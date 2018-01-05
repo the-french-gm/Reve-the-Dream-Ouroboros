@@ -34,7 +34,7 @@ function generateBirthHour() {
 /*
  *
  */
-function getHeight(character_size) {
+function getHeight(size) {
     height = [
         "1.52m / 4'11\"",
         "1.57m / 5'1\"",
@@ -48,75 +48,202 @@ function getHeight(character_size) {
         "1.97m / 6'5\""
     ]
 
-    return height[character_size-6];
+    return height[size-6];
 }
 
 /*
  *
  */
-function generateCharacteristics(is_dreamer = false) {
+function getSustenance(size) {
+    if(size <= 9) {
+        return 2;
+    }
+
+    if(size <= 13) {
+        return 3;
+    }
+
+    if(size <= 15) {
+        return 4;
+    }
+}
+
+/*
+ *
+ */
+function getGender() {
+    var chance = getRandomInt(1, 100);
+
+    if(chance <= 1) {
+        return 'bigender';
+    }
+
+    if(chance <= 2) {
+        return 'androgyne';
+    }
+
+    if(chance <= 3) {
+        return 'neutrois';
+    }
+
+    if(chance <= 4) {
+        return 'agender';
+    }
+
+    if(chance <= 5) {
+        return 'demiman';
+    }
+
+    if(chance <= 6) {
+        return 'demiwoman';
+    }
+
+    if(chance <= 7) {
+        return 'genderqueer';
+    }
+
+    if(chance <= 8) {
+        return 'polygender';
+    }
+
+    if(chance <= 9) {
+        return 'epicene';
+    }
+
+    if(chance <= 10) {
+        return 'genderfluid';
+    }
+
+    if(chance <= 11) {
+        return 'transgender';
+    }
+
+    if(chance <= 45) {
+        return 'female';
+    }
+
+    if(chance <= 100) {
+        return 'male';
+    }
+}
+
+
+/*
+ *
+ */
+function getConstitutionThreshold(constitution) {
+    if(constitution <= 8) {
+        return 2;
+    }
+
+    if(constitution <= 11) {
+        return 3;
+    }
+
+    if(constitution <= 14) {
+        return 4;
+    }
+
+    if(constitution == 15) {
+        return 5;
+    }
+}
+
+/*
+ *
+ */
+function getBeauty(beauty) {
+    var values = {
+        10 : 'Common',
+        11 : 'Not Bad',
+        12 : 'Attractive',
+        13 : 'Cute',
+        14 : 'Beautiful',
+        15 : 'Very Beautiful',
+        16 : 'Stunning'   
+    }
+
+    return values[beauty];
+}
+
+/*
+ *
+ */
+function getDamageModifier(size, strength) {
+    var dm = average_round_down(size, strength);
+
+    if(dm <= 7) {
+        return '-1';
+    }
+
+    if(dm <= 11) {
+        return 0;
+    }
+
+    if(dm <= 13) {
+        return '+1';
+    }
+
+    if(dm <= 15) {
+        return '+2'
+    }
+}
+
+/*
+ *
+ */
+function generateCharacteristics(is_dreamer = null) {
+    if(is_dreamer == null) {
+        is_dreamer = Math.random() >= 0.5;
+    }
+
     var total_points = 160;
 
-    var base_characteristics = [
-        ['size', 0],
-        ['appearance', 0],
-        ['constitution', 0],
-        ['strength', 0],
-        ['agility', 0],
-        ['dexterity', 0],
-        ['sight', 0],
-        ['hearing', 0],
-        ['smell-taste', 0],
-        ['will', 0],
-        ['intellect', 0],
-        ['empathy', 0],
-        ['dream', 0],
-        ['luck', 0],
-        ['melee', 0],
-        ['missile', 0],
-        ['throw', 0],
-        ['stealth', 0],
-        ['life', 0],
-        ['endurance', 0],
-        ['sustenance', 0],
-        ['damage-modifier', 0],
-        ['encumbrance', 0],
-        ['birth-hour', generateBirthHour()],
-        ['gender', ''],
-        ['age', getRandomInt(18, 40)],
-        ['height', 0],
-        ['beauty', 10],
-        ['handedness', generateHandedness()]
-    ]
+    var characteristics = {
+        'size' : 0,
+        'appearance' : 0,
+        'constitution' : 0,
+        'strength' : 0,
+        'agility' : 0,
+        'dexterity' : 0,
+        'sight' : 0,
+        'hearing' : 0,
+        'smell-taste' : 0,
+        'will' : 0,
+        'intellect' : 0,
+        'empathy' : 0,
+        'dream' : 0,
+        'luck' : 0,
+        'beauty' : 10
+    }
 
     // first round of assigning values to characteristics
     // the algorithm is to assign between 6 and 10 
-    $.each(base_characteristics, function(index, value) {
+    $.each(characteristics, function(key, value) {
         var characteristic_points = 0;
 
-        if(index > 13) {
-            return;
-        }
-
-        if((value[0] == "dream") && !is_dreamer) {
+        if((key == "dream") && !is_dreamer) {
             characteristic_points = getRandomInt(6, 10);
         }
-        else if((value[0] == "dream") && is_dreamer) {
+        else if((key == "dream") && is_dreamer) {
             characteristic_points = getRandomInt(12, 15);
         }
-        else if((value[0] == "strength")) {
+        else if(key == "strength") {
             // strength cannot be higher than size + 4
-            characteristic_points = getRandomInt(9, base_characteristics[0][1]+4);
+            characteristic_points = getRandomInt(9, characteristics['size'] + 4);
+        }
+        else if(key == "beauty") {
+            return;
         }
         else {
-            characteristic_points = getRandomInt(8, 11);
+            characteristic_points = getRandomInt(7, 11);
         }
 
         if(total_points - characteristic_points < 0) {
             return;
         }
 
-        base_characteristics[index][1] = characteristic_points;
+        characteristics[key] = characteristic_points;
         total_points = total_points - characteristic_points;
     });
 
@@ -124,42 +251,64 @@ function generateCharacteristics(is_dreamer = false) {
      * We randomly add any remaining points to the primary characteristics
      */
     while(total_points != 0) {
-        index = getRandomInt(0, 13);
-        inc = base_characteristics[index][1] + 1;
+        key = Object.keys(characteristics)[getRandomInt(0, Object.keys(characteristics).length - 1)];
+
+        // we reduce the chances of spending points on beauty by half
+        if((key == "beauty") && (Math.random() >= 0.50)) {
+            continue;
+        }
+
+        inc = characteristics[key] + 1;
 
         if(inc <= 15) {
-            base_characteristics[index][1] = inc;
+            characteristics[key] = inc;
             total_points--;
         }
     }
 
     // melee is the average of strength and agility, rounded down
-    var melee = average_round_down(base_characteristics[3][1], base_characteristics[4][1]);
-    base_characteristics[14][1] = melee;
+    var melee = average_round_down(characteristics['strength'], characteristics['agility']);
+    characteristics['melee'] = melee;
 
     // missile is the average of sight and dexterity, rounded down
-    var missile = average_round_down(base_characteristics[5][1], base_characteristics[6][1]);
-    base_characteristics[15][1] = missile;
+    var missile = average_round_down(characteristics['sight'], characteristics['dexterity']);
+    characteristics['missile'] = missile;
 
     // throw is the average of missile and strength, rounded down
-    var throw_ = average_round_down(missile, base_characteristics[3][1]);
-    base_characteristics[16][1] = throw_;
+    var throw_ = average_round_down(missile, characteristics['strength']);
+    characteristics['throw'] = throw_;
 
     // stealth is the average of agility + (21-size), rounded down
-    var stealth = average_round_down(base_characteristics[4][1], (21 - base_characteristics[0][1]));
-    base_characteristics[17][1] = stealth;
+    var stealth = average_round_down(characteristics['agility'], (21 - characteristics['size']));
+    characteristics['stealth'] = stealth;
 
-    // get the height based on the size
-    base_characteristics[26][1] = getHeight(base_characteristics[0][1]);
+    // life is the average of size and constitution, rounded up
+    var life = average_round_up(characteristics['size'], characteristics['constitution']);
+    characteristics['life'] = life;
 
-    /*
-     * Display the value in the HTML table
-     */
-    $.each(base_characteristics, function(index, value) {
-        var characteristic = $('#'+value[0]);
-        
-        if(characteristic.length) {
-            characteristic.text(value[1]);
-        }
-    });
+    // Encumbrance is the average of size and strength, rounded down
+    var encumbrance = average_round_down(characteristics['size'], characteristics['strength']);
+    characteristics['encumbrance'] = encumbrance;
+
+    // Endurance is either Size + Constitution, or Will + Life, whichever is better
+    var endurance_1 = characteristics['size'] + characteristics['constitution'];
+    var endurance_2 = characteristics['will'] + characteristics['life'];
+    characteristics['endurance'] = (endurance_1 >= endurance_2) ? endurance_1 : endurance_2;
+
+    // Damage modifier
+    var dm = getDamageModifier(characteristics['size'], characteristics['strength']);
+    characteristics['damage-modifier'] = dm;
+
+    // Other Characteristics
+    characteristics['height'] = getHeight(characteristics['size']);
+    characteristics['sustenance'] = getSustenance(characteristics['size']);
+    characteristics['birth-hour'] = generateBirthHour();
+    characteristics['gender'] = getGender();
+    characteristics['age'] = getRandomInt(18, 40);
+    characteristics['handedness'] = generateHandedness();
+    characteristics['high-dreamer'] = (is_dreamer ? 'Yes' : 'No');
+    characteristics['constitution-threshold'] = getConstitutionThreshold(characteristics['constitution']);
+    characteristics['beauty'] = getBeauty(characteristics['beauty']) + ' (' + characteristics['beauty'] + ')';
+
+    return characteristics;
 }

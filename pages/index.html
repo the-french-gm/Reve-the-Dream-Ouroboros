@@ -22,8 +22,16 @@ permalink: /
             </div>
 
             <div class="row bg-light characteristics">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-auto">
                     <table>
+                        <tr>
+                            <td class="characteristic"><label>Name</label></td>
+                            <td class="value" id="name"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>Gender</label></td>
+                            <td class="value" id="gender"></td>
+                        </tr>
                         <tr>
                             <td class="characteristic"><label>Age</label></td>
                             <td class="value" id="age"></td>
@@ -31,6 +39,14 @@ permalink: /
                         <tr>
                             <td class="characteristic"><label>Height</label></td>
                             <td class="value" id="height"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>Beauty</label></td>
+                            <td class="value" id="beauty"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>Dreamer?</label></td>
+                            <td class="value" id="high-dreamer"></td>
                         </tr>
                         <tr>
                             <td class="characteristic"><label>Birth Hour</label></td>
@@ -42,7 +58,7 @@ permalink: /
                         </tr>
                     </table>
                 </div>
-                <div class="col-xs-12 col-md-2">
+                <div class="col-xs-12 col-md-auto">
                     <table>
                         <tr>
                             <td class="characteristic"><label>Size</label></td>
@@ -82,7 +98,7 @@ permalink: /
                         </tr>
                     </table>
                 </div>
-                <div class="col-xs-12 col-md-2">
+                <div class="col-xs-12 col-md-auto">
                     <table>
                         <tr>
                             <td class="characteristic"><label>Will</label></td>
@@ -122,6 +138,34 @@ permalink: /
                         </tr>
                     </table>
                 </div>
+                <div class="col-xs-12 col-md-auto">
+                    <table>
+                        <tr>
+                            <td class="characteristic"><label>Life</label></td>
+                            <td class="value" id="life"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>Endurance</label></td>
+                            <td class="value" id="endurance"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>Sustenance</label></td>
+                            <td class="value" id="sustenance"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>Encumbrance</label></td>
+                            <td class="value" id="encumbrance"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>DM</label></td>
+                            <td class="value" id="damage-modifier"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic"><label>CT</label></td>
+                            <td class="value" id="constitution-threshold"></td>
+                        </tr>
+                    </table>
+                </div>
                 <div class="col-xs-12 col-md-4">
                     <img src="{{ '/assets/images/resolution-table.png' | prepend: site.baseurl }}" width="100%" />
                 </div>
@@ -132,15 +176,48 @@ permalink: /
         <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/utils.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/characteristics.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/chance.min.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/fantasy-names.js' | prepend: site.baseurl }}"></script>
 
         <script>
-            function generateCharacter(is_dreamer) {
-                generateCharacteristics(is_dreamer);
+            /*
+             *
+             */
+            var settings = {
+                'genre' : 'fantasy'
+            }
+            
+            /*
+             *
+             */
+            function generateCharacter() {
+                characteristics = generateCharacteristics();
+                
+                /*
+                 * We adapt the data based on the genre of the game
+                 */
+                if(settings['genre'] == 'contemporary') {
+                    characteristics['name'] = chance.name({ gender: "male" });
+                }
+
+                if(settings['genre'] == 'fantasy') {
+                    characteristics['name'] = generateFantasyName();
+                }
+
+                /*
+                * Display the value in the HTML table
+                */
+                $.each(characteristics, function(key, value) {
+                    var characteristic = $('#'+key);
+                    
+                    if(characteristic.length) {
+                        characteristic.text(value);
+                    }
+                });
             }
 
             window.onload = function() {
-                var is_dreamer = Math.random() >= 0.5;
-                generateCharacter(is_dreamer);
+                generateCharacter();
             }
         </script>
     </body>
