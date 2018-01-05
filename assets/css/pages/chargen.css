@@ -1,0 +1,17 @@
+.characteristics {
+    padding-top: 20px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+td.value {
+    border-bottom: 1px dotted gray;
+    text-align: center;
+}
+
+td>label {
+    margin-bottom: 0;
+}
