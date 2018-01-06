@@ -1,9 +1,22 @@
-{% if include.skills %}
-{% for skill in include.skills %}
-    <tr>
-        <td class="skill">{{skill}}</td>
-        <td class="value" id="{{ skill | replace:' ','-' }}"></td>
-        <td class="value arch-skill" id="arch-{{ skill | replace:' ','-' }}"></td>
-    </tr>
-{% endfor %}
-{% endif %}
+<table>
+    <thead>
+        <tr>
+            <td></td>
+            <td>Lvl</td>
+            <td>Exp</td>
+            <td>Arch</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% if include.skills %}
+    {% for skill in include.skills %}
+        <tr>
+            <td class="skill">{{skill}}</td>
+            <td class="value" id="{{ skill | replace:' ','-' }}"></td>
+            <td class="value exp-skill" id="exp-{{ skill | replace:' ','-' }}"></td>
+            <td class="value arch-skill" id="arch-{{ skill | replace:' ','-' }}"></td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>

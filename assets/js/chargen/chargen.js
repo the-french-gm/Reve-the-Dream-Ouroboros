@@ -10,7 +10,8 @@ function generateCharacter() {
         is_dreamer = false;
     }
 
-    archetype = generateArchetype(is_dreamer, skills);
+    archetype = generateArchetype(skills);
+    archetype = generateSkills(skills, is_dreamer);
     
     /*
      * We adapt the data based on the genre of the game
