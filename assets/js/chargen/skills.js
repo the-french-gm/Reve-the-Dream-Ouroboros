@@ -42,25 +42,19 @@ function assignSkillPointsAndXP(points, skills, is_dreamer) {
         /*
          * Random skill generation
          */
+        var index = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3]
         if(is_dreamer && ['thanatos', 'oneiros', 'hypnos', 'narcos'].includes(skill[0])) {
-            var level = getRandomInt(9, 14);
+            console.log("test")
+            var level = getRandomInt(5, 13);
         }
         else if(!is_dreamer && ['thanatos', 'oneiros', 'hypnos', 'narcos'].includes(skill[0])) {
-            var level = getRandomInt(1, 9);
+            var level = getRandomInt(0, 5);
         }
         else {
-            var level = getRandomInt(1, 14);
+            var level = getRandomInt(0, 13);
         }
-
-        if(level == 11) {
-            level = 0;
-        }
-        else if(level > 11) {
-            level -= 11;
-        }
-        else {
-            level -= level+level;
-        }
+        
+        level = index[level];
 
         /*
          * We calculate the cost of acquiring the skill
