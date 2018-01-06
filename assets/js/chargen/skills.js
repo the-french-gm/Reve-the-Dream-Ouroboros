@@ -107,5 +107,6 @@ function generateSkills(skills, is_dreamer = false) {
     });
 
     assignSkillPointsAndXP(skills_points, skills_list, is_dreamer);
-    $("#spell_points").text(spells_points);
+    $("#skills_points").text(skills_points);
+    $("#spells_points").text(spells_points);
 }
