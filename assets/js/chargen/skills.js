@@ -101,6 +101,8 @@ function generateSkills(skills, is_dreamer = false) {
         difficulty = value[0];
         $.each(value[1], function(index, skill) {
             skills_list.push([skill, difficulty]);
+            $("#exp-"+skill).text("  ");
+            $("#"+skill).text("  ");
         });
     });
 
