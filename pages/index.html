@@ -12,13 +12,18 @@ permalink: /
     <body>
         <div class="container-fluid">
             <div class="row bg-dark row-eq-height top-menu">
-                <div class="col-xs-12 col-md-9">
+                <div class="col-xs-12 col-md-8">
                     <h1 class="text-white">Rêve: the Dream Ouroboros - Character Generator</h1>
                 </div>
 
-                <div class="col-xs-12 col-md-3">
-                    <button type="button" class="btn lang-btn">Français</button>
+                <div class="col-xs-12 col-md-4">
+                    <select class="custom-select genre-select">
+                        <option value="fantasy">Fantasy</option>
+                    </select>
+
                     <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
+
+                    <button type="button" class="btn lang-btn">Français</button>
                 </div>
             </div>
 
