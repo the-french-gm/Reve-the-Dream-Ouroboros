@@ -17,9 +17,9 @@ function generateCharacter() {
      * We adapt the data based on the genre of the game
      */
     if(settings['genre'] == 'contemporary') {
-        characteristics['name'] = chance.name({ gender: "male" });
+        characteristics['name'] = generateContemporaryName(characteristics['gender']);
     }
-
+    
     if(settings['genre'] == 'fantasy') {
         characteristics['name'] = generateFantasyName();
     }

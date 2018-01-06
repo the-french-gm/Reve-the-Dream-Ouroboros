@@ -1,5 +1,8 @@
 $.i18n.debug = true;
 
+/*
+ *
+ */
 $(document).ready( function( $ ) {
 	/*
 	 * Add the data-i18n tag to all the Characteristics
@@ -9,30 +12,48 @@ $(document).ready( function( $ ) {
 	});
 
 	/*
+	 *
+	 */
+	function applyLanguage() {
+		$.i18n()
+		.load('assets/js/chargen/lang/'+settings['language']+'-'+settings['genre']+'.json', settings['language']+'-'+settings['genre'])
+		.done(function() {
+			$.i18n().locale = settings['language']+'-'+settings['genre'];
+			$('body').i18n();
+		});
+	}
+
+	/*
+	 *
+	 */
+	$('.genre-select').on("change keyup", function() {
+		settings['genre'] = $(".genre-select option:selected").val();
+		applyLanguage();
+
+		var name = $('#name');
+
+		if(settings['genre'] == "contemporary") {
+			var gender = $('#gender').text();
+			name.text(generateContemporaryName(gender));
+		}
+		else {
+
+		}
+	});
+
+	/*
 	 * Change the language between English and French
 	 */
 	$('.lang-btn').on('click', function() {
 		if(settings['language'] == 'en') {
 			$(this).text("English");
 			settings['language'] = 'fr';
-
-			$.i18n()
-			.load('assets/js/chargen/lang/'+settings['language']+'-'+settings['genre']+'.json', 'fr'+'-'+settings['genre'])
-			.done(function() {
-				$.i18n().locale = 'fr'+'-'+settings['genre'];
-				$('body').i18n();
-			});
 		} else {
 			$(this).text("Français");
 			settings['language'] = 'en';
-
-			$.i18n()
-			.load('assets/js/chargen/lang/'+settings['language']+'-'+settings['genre']+'.json', 'en'+'-'+settings['genre'])
-			.done(function() {
-				$.i18n().locale = 'en'+'-'+settings['genre'];
-				$('body').i18n();
-			});
 		}
+
+		applyLanguage();
 	});
 
 });

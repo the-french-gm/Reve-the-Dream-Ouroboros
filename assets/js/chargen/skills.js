@@ -44,7 +44,6 @@ function assignSkillPointsAndXP(points, skills, is_dreamer) {
          */
         var index = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3]
         if(is_dreamer && ['thanatos', 'oneiros', 'hypnos', 'narcos'].includes(skill[0])) {
-            console.log("test")
             var level = getRandomInt(5, 13);
         }
         else if(!is_dreamer && ['thanatos', 'oneiros', 'hypnos', 'narcos'].includes(skill[0])) {
