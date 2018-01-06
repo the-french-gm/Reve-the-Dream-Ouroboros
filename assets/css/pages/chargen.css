@@ -2,6 +2,15 @@
     padding-top: 20px;
 }
 
+.skills {
+    padding-top: 50px;
+}
+
+.characteristic,
+.skill {
+    text-transform: capitalize;
+}
+
 table {
     border-collapse: separate;
     border-spacing: 10px;

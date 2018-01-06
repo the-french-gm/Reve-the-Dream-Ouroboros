@@ -1,0 +1,9 @@
+{% if include.skills %}
+{% for skill in include.skills %}
+    <tr>
+        <td class="skill">{{skill}}</td>
+        <td class="value" id="{{ skill | replace:' ','-' }}"></td>
+        <td class="value arch-skill" id="arch-{{ skill | replace:' ','-' }}"></td>
+    </tr>
+{% endfor %}
+{% endif %}

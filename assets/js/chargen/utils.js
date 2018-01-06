@@ -18,3 +18,10 @@ function average_round_down(int1, int2) {
 function average_round_up(int1, int2) {
     return Math.ceil((int1 + int2) / 2);
 }
+
+/*
+ * Remove an item from an array.
+ */
+function removeItemFromArray(array, element) {
+    return array.filter(e => e !== element);
+}

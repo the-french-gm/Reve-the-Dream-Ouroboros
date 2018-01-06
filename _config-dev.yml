@@ -1,0 +1,6 @@
+#
+# Development environment configuration file
+#
+
+baseurl: ""
+url: "http://localhost"
