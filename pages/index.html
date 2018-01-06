@@ -17,6 +17,7 @@ permalink: /
                 </div>
 
                 <div class="col-xs-12 col-md-2">
+                    <button type="button" class="btn lang-btn">Français</button>
                     <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
                 </div>
             </div>
@@ -174,6 +175,10 @@ permalink: /
 
         <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/i18n/jquery.i18n.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/i18n/jquery.i18n.messagestore.js' | prepend: site.baseurl }}"></script>
+
+        <script src="{{ '/assets/js/chargen/i18n.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/utils.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/characteristics.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/chance.min.js' | prepend: site.baseurl }}"></script>
@@ -205,8 +210,8 @@ permalink: /
                 }
 
                 /*
-                * Display the value in the HTML table
-                */
+                 * Display the value in the HTML table
+                 */
                 $.each(characteristics, function(key, value) {
                     var characteristic = $('#'+key);
                     

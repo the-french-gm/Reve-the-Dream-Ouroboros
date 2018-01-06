@@ -118,7 +118,7 @@ function getGender() {
         return 'transgender';
     }
 
-    if(chance <= 45) {
+    if(chance <= 56) {
         return 'female';
     }
 
