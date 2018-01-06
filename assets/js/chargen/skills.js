@@ -53,7 +53,7 @@ function assignSkillPointsAndXP(points, skills, is_dreamer) {
         else {
             var level = getRandomInt(0, 13);
         }
-        
+
         level = index[level];
 
         /*
@@ -92,7 +92,7 @@ function assignSkillPointsAndXP(points, skills, is_dreamer) {
  */
 function generateSkills(skills, is_dreamer = false) {
     var total_points = 3000;
-    var spells_points = getRandomInt(0, total_points / 3);
+    var spells_points = getRandomInt(0, total_points / 3.5);
     var skills_points = total_points - spells_points;
 
     var skills_list = [];
@@ -104,7 +104,6 @@ function generateSkills(skills, is_dreamer = false) {
         });
     });
 
-    skills = assignSkillPointsAndXP(skills_points, skills_list, is_dreamer);
-
-    return skills;
+    assignSkillPointsAndXP(skills_points, skills_list, is_dreamer);
+    $("#spell_points").text(spells_points);
 }

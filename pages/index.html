@@ -172,40 +172,55 @@ permalink: /
                 </div>
             </div>
             <div class="row bg-light skills">
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>General (-4)</h6>
                     {% assign general_skills = "climbing,cooking,dance,discretion,drawing,jumping,running,seduction,singing,tinkering,vigilance" | split: "," %}
                     {% include chargen/skills-table.html skills=general_skills %}
                 </div>
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>Arts (-11)</h6>
                     {% assign arts_skills = "acrobatics,gaming,jewelrysmith,juggling,leatherwork,locksmithing,metalwork,naviguation,surgery,swimming" | split: "," %}
                     {% include chargen/skills-table.html skills=arts_skills %}
                 </div>
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>Specialized Skills (-8)</h6>
                     {% assign specialized_skills = "acting,carpentry,commerce,disguise,masonry,music,pickpocket,riding,city survival,outdoor survival" | split: "," %}
                     {% include chargen/skills-table.html skills=specialized_skills %}
                 </div>
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>Sciences (-11)</h6>
                     {% assign science_skills = "alchemy,astrology,botany,legends,medicine,writing,zoology" | split: "," %}
                     {% include chargen/skills-table.html skills=science_skills %}
                 </div>
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>Draconics (-11)</h6>
                     {% assign draconic_skills = "oneiros,hypnos,narcos,thanatos" | split: "," %}
                     {% include chargen/skills-table.html skills=draconic_skills %}
                 </div>
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>Melee (-6)</h6>
                     {% assign melee_skills = "1-handed axe,2-handed axe,dagger,dodging,flail,hand to hand,lance,1-handed mace,2-handed mace,polearm,shield,1-handed sword,2-handed sword" | split: "," %}
                     {% include chargen/skills-table.html skills=melee_skills %}
                 </div>
-                <div class="col-xs-12 col-md-auto">
+                <div class="col col-xs-12 col-md-auto">
                     <h6>Missile &amp; Thrown (-8)</h6>
                     {% assign mt_skills = "blowgun,bow,crossbow,knife,hand axe,javelin,lasso,sling,whip" | split: "," %}
                     {% include chargen/skills-table.html skills=mt_skills %}
+                </div>
+                <div class="col col-xs-12 col-md-auto">
+                    <h6>Spells (<span id="spell_points"></span> points)</h6>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Spell</td>
+                                <td>Diff.</td>
+                                <td>Cost</td>
+                            </tr>
+                        </thead>
+                        <tbody id="spells-table">
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
