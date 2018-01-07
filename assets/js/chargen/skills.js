@@ -217,6 +217,8 @@ function assignSpellPointsAndXP(skills, spells_points, spells) {
  *
  */
 function generateSkills(skills, spells, is_dreamer = false) {
+    $('.spells-table').empty();
+
     var total_points = 3000;
     var spells_points = getRandomInt(0, total_points / 3.5);
     var skills_points = total_points - spells_points;
