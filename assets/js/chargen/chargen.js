@@ -5,6 +5,7 @@ function getSettings() {
     var settings = {};
 
     settings['characteristic-points'] = $('.setting-characteristic-points').val();
+    settings['max-characteristic-points'] = $('.setting-max-characteristic-points').val();
     settings['skill-points'] = $('.setting-skill-points').val();
     settings['build'] = $('.setting-build option:selected').val().toLowerCase();
     settings['location'] = $('.setting-location option:selected').val().toLowerCase();
@@ -46,7 +47,7 @@ function getSettings() {
             settings[index] = value;
         });
     }
-    
+
     return settings;
 }
 

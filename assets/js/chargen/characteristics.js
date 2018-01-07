@@ -209,27 +209,33 @@ function getDamageModifier(size, strength) {
  *
  */
 function generateCharacteristics(settings) {
-    var total_points = settings['characteristic-points'];
-    var max_points = (15 + (total_points - 160));
-    var min_points = (6 + (total_points - 160));
+    var total_points = parseInt(settings['characteristic-points']);
+    var max_points = parseInt(settings['max-characteristic-points']);
+    var min_points = 6;
+    
+    if(max_points < min_points) {
+        max_points = min_points;
+    }
 
     var characteristics = {
-        'size' : 0,
-        'appearance' : 0,
-        'constitution' : 0,
-        'strength' : 0,
-        'agility' : 0,
-        'dexterity' : 0,
-        'sight' : 0,
-        'hearing' : 0,
-        'smell-taste' : 0,
-        'will' : 0,
-        'intellect' : 0,
-        'empathy' : 0,
-        'dream' : 0,
-        'luck' : 0,
+        'size' : min_points,
+        'appearance' : min_points,
+        'constitution' : min_points,
+        'strength' : min_points,
+        'agility' : min_points,
+        'dexterity' : min_points,
+        'sight' : min_points,
+        'hearing' : min_points,
+        'smell-taste' : min_points,
+        'will' : min_points,
+        'intellect' : min_points,
+        'empathy' : min_points,
+        'dream' : min_points,
+        'luck' : min_points,
         'beauty' : 10
     }
+
+    total_points -= (min_points * 14);
 
     /*
      * High dreamers are maxed out on Dream.
@@ -258,7 +264,7 @@ function generateCharacteristics(settings) {
 
             // strength cannot be higher than size + 4.
             // this also means that size must always be calculated before strength!!
-            if((characteristic == "strength") && value == (characteristics['size'] + 4)) {
+            if((characteristic == "strength") && value >= (characteristics['size'] + 4)) {
                 value = (characteristics['size'] + 4);
             }
 
@@ -269,36 +275,39 @@ function generateCharacteristics(settings) {
     /*
      * We randomly add any remaining points to the primary characteristics
      */
-    while(total_points != 0) {
-        key = Object.keys(characteristics)[getRandomInt(0, Object.keys(characteristics).length - 1)];
-
+    var chars = Object.keys(characteristics);
+    
+    while((total_points != 0)) {
+        key = chars[getRandomInt(0, chars.length - 1)];
+        current_value = characteristics[key];
+        
         // we reduce the chances of spending points on beauty by half
         if((key == "beauty") && (Math.random() >= 0.50)) {
             continue;
         }
 
         // strength cannot be higher than size + 4
-        if((key == "strength") && characteristics[key] == (characteristics['size'] + 4)) {
-            continue;
+        if(key == "strength") {
+            if(current_value == (characteristics['size'] + 4)) {
+                chars = removeItemFromArray(chars, "strength");
+                continue;
+            }
         }
 
         // size cannot be more than 15
-        if((key == "size") && characteristics[key] == 15) {
+        var max_size;
+        if((key == "size") && current_value == 15) {
+            chars = removeItemFromArray(chars, "size");
             continue;
         }
 
-        var inc;
-        if(characteristics[key] < min_points){
-            inc = min_points;
-        }
-        else {
-            inc = 1;
+        if(current_value == max_points) {
+            chars = removeItemFromArray(chars, key);
+            continue;
         }
 
-        if(inc <= max_points) {
-            characteristics[key] += inc;
-            total_points -= inc;
-        }
+        characteristics[key]++;
+        total_points--;
     }
 
     // melee is the average of strength and agility, rounded down
