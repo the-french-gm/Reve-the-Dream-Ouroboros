@@ -1,6 +1,22 @@
 /*
  *
  */
+function generateName(settings, gender) {
+    /*
+     * We adapt the data based on the genre of the game
+     */
+    if(settings['genre'] == 'contemporary') {
+        return generateContemporaryName(gender);
+    }
+
+    if(settings['genre'] == 'fantasy') {
+        return generateFantasyName();
+    }
+}
+
+/*
+ *
+ */
 function generateHandedness() {
     if(Math.random() >= 0.25) {
         return 'Right Handed';
@@ -192,12 +208,10 @@ function getDamageModifier(size, strength) {
 /*
  *
  */
-function generateCharacteristics(is_dreamer = null) {
-    if(is_dreamer == null) {
-        is_dreamer = Math.random() >= 0.5;
-    }
-
-    var total_points = 160;
+function generateCharacteristics(settings) {
+    var total_points = settings['characteristic-points'];
+    var max_points = (15 + (total_points - 160));
+    var min_points = (6 + (total_points - 160));
 
     var characteristics = {
         'size' : 0,
@@ -217,35 +231,40 @@ function generateCharacteristics(is_dreamer = null) {
         'beauty' : 10
     }
 
-    // first round of assigning values to characteristics
-    // the algorithm is to assign between 6 and 10 
-    $.each(characteristics, function(key, value) {
-        var characteristic_points = 0;
+    /*
+     * High dreamers are maxed out on Dream.
+     */
+    if(settings['high-dreamer']) {
+        characteristics['dream'] = max_points;
+    }
 
-        if((key == "dream") && !is_dreamer) {
-            characteristic_points = getRandomInt(6, 10);
-        }
-        else if((key == "dream") && is_dreamer) {
-            characteristic_points = getRandomInt(12, 15);
-        }
-        else if(key == "strength") {
-            // strength cannot be higher than size + 4
-            characteristic_points = getRandomInt(9, characteristics['size'] + 4);
-        }
-        else if(key == "beauty") {
-            return;
-        }
-        else {
-            characteristic_points = getRandomInt(7, 11);
-        }
+    /*
+     * We apply the template
+     */
+    if(settings['template']) {
+        $.each(settings['template']['characteristics'], function(index, characteristic) {
+            var value = getRandomInt(Math.floor(max_points / 1.2), max_points);
 
-        if(total_points - characteristic_points < 0) {
-            return;
-        }
+            // we do not decrement the number of total points if beauty is below 10
+            if((characteristic == "beauty") && (value < 10)) {
+                characteristics['beauty'] = 10;
+                return;
+            }
 
-        characteristics[key] = characteristic_points;
-        total_points = total_points - characteristic_points;
-    });
+            if((characteristic == "beauty") && (value > 10)) {
+                characteristics['beauty'] = value;
+                value -= 10;
+            }
+
+            // strength cannot be higher than size + 4.
+            // this also means that size must always be calculated before strength!!
+            if((characteristic == "strength") && value == (characteristics['size'] + 4)) {
+                value = (characteristics['size'] + 4);
+            }
+
+            characteristics[characteristic] = value;
+        });
+    }
 
     /*
      * We randomly add any remaining points to the primary characteristics
@@ -258,11 +277,27 @@ function generateCharacteristics(is_dreamer = null) {
             continue;
         }
 
-        inc = characteristics[key] + 1;
+        // strength cannot be higher than size + 4
+        if((key == "strength") && characteristics[key] == (characteristics['size'] + 4)) {
+            continue;
+        }
 
-        if(inc <= 15) {
-            characteristics[key] = inc;
-            total_points--;
+        // size cannot be more than 15
+        if((key == "size") && characteristics[key] == 15) {
+            continue;
+        }
+
+        var inc;
+        if(characteristics[key] < min_points){
+            inc = min_points;
+        }
+        else {
+            inc = 1;
+        }
+
+        if(inc <= max_points) {
+            characteristics[key] += inc;
+            total_points -= inc;
         }
     }
 
@@ -299,14 +334,18 @@ function generateCharacteristics(is_dreamer = null) {
     var dm = getDamageModifier(characteristics['size'], characteristics['strength']);
     characteristics['damage-modifier'] = dm;
 
+    // Calculate height
+    var size_for_height = (characteristics['size'] > 15) ? 15 : characteristics['size'];
+    characteristics['height'] = getHeight(size_for_height);
+
     // Other Characteristics
-    characteristics['height'] = getHeight(characteristics['size']);
+    characteristics['gender'] = getGender();
+    characteristics['name'] = generateName(settings, characteristics['gender']);
     characteristics['sustenance'] = getSustenance(characteristics['size']);
     characteristics['birth-hour'] = generateBirthHour();
-    characteristics['gender'] = getGender();
     characteristics['age'] = getRandomInt(18, 40);
     characteristics['handedness'] = generateHandedness();
-    characteristics['high-dreamer'] = (is_dreamer ? 'Yes' : 'No');
+    characteristics['high-dreamer'] = settings['high-dreamer'];
     characteristics['constitution-threshold'] = getConstitutionThreshold(characteristics['constitution']);
     characteristics['beauty'] = getBeauty(characteristics['beauty']) + ' (' + characteristics['beauty'] + ')';
 

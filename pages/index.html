@@ -17,14 +17,62 @@ permalink: /
                 </div>
 
                 <div class="col-xs-12 col-md-4">
-                    <select class="custom-select genre-select">
-                        <option value="fantasy">Fantasy</option>
-                        <option value="contemporary">Contemporary</option>
-                    </select>
-
                     <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
 
                     <button type="button" class="btn lang-btn">Français</button>
+                </div>
+            </div>
+
+            <div class="row bg-secondary generator-settings">
+                <div class="col-xs-12 col-md-2">
+                    <label>Characteristic Points:</label>
+                    <input type="text" class="form-control setting-characteristic-points" value="160" />
+                </div>
+
+                <div class="col-xs-12 col-md-2">
+                    <label>Skill Points:</label>
+                    <input type="text" class="form-control setting-skill-points" value="3000" />
+                </div>
+
+                <div class="col-xs-12 col-md-2">
+                    <label>Build:</label>
+                    <select class="custom-select setting-build">
+                        <option value="random">Random</option>
+                        <option value="white-mage">White Mage</option>
+                        <option value="dark-mage">Dark Mage</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-12 col-md-2">
+                    <label>Location:</label>
+                    <select class="custom-select setting-location">
+                        <option value="random">Random</option>
+                        <option value="city">City</option>
+                        <option value="outdoor">Outdoor</option>
+                        <option value="mountain">Mountain</option>
+                        <option value="forest">Forest</option>
+                        <option value="desert">Desert</option>
+                        <option value="swamp">Swamp</option>
+                        <option value="artic">Artic</option>
+                        <option value="underground">Underground</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-12 col-md-2">
+                    <label>Is High Dreamer?</label>
+                    <select class="custom-select setting-high-dreamer">
+                        <option value="random">Random</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-12 col-md-2">
+                    <label>Genre:</label>
+                    <select class="custom-select setting-genre">
+                        <option value="fantasy">Fantasy</option>
+                        <option value="contemporary">Contemporary</option>
+                    </select>
                 </div>
             </div>
 
@@ -247,6 +295,9 @@ permalink: /
         <script src="{{ '/assets/js/i18n/jquery.i18n.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/i18n/jquery.i18n.messagestore.js' | prepend: site.baseurl }}"></script>
 
+        <script src="{{ '/assets/js/chargen/templates/white-mage.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/dark-mage.js' | prepend: site.baseurl }}"></script>
+
         <script src="{{ '/assets/js/chargen/i18n.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/spells.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/utils.js' | prepend: site.baseurl }}"></script>
@@ -257,14 +308,6 @@ permalink: /
         <script src="{{ '/assets/js/chargen/fantasy-names.js' | prepend: site.baseurl }}"></script>
 
         <script>
-            /*
-             *
-             */
-            var settings = {
-                'genre' : 'fantasy',
-                'language' : 'en'
-            }
-
             /*
              *
              */
