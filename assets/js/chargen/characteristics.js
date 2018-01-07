@@ -249,7 +249,12 @@ function generateCharacteristics(settings) {
      */
     if(settings['template']) {
         $.each(settings['template']['characteristics'], function(index, characteristic) {
-            var value = getRandomInt(Math.floor(max_points / 1.2), max_points);
+            // dream points have already been applied for high dreamers
+            if(settings['high-dreamer'] && characteristic == "dream") {
+                return;
+            }
+
+            var value = getRandomInt(Math.floor(max_points / 1.5), max_points);
 
             // we do not decrement the number of total points if beauty is below 10
             if((characteristic == "beauty") && (value < 10)) {
@@ -268,7 +273,12 @@ function generateCharacteristics(settings) {
                 value = (characteristics['size'] + 4);
             }
 
+            while((total_points-value) <= 0) {
+                value--;
+            }
+
             characteristics[characteristic] = value;
+            total_points -= value;
         });
     }
 
