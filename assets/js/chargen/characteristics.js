@@ -308,6 +308,12 @@ function generateCharacteristics(settings) {
 
         characteristics[key]++;
         total_points--;
+
+        // there is a small chance that size is final
+        var odd = (Math.random() <= 0.15)
+        if((key == "size") && odd) {
+            chars = removeItemFromArray(chars, "size");
+        }
     }
 
     // melee is the average of strength and agility, rounded down
