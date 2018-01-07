@@ -11,7 +11,7 @@ function generateCharacter() {
     }
 
     archetype = generateArchetype(skills);
-    archetype = generateSkills(skills, is_dreamer);
+    archetype = generateSkills(skills, spells, is_dreamer);
     
     /*
      * We adapt the data based on the genre of the game
@@ -19,7 +19,7 @@ function generateCharacter() {
     if(settings['genre'] == 'contemporary') {
         characteristics['name'] = generateContemporaryName(characteristics['gender']);
     }
-    
+
     if(settings['genre'] == 'fantasy') {
         characteristics['name'] = generateFantasyName();
     }
