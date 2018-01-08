@@ -121,7 +121,7 @@ function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
             continue;
         }
         else {
-            var level = getRandomInt(0, 13);
+            var level = getRandomInt(6, 13);
         }
 
         level = index[level];
