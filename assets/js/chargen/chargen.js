@@ -120,7 +120,7 @@ function generateCharacter(skills) {
      */
     var settings = getSettings();
     var characteristics = generateCharacteristics(settings);
-    //var archetype = generateArchetype(settings, skills);
+    var archetype = generateArchetype(settings, skills);
     var skills = generateSkills(settings, skills, spells);
 
     /*

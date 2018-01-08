@@ -1,7 +1,7 @@
 /*
  *
  */
-function generateArchetype(skills) {
+function generateArchetype(settings, skills) {
     var all_skills = [];
 
     $.each(skills, function(key, value) {
