@@ -48,7 +48,7 @@ function getSettings() {
      *
      */
     if(settings['build'] != 'none') {
-        settings['template'] = character_templates[settings['build']];
+        settings['template'] = Object.assign({}, character_templates[settings['build']]);
         settings['build'] = true;
     }
     else {
@@ -73,8 +73,8 @@ function getSettings() {
 
             $.extend(settings['template']['primary-skills'], location['primary-skills']);
             $.extend(settings['template']['secondary-skills'], location['secondary-skills']);
-
             
+            console.log(settings['template']['primary-skills']);
         }
     }
 
