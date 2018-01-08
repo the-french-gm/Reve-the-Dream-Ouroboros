@@ -106,7 +106,7 @@ function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
         /*
          * We ignore skills that are excluded by templates
          */
-        if(settings['template'] && settings['template']['exclude'].indexOf(skill[0]) > -1) {
+        if(settings['template'] && settings['template']['exclude'] && settings['template']['exclude'].indexOf(skill[0]) > -1) {
             continue;
         }
 
@@ -195,7 +195,7 @@ function displaySpell(spell) {
 function assignSpellPointsAndXP(character_skills, spell_points, spells) {
     var draconics = {};
     var acquired_spells = [];
-    console.log(spells['oneiros']);
+
     /*
      * We only buy spells from Ways that the character
      * is versed into.
@@ -287,7 +287,6 @@ function assignSpellPointsAndXP(character_skills, spell_points, spells) {
             delete draconics[draconic];
         }
     }
-    console.log(spells['oneiros']);
 }
 
 /*

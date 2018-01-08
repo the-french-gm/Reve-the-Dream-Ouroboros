@@ -268,7 +268,7 @@ permalink: /
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Specialized Skills (-8)</h6>
-                    {% assign specialized_skills = "acting,carpentry,commerce,disguise,masonry,music,pickpocket,riding,city survival,outdoor survival" | split: "," %}
+                    {% assign specialized_skills = "acting,carpentry,commerce,disguise,masonry,music,pickpocket,riding,city survival,outdoor survival,artic,desert,forest,mountain,swamp,underground" | split: "," %}
                     {% include chargen/skills-table.html skills=specialized_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
@@ -317,8 +317,10 @@ permalink: /
         <script src="{{ '/assets/js/i18n/jquery.i18n.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/i18n/jquery.i18n.messagestore.js' | prepend: site.baseurl }}"></script>
 
-        <script src="{{ '/assets/js/chargen/templates/white-mage.js' | prepend: site.baseurl }}"></script>
-        <script src="{{ '/assets/js/chargen/templates/dark-mage.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/white-mage.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/dark-mage.js' | prepend: site.baseurl }}"></script>
+
+        <script src="{{ '/assets/js/chargen/templates/locations/mountain.js' | prepend: site.baseurl }}"></script>
 
         <script src="{{ '/assets/js/chargen/i18n.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/spells.js' | prepend: site.baseurl }}"></script>

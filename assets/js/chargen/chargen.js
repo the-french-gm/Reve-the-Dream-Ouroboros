@@ -56,6 +56,28 @@ function getSettings() {
         settings['build'] = false;
     }
 
+    if(settings['location'] != 'random') {
+        var location = location_templates[settings['location']]
+
+        if(location) {
+            if(!settings['template']) {
+                settings['template'] = {
+                    "settings": {},
+                    "characteristics": [],
+                    "primary-skills": [],
+                    "secondary-skills": []
+                };
+                
+                settings['build'] = true;
+            }
+
+            $.extend(settings['template']['primary-skills'], location['primary-skills']);
+            $.extend(settings['template']['secondary-skills'], location['secondary-skills']);
+
+            
+        }
+    }
+
     /*
      *
      */
@@ -77,6 +99,7 @@ function generateCharacter(skills) {
     /*
      * We save global variable.
      * I know that's an ugly solution, but what the hell!
+     * That way we avoid possible bugs.
      */
     if(!skills) {
         skills = global_skills;
@@ -92,6 +115,9 @@ function generateCharacter(skills) {
         global_spells = spells;
     }
     
+    /*
+     * Generate the character :)
+     */
     var settings = getSettings();
     var characteristics = generateCharacteristics(settings);
     //var archetype = generateArchetype(settings, skills);
