@@ -15,6 +15,8 @@ $(document).ready( function( $ ) {
 	 *
 	 */
 	function applyLanguage() {
+		var settings = getSettings();
+		
 		$.i18n()
 		.load('assets/js/chargen/lang/'+settings['language']+'-'+settings['genre']+'.json', settings['language']+'-'+settings['genre'])
 		.done(function() {
@@ -27,6 +29,7 @@ $(document).ready( function( $ ) {
 	 *
 	 */
 	$('.genre-select').on("change keyup", function() {
+		var settings = getSettings();
 		settings['genre'] = $(".genre-select option:selected").val();
 		applyLanguage();
 
@@ -45,6 +48,8 @@ $(document).ready( function( $ ) {
 	 * Change the language between English and French
 	 */
 	$('.lang-btn').on('click', function() {
+		var settings = getSettings();
+
 		if(settings['language'] == 'en') {
 			$(this).text("English");
 			settings['language'] = 'fr';

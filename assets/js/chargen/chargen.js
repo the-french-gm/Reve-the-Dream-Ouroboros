@@ -4,6 +4,21 @@
 function getSettings() {
     var settings = {};
 
+    /*
+     * Language Settings
+     */
+    settings['language'] = $('.lang-btn').text();
+
+    if(settings['language'] == 'Français') {
+        settings['language'] = 'en';
+    }
+    else {
+        settings['language'] = 'fr';
+    }
+
+    /*
+     * Generator Settings
+     */
     settings['characteristic-points'] = $('.setting-characteristic-points').val();
     settings['max-characteristic-points'] = $('.setting-max-characteristic-points').val();
     settings['skill-points'] = $('.setting-skill-points').val();
@@ -16,7 +31,7 @@ function getSettings() {
      *
      */
     if(settings['high-dreamer'] == 'random') {
-        settings['high-dreamer'] = (Math.random() >= 0.5) ? true : false;
+        settings['high-dreamer'] = (Math.random() <= 0.25) ? true : false;
     }
     else if(settings['high-dreamer'] == 'yes') {
         settings['high-dreamer'] = true;
@@ -28,7 +43,7 @@ function getSettings() {
     /*
      *
      */
-    if(settings['build'] != 'random') {
+    if(settings['build'] != 'none') {
         settings['template'] = character_templates[settings['build']];
         settings['build'] = true;
     }
