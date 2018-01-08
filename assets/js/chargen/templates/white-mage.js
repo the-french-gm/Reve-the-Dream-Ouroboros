@@ -27,10 +27,7 @@ character_templates["white-mage"] = {
     ],
 
     "secondary-skills" : [
-        "drawing",
         "surgery",
-        "city-survival",
-        "outdoor-survival",
         "medicine",
     ],
 

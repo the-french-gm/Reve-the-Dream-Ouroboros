@@ -11,88 +11,90 @@ permalink: /
 
     <body>
         <div class="container-fluid">
-            <div class="row bg-dark row-eq-height top-menu">
-                <div class="col-xs-12 col-md-8">
-                    <h1 class="text-white">Rêve: the Dream Ouroboros - Character Generator</h1>
-                </div>
+            <div class="fixed-top">
+                <div class="row bg-dark row-eq-height top-menu">
+                    <div class="col-xs-12 col-md-8">
+                        <h1 class="text-white">Rêve: the Dream Ouroboros - Character Generator</h1>
+                    </div>
 
-                <div class="col-xs-12 col-md-4">
-                    <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
+                    <div class="col-xs-12 col-md-4">
+                        <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
 
-                    <button type="button" class="btn lang-btn">Français</button>
-                </div>
-            </div>
-
-            <div class="row bg-secondary generator-settings">
-                <div class="col-xs-12 col-md-2">
-                    <label>Characteristic Points:</label>
-                    <div class="form-row">
-                        <div class="col col-xs-12 col-md-5">
-                            <input type="text" class="form-control setting-characteristic-points" value="160" />
-                        </div>
-                        <div class="col col-xs-12 col-md-3">
-                            <label class="small max align-middle">Max.</label>
-                        </div>
-                        <div class="col col-xs-12 col-md-4">
-                            <input type="text" class="form-control setting-max-characteristic-points" value="15" />
-                        </div>
+                        <button type="button" class="btn lang-btn">Français</button>
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-2">
-                    <label>Skill Points:</label>
-                    <div class="form-row">
-                        <div class="col col-xs-12 col-md-5">
-                            <input type="text" class="form-control setting-skill-points" value="3000" />
-                        </div>
-                        <div class="col col-xs-12 col-md-3">
-                            <label class="small max align-middle">Max.</label>
-                        </div>
-                        <div class="col col-xs-12 col-md-4">
-                            <input type="text" class="form-control setting-max-skill-points" value="+3" />
+                <div class="row bg-secondary generator-settings">
+                    <div class="col-xs-12 col-md-2">
+                        <label>Characteristic Points:</label>
+                        <div class="form-row">
+                            <div class="col col-xs-12 col-md-5">
+                                <input type="text" class="form-control setting-characteristic-points" value="160" />
+                            </div>
+                            <div class="col col-xs-12 col-md-3">
+                                <label class="small max align-middle">Max.</label>
+                            </div>
+                            <div class="col col-xs-12 col-md-4">
+                                <input type="text" class="form-control setting-max-characteristic-points" value="15" />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-md-2">
-                    <label>Build:</label>
-                    <select class="custom-select setting-build">
-                        <option value="none">None</option>
-                        <option value="white-mage">White Mage</option>
-                        <option value="dark-mage">Dark Mage</option>
-                    </select>
-                </div>
+                    <div class="col-xs-12 col-md-2">
+                        <label>Skill Points:</label>
+                        <div class="form-row">
+                            <div class="col col-xs-12 col-md-5">
+                                <input type="text" class="form-control setting-skill-points" value="3000" />
+                            </div>
+                            <div class="col col-xs-12 col-md-3">
+                                <label class="small max align-middle">Max.</label>
+                            </div>
+                            <div class="col col-xs-12 col-md-4">
+                                <input type="text" class="form-control setting-max-skill-points" value="+3" />
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="col-xs-12 col-md-2">
-                    <label>Location:</label>
-                    <select class="custom-select setting-location">
-                        <option value="random">Random</option>
-                        <option value="city">City</option>
-                        <option value="outdoor">Outdoor</option>
-                        <option value="mountain">Mountain</option>
-                        <option value="forest">Forest</option>
-                        <option value="desert">Desert</option>
-                        <option value="swamp">Swamp</option>
-                        <option value="artic">Artic</option>
-                        <option value="underground">Underground</option>
-                    </select>
-                </div>
+                    <div class="col-xs-12 col-md-2">
+                        <label>Build:</label>
+                        <select class="custom-select setting-build">
+                            <option value="none">None</option>
+                            <option value="white-mage">White Mage</option>
+                            <option value="dark-mage">Dark Mage</option>
+                        </select>
+                    </div>
 
-                <div class="col-xs-12 col-md-2">
-                    <label>Is High Dreamer?</label>
-                    <select class="custom-select setting-high-dreamer">
-                        <option value="random">Random</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
+                    <div class="col-xs-12 col-md-2">
+                        <label>Location:</label>
+                        <select class="custom-select setting-location">
+                            <option value="random">Random</option>
+                            <option value="city">City</option>
+                            <option value="outdoor">Outdoor</option>
+                            <option value="mountain">Mountain</option>
+                            <option value="forest">Forest</option>
+                            <option value="desert">Desert</option>
+                            <option value="swamp">Swamp</option>
+                            <option value="artic">Artic</option>
+                            <option value="underground">Underground</option>
+                        </select>
+                    </div>
 
-                <div class="col-xs-12 col-md-2">
-                    <label>Genre:</label>
-                    <select class="custom-select setting-genre">
-                        <option value="fantasy">Fantasy</option>
-                        <option value="contemporary">Contemporary</option>
-                    </select>
+                    <div class="col-xs-12 col-md-2">
+                        <label>Is High Dreamer?</label>
+                        <select class="custom-select setting-high-dreamer">
+                            <option value="random">Random</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xs-12 col-md-2">
+                        <label>Genre:</label>
+                        <select class="custom-select setting-genre">
+                            <option value="fantasy">Fantasy</option>
+                            <option value="contemporary">Contemporary</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -326,27 +328,24 @@ permalink: /
         <script src="{{ '/assets/js/chargen/archetype.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/chance.min.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/fantasy-names.js' | prepend: site.baseurl }}"></script>
-
-        <script>
-            /*
-             *
-             */
-            var skills = {
-                "general" : [-4, ['{{ general_skills | join: "','" | replace: " ","-" }}']],
-                "arts" : [-11, ['{{ arts_skills | join: "','" | replace: " ","-" }}']],
-                "specialized" : [-8, ['{{ specialized_skills | join: "','" | replace: " ","-" }}']],
-                "sciences" : [-11, ['{{ science_skills | join: "','" | replace: " ","-"  }}']],
-                "draconic" : [-11, ['{{ draconic_skills | join: "','" | replace: " ","-"  }}']],
-                "melee" : [-6, ['{{ melee_skills | join: "','" | replace: " ","-"  }}']],
-                "mt" : [-8, ['{{ mt_skills | join: "','" | replace: " ","-"  }}']]
-            }
-        </script>
-
         <script src="{{ '/assets/js/chargen/chargen.js' | prepend: site.baseurl }}"></script>
 
         <script>
             window.onload = function() {
-                generateCharacter();
+                /*
+                 *
+                 */
+                var skills = {
+                    "general" : [-4, ['{{ general_skills | join: "','" | replace: " ","-" }}']],
+                    "arts" : [-11, ['{{ arts_skills | join: "','" | replace: " ","-" }}']],
+                    "specialized" : [-8, ['{{ specialized_skills | join: "','" | replace: " ","-" }}']],
+                    "sciences" : [-11, ['{{ science_skills | join: "','" | replace: " ","-"  }}']],
+                    "draconic" : [-11, ['{{ draconic_skills | join: "','" | replace: " ","-"  }}']],
+                    "melee" : [-6, ['{{ melee_skills | join: "','" | replace: " ","-"  }}']],
+                    "mt" : [-8, ['{{ mt_skills | join: "','" | replace: " ","-"  }}']]
+                }
+
+                generateCharacter(skills);
             }
         </script>
     </body>

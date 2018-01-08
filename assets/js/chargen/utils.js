@@ -41,6 +41,7 @@ $.expr[':'].textEquals = function(el, i, m) {
  *
  */
 function shuffleArray(o) {
+	var o = o.slice();
 	for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 };

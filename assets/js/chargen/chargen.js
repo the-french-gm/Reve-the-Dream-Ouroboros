@@ -1,3 +1,7 @@
+//
+var global_skills;
+var global_spells;
+
 /*
  *
  */
@@ -69,11 +73,29 @@ function getSettings() {
 /*
  *
  */
-function generateCharacter() {
+function generateCharacter(skills) {
+    /*
+     * We save global variable.
+     * I know that's an ugly solution, but what the hell!
+     */
+    if(!skills) {
+        skills = global_skills;
+    }
+    else {
+        global_skills = skills;
+    }
+
+    if(!spells) {
+        spells = global_spells;
+    }
+    else {
+        global_spells = spells;
+    }
+    
     var settings = getSettings();
     var characteristics = generateCharacteristics(settings);
     //var archetype = generateArchetype(settings, skills);
-    //var skills = generateSkills(settings, skills, spells, is_dreamer);
+    var skills = generateSkills(settings, skills, spells);
 
     /*
      * Display the characteristics in the HTML table

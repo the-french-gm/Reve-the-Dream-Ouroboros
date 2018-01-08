@@ -33,14 +33,82 @@ function calculateCost(difficulty, level) {
 /*
  *
  */
-function assignSkillPointsAndXP(points, skills, is_dreamer) {
+function getSkill(skills, skill) {
+    var ret = null;
 
+    $.each(skills, function(index, value) {
+        var arr = skills[index];
+        if(arr[0] == skill) {
+            ret = arr;
+            return false;
+        }
+    });
+
+    return ret;
+}
+
+/*
+ *
+ */
+function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
     var acquired_skills = {};
 
+    /*
+     * We assign the points are per the template
+     */
+    if(settings['template']) {
+        // We shuffle the arrays to add more randomness
+        settings['template']['primary-skills'] = shuffleArray(settings['template']['primary-skills']);
+        settings['template']['secondary-skills'] = shuffleArray(settings['template']['secondary-skills']);
+
+        /*
+         * Primary and secondary skills assignment.
+         */
+        var important_skills = [
+            settings['template']['primary-skills'],
+            settings['template']['secondary-skills']
+        ]
+
+        $.each(important_skills, function(index, value) {
+            $.each(value, function(index, skill) {
+                var skill = getSkill(skills, skill);
+                var difficulty = skill[1];
+                
+                for(level = 3; level > -1; level--) {
+                    var cost = calculateCost(difficulty, level);
+                    
+                    if((points-cost) > 0) {
+                        points -= cost;
+                        acquired_skills[skill[0]] = level;
+                        $("#"+skill[0]).text(level);
+                        break;
+                    }
+                }
+            });
+        });
+    }
+
+    /*
+     * We assign all remaining points randomly.
+     */
     while((points / 10) >= 1) {
         var index = getRandomInt(0, skills.length-1);
         var skill = skills[index];
         var difficulty = skill[1];
+
+        /*
+         * We ignore skills that have already been prepopulated by templates
+         */
+        if(acquired_skills[skill[0]]) {
+            continue;
+        }
+
+        /*
+         * We ignore skills that are excluded by templates
+         */
+        if(settings['template'] && settings['template']['exclude'].indexOf(skill[0]) > -1) {
+            continue;
+        }
 
         /*
          * Random skill generation
@@ -124,24 +192,31 @@ function displaySpell(spell) {
 /*
  *
  */
-function assignSpellPointsAndXP(skills, spells_points, spells) {
+function assignSpellPointsAndXP(character_skills, spell_points, spells) {
     var draconics = {};
     var acquired_spells = [];
-
-    $.each(skills, function(index, value) {
+    console.log(spells['oneiros']);
+    /*
+     * We only buy spells from Ways that the character
+     * is versed into.
+     */
+    //console.log(character_skills)
+    $.each(character_skills, function(index, value) {
         if(['oneiros', 'narcos', 'hypnos', 'thanatos'].indexOf(index) > -1) {
             draconics[index] = value;
         }
     });
-
+    
+    /*
+     * We now assign spells randomly to the character.
+     */
     var length;
-
     while((length = Object.keys(draconics).length) > 0) {
         var index = getRandomInt(0, length - 1);
         var draconic = Object.keys(draconics)[index];
         var level = draconics[draconic];
         var d_spells = shuffleArray(spells[draconic]);
-
+        
         var spell;
 
         while(d_spells.length > 0) {
@@ -199,9 +274,10 @@ function assignSpellPointsAndXP(skills, spells_points, spells) {
                 cost = cost * 2;
             }
 
-            if((spells_points-cost) > 0) {
-                spells_points -= cost;
+            if((spell_points-cost) > 0) {
                 spell = [draconic].concat(spell.concat(cost));
+                spell_points -= cost;
+                
                 displaySpell(spell);
                 break;
             }
@@ -211,20 +287,23 @@ function assignSpellPointsAndXP(skills, spells_points, spells) {
             delete draconics[draconic];
         }
     }
+    console.log(spells['oneiros']);
 }
 
 /*
  *
  */
-function generateSkills(skills, spells, is_dreamer = false) {
-    $('.spells-table').empty();
-
-    var total_points = 3000;
-    var spells_points = getRandomInt(0, total_points / 3.5);
-    var skills_points = total_points - spells_points;
-
+function generateSkills(settings, skills, spells) {
+    $('#spells-table').empty();
     var skills_list = [];
     
+    /*
+     * Create a global skills list to make it easier
+     * for the generator to find and select skills.
+     * 
+     * In the same code, we empty all the skill values
+     * from the UI.
+     */
     $.each(skills, function(key, value) {
         difficulty = value[0];
         $.each(value[1], function(index, skill) {
@@ -234,9 +313,32 @@ function generateSkills(skills, spells, is_dreamer = false) {
         });
     });
 
-    var skills = assignSkillPointsAndXP(skills_points, skills_list, is_dreamer);
-    var spells = assignSpellPointsAndXP(skills, spells_points, spells);
+    /*
+     * We assign skills and spells to the character.
+     */
+    var skill_points = settings['skill-points'];
+    var spell_points = 0;
 
-    $("#skills_points").text(skills_points);
-    $("#spells_points").text(spells_points);
+    if(settings['high-dreamer']) {
+        spell_points = getRandomInt(0, skill_points / 4);
+        skill_points -= spell_points;
+    }
+    
+    var character_skills = assignSkillPointsAndXP(
+            settings,
+            skill_points, 
+            skills_list, 
+            settings['high-dreamer']
+        );
+    
+    if(settings['high-dreamer']) {
+        var character_spells = assignSpellPointsAndXP(
+            character_skills,
+            spell_points,
+            spells
+        );
+    }
+    
+    $("#skills_points").text(skill_points);
+    $("#spells_points").text(spell_points);
 }
