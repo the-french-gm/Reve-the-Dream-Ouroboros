@@ -2,7 +2,7 @@ if(!character_templates) {
     var character_templates = {};
 }
 
-character_templates["dark-mage"] = {
+character_templates["thanatos-mage"] = {
     "settings" : {
         "high-dreamer" : true
     },
@@ -21,9 +21,6 @@ character_templates["dark-mage"] = {
         "botany",
         "legends",
         "writing",
-        "oneiros",
-        "hypnos",
-        "narcos",
         "thanatos"
     ],
 
@@ -31,5 +28,22 @@ character_templates["dark-mage"] = {
         "drawing",
         "surgery",
         "medicine",
+    ],
+    
+    "exclude" : [
+        "masonry",
+        "carpentry",
+        "leatherwork",
+        "metalwork",
+        "juggling",
+        "jewelrysmith",
+        "acting",
+        "gaming",
+        "2-handed-sword",
+        "2-handed-mace",
+        "2-handed-axe",
+        "hand-axe",
+        "javelin",
+        "lasso"
     ]
 }

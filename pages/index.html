@@ -59,8 +59,17 @@ permalink: /
                         <label>Build:</label>
                         <select class="custom-select setting-build">
                             <option value="none">None</option>
+                            <option value="traveler">Traveler</option>
                             <option value="white-mage">White Mage</option>
-                            <option value="dark-mage">Dark Mage</option>
+                            <option value="thanatos-mage">Thanatos Mage</option>
+                            <option value="mercenary">Mercenary</option>
+                            <option value="assassin">Assassin</option>
+                            <option value="warrior">Warrior</option>
+                            <option value="scholar">Scholar</option>
+                            <option value="healer">Healer</option>
+                            <option value="street-artist">Street Artist</option>
+                            <option value="sailor">Sailor</option>
+                            <option value="merchant">Merchant</option>
                         </select>
                     </div>
 
@@ -264,7 +273,7 @@ permalink: /
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Arts (-11)</h6>
-                    {% assign arts_skills = "acrobatics,gaming,jewelrysmith,juggling,leatherwork,locksmithing,metalwork,naviguation,surgery,swimming" | split: "," %}
+                    {% assign arts_skills = "acrobatics,gaming,jewelrysmith,juggling,leatherwork,locksmithing,metalwork,navigation,surgery,swimming" | split: "," %}
                     {% include chargen/skills-table.html skills=arts_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
@@ -284,12 +293,12 @@ permalink: /
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Melee (-6)</h6>
-                    {% assign melee_skills = "1-handed axe,2-handed axe,dagger,dodging,flail,hand to hand,lance,1-handed mace,2-handed mace,polearm,shield,1-handed sword,2-handed sword" | split: "," %}
+                    {% assign melee_skills = "1-handed axe,2-handed axe,dagger,dodging,hand to hand,lance,1-handed mace,2-handed mace,shield,1-handed sword,2-handed sword" | split: "," %}
                     {% include chargen/skills-table.html skills=melee_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Missile &amp; Thrown (-8)</h6>
-                    {% assign mt_skills = "blowgun,bow,crossbow,knife,hand axe,javelin,lasso,sling,whip" | split: "," %}
+                    {% assign mt_skills = "bow,crossbow,knife,hand axe,javelin,lasso,whip" | split: "," %}
                     {% include chargen/skills-table.html skills=mt_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
@@ -319,7 +328,16 @@ permalink: /
         <script src="{{ '/assets/js/i18n/jquery.i18n.messagestore.js' | prepend: site.baseurl }}"></script>
 
         <script src="{{ '/assets/js/chargen/templates/classes/white-mage.js' | prepend: site.baseurl }}"></script>
-        <script src="{{ '/assets/js/chargen/templates/classes/dark-mage.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/thanatos-mage.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/mercenary.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/traveler.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/assassin.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/street-artist.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/sailor.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/merchant.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/warrior.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/scholar.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/chargen/templates/classes/healer.js' | prepend: site.baseurl }}"></script>
 
         <script src="{{ '/assets/js/chargen/templates/locations/mountain.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/assets/js/chargen/templates/locations/city.js' | prepend: site.baseurl }}"></script>

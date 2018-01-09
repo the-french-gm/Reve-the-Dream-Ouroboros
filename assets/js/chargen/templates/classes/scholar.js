@@ -2,17 +2,9 @@ if(!character_templates) {
     var character_templates = {};
 }
 
-character_templates["white-mage"] = {
-    "settings" : {
-        "high-dreamer" : true
-    },
-
+character_templates["scholar"] = {
     "characteristics" : [
-        "intellect",
-        "dream",
-        "dexterity",
-        "will",
-        "empathy"
+        "intellect"
     ],
 
     "primary-skills" : [
@@ -20,25 +12,25 @@ character_templates["white-mage"] = {
         "astrology",
         "botany",
         "legends",
-        "writing",
-        "oneiros",
-        "hypnos",
-        "narcos"
+        "medicine",
+        "zoology",
+        "writing"
     ],
 
     "secondary-skills" : [
-        "surgery",
-        "medicine",
+        "drawing",
+        "surgery"
     ],
-
+    
     "exclude" : [
-        "thanatos",
         "masonry",
         "carpentry",
         "leatherwork",
         "metalwork",
         "juggling",
         "jewelrysmith",
+        "acting",
+        "gaming",
         "2-handed-sword",
         "2-handed-mace",
         "2-handed-axe",

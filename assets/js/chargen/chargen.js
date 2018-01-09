@@ -71,10 +71,9 @@ function getSettings() {
                 settings['build'] = true;
             }
 
-            $.extend(settings['template']['primary-skills'], location['primary-skills']);
-            $.extend(settings['template']['secondary-skills'], location['secondary-skills']);
+            settings['template']['primary-skills'] = settings['template']['primary-skills'].concat( location['primary-skills']).unique();
             
-            console.log(settings['template']['primary-skills']);
+            settings['template']['secondary-skills'] = settings['template']['secondary-skills'].concat(location['secondary-skills']);
         }
     }
 

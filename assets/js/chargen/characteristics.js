@@ -255,7 +255,7 @@ function generateCharacteristics(settings) {
             }
 
             var value = getRandomInt(Math.floor(max_points / 1.5), max_points);
-
+            
             // we do not decrement the number of total points if beauty is below 10
             if((characteristic == "beauty") && (value < 10)) {
                 characteristics['beauty'] = 10;

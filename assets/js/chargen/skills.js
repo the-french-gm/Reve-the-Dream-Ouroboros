@@ -52,6 +52,7 @@ function getSkill(skills, skill) {
  */
 function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
     var acquired_skills = {};
+    var draconics = ['thanatos', 'oneiros', 'hypnos', 'narcos'];
 
     /*
      * We assign the points are per the template
@@ -72,6 +73,11 @@ function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
         $.each(important_skills, function(index, value) {
             $.each(value, function(index, skill) {
                 var skill = getSkill(skills, skill);
+                
+                if(!skill) {
+                    return;
+                }
+
                 var difficulty = skill[1];
                 
                 for(level = 3; level > -1; level--) {
@@ -86,6 +92,21 @@ function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
                 }
             });
         });
+    }
+
+    /*
+     * If the character is a dreamer, she must at least have one
+     * draconic way.
+     */
+    if(is_dreamer) {
+        var index = getRandomInt(0, draconics.length-1);
+        var draconic_way = draconics[index];
+        var cost = calculateCost(-11, 3);
+
+        if((!acquired_skills[draconic_way]) && ((points-cost) > 0)) {
+            acquired_skills[draconic_way] = 3;
+            $("#"+draconic_way).text(level);
+        }
     }
 
     /*
@@ -114,10 +135,10 @@ function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
          * Random skill generation
          */
         var index = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3]
-        if(is_dreamer && ['thanatos', 'oneiros', 'hypnos', 'narcos'].includes(skill[0])) {
-            var level = getRandomInt(11, 13);
+        if(is_dreamer && draconics.includes(skill[0])) {
+            var level = getRandomInt(12, 13);
         }
-        else if(!is_dreamer && ['thanatos', 'oneiros', 'hypnos', 'narcos'].includes(skill[0])) {
+        else if(!is_dreamer && draconics.includes(skill[0])) {
             continue;
         }
         else {
@@ -125,6 +146,18 @@ function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
         }
 
         level = index[level];
+
+        /*
+         * We skip acquiring purchasing advanced skills if the
+         * proposed level is too low.
+         */
+        if((difficulty == -6) && (level < 1)) {
+            continue;
+        }
+
+        if(((difficulty == -11) || (difficulty == -8)) && (level != 3)) {
+            continue;
+        }
 
         /*
          * We calculate the cost of acquiring the skill
@@ -318,8 +351,8 @@ function generateSkills(settings, skills, spells) {
     var skill_points = settings['skill-points'];
     var spell_points = 0;
 
-    if(settings['high-dreamer']) {
-        spell_points = getRandomInt(0, skill_points / 4);
+    if(settings['high-dreamer'] && (skill_points > 100)) {
+        spell_points = getRandomInt(100, (skill_points / 4));
         skill_points -= spell_points;
     }
     
