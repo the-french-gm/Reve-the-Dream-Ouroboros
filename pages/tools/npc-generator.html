@@ -1,0 +1,46 @@
+---
+permalink: /tools/npc-generator.html
+---
+
+<html>
+<head>
+    <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ '/assets/css/pages/npc-generator.css' | prepend: site.baseurl }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row bg-dark top-menu">
+            <div class="col-xs-12 col-md-8">
+                <h1 class="text-white">Rêve: the Dream Ouroboros - NPC Generator</h1>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
+
+                <button type="button" class="btn lang-btn">Français</button>
+            </div>
+        </div>
+
+        <div class="row bg-secondary">
+
+        </div>
+    </div>
+
+    
+    <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/js/chance.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
+    <script>
+        /*
+         *
+         */
+        $(document).ready( function( $ ) {
+            var rddjs = new RDDJS();
+            character = rddjs.generateCharacter();
+            console.log(character);
+        });
+
+    </script>
+</body>
+</html>
