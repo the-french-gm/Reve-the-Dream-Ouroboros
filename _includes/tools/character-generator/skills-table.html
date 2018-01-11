@@ -3,7 +3,6 @@
         <tr>
             <td></td>
             <td>Lvl</td>
-            <td>Exp</td>
             <td>Arch</td>
         </tr>
     </thead>
@@ -13,7 +12,6 @@
         <tr>
             <td class="skill">{{skill}}</td>
             <td class="value" id="{{ skill | replace:' ','-' }}"></td>
-            <td class="value exp-skill" id="exp-{{ skill | replace:' ','-' }}"></td>
             <td class="value arch-skill" id="arch-{{ skill | replace:' ','-' }}"></td>
         </tr>
     {% endfor %}

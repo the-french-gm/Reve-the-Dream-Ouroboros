@@ -254,44 +254,44 @@ permalink: /tools/character-generator.html
                     </table>
                 </div>
                 <div class="col-xs-12 col-md-4">
-                    <img src="{{ '/assets/images/resolution-table.png' | prepend: site.baseurl }}" width="100%" />
+                    <img src="{{ '/assets/images/resolution-table.png' | prepend: site.baseurl }}" style="width:auto;max-height:320px;" />
                 </div>
             </div>
             <div class="row bg-light skills">
                 <div class="col col-xs-12 col-md-auto">
                     <h6>General (-4)</h6>
                     {% assign general_skills = "climbing,cooking,dance,discretion,drawing,jumping,running,seduction,singing,tinkering,vigilance" | split: "," %}
-                    {% include chargen/skills-table.html skills=general_skills %}
+                    {% include tools/character-generator/skills-table.html skills=general_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Arts (-11)</h6>
                     {% assign arts_skills = "acrobatics,gaming,jewelrysmith,juggling,leatherwork,locksmithing,metalwork,navigation,surgery,swimming" | split: "," %}
-                    {% include chargen/skills-table.html skills=arts_skills %}
+                    {% include tools/character-generator/skills-table.html skills=arts_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Specialized Skills (-8)</h6>
                     {% assign specialized_skills = "acting,carpentry,commerce,disguise,masonry,music,pickpocket,riding,city survival,outdoor survival,artic,desert,forest,mountain,swamp,underground" | split: "," %}
-                    {% include chargen/skills-table.html skills=specialized_skills %}
+                    {% include tools/character-generator/skills-table.html skills=specialized_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Sciences (-11)</h6>
                     {% assign science_skills = "alchemy,astrology,botany,legends,medicine,writing,zoology" | split: "," %}
-                    {% include chargen/skills-table.html skills=science_skills %}
+                    {% include tools/character-generator/skills-table.html skills=science_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Draconics (-11)</h6>
                     {% assign draconic_skills = "oneiros,hypnos,narcos,thanatos" | split: "," %}
-                    {% include chargen/skills-table.html skills=draconic_skills %}
+                    {% include tools/character-generator/skills-table.html skills=draconic_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Melee (-6)</h6>
                     {% assign melee_skills = "1-handed axe,2-handed axe,dagger,dodging,hand to hand,lance,1-handed mace,2-handed mace,shield,1-handed sword,2-handed sword" | split: "," %}
-                    {% include chargen/skills-table.html skills=melee_skills %}
+                    {% include tools/character-generator/skills-table.html skills=melee_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Missile &amp; Thrown (-8)</h6>
                     {% assign mt_skills = "bow,crossbow,knife,hand axe,javelin,lasso,whip" | split: "," %}
-                    {% include chargen/skills-table.html skills=mt_skills %}
+                    {% include tools/character-generator/skills-table.html skills=mt_skills %}
                 </div>
                 <div class="col col-xs-12 col-md-auto">
                     <h6>Spells</h6>
@@ -469,8 +469,8 @@ permalink: /tools/character-generator.html
                     var settings = getSettings();
                     
                     $.i18n()
-                    .load('assets/js/chargen/lang/'+settings['language']+'-'+settings['genre']+'.json', settings['language']+'-'+settings['genre'])
-                    .done(function() {
+                    .load({{ "'/assets/js/rdd-js/lang/'+settings['language']+'-'+settings['genre']+'.json'" | prepend: site.baseurl }}, 
+                        settings['language']+'-'+settings['genre']).done(function() {
                         $.i18n().locale = settings['language']+'-'+settings['genre'];
                         $('body').i18n();
                     });
