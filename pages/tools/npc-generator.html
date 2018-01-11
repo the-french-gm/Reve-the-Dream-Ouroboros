@@ -6,6 +6,7 @@ permalink: /tools/npc-generator.html
 <head>
     <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ '/assets/css/pages/npc-generator.css' | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ '/assets/css/rpg-awesome.min.css' | prepend: site.baseurl }}">
 </head>
 <body>
     <div class="container-fluid">
@@ -29,6 +30,8 @@ permalink: /tools/npc-generator.html
     
     <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/js/html2canvas.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/js/canvas2image.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/js/chance.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
     <script>
@@ -38,13 +41,25 @@ permalink: /tools/npc-generator.html
             'skill-points' : 3000
         };
 
-        function generateCard(character) {
+        function download(uid) {
+            var build = $('#npc-'+uid+' .build').text().replace(' ', '');
+            
+            html2canvas(document.querySelector('#npc-'+uid)).then(canvas => {
+                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+                var a = document.createElement('a');
+                a.href = image;
+                a.download = build+'-'+uid+'.png';
+                a.click();
+            });
+        }
+
+        function generateCard(character, uid) {
             var div = $('.npc-cards');
             
             var html = '';
-            html += '<div class="npc-card col-md-auto">'
+            html += '<div class="npc-card col-md-auto" id="npc-'+uid+'">'
             html += '<table>'
-            html += '<tr><td class="build" COLSPAN=3>'+character['build']+'</td></tr>'
+            html += '<tr><td class="build" COLSPAN=3>'+character['build']+' <a><i class="ra ra-sword" onclick="javascript:download('+uid+')"></i></a></td></tr>'
             html += '<tr><td>Height</td><td>:</td><td class="value">'+character['characteristics']['height']+'</td></tr>'
             html += '<tr><td>Dream</td><td>:</td><td class="value">'+character['characteristics']['dream']+'</td></tr>'
             html += '<tr><td>Melee</td><td>:</td><td class="value">'+character['characteristics']['melee']+'</td></tr>'
@@ -52,9 +67,10 @@ permalink: /tools/npc-generator.html
             html += '<tr><td>Throw</td><td>:</td><td class="value">'+character['characteristics']['throw']+'</td></tr>'
 
             $.each(character["resolutions"], function(key, value) {
-                html += '<tr><td>'+key+'</td><td>:</td><td class="value">'+value+'</td></tr>'
+                key = key.replace('-', ' ')
+                html += '<tr><td class="text-capitalize">'+key+'</td><td>:</td><td class="value">'+value+'</td></tr>'
             });
-
+            
             html += '</table>'
             html += '</div>'
 
@@ -63,6 +79,7 @@ permalink: /tools/npc-generator.html
 
         function generateCards() {
             $('.npc-cards').empty();
+            var uid = 0;
 
             $.each(RDDJS.templates, function(key, value) {
                 var settings = default_settings;
@@ -71,7 +88,8 @@ permalink: /tools/npc-generator.html
                 settings['template'] = key;
                 rddjs.setSettings(settings);
                 character = rddjs.generateCharacter();
-                generateCard(character);
+                generateCard(character, uid);
+                uid++;
             });
         }
         
