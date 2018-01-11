@@ -54,6 +54,7 @@
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/sailor.js %}
     {% include rdd-js/templates/classes/scholar.js %}
+    {% include rdd-js/templates/classes/soldier.js %}
     {% include rdd-js/templates/classes/street-artist.js %}
     {% include rdd-js/templates/classes/thanatos-mage.js %}
     {% include rdd-js/templates/classes/traveler.js %}
