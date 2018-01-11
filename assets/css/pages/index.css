@@ -1,5 +1,5 @@
 .header {
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #343a40;
 }
 
 .pictures-slider {
@@ -49,4 +49,9 @@ li {
 
 .nitouche {
     margin-top: 25px;
+}
+
+.footer {
+    margin-top: 25px;
+    text-align: center;
 }
