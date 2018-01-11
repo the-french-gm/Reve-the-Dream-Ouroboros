@@ -15,9 +15,15 @@ permalink: /tools/npc-generator.html
                 <h1 class="text-white">Rêve: the Dream Ouroboros - NPC Generator</h1>
             </div>
 
-            <div class="col-xs-12 col-md-4">
-                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCards();">Generate!</button>
+            <div class="col-xs-12 col-md-auto">
+                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCards();">Generate</button>
+            </div>
 
+            <div class="col-xs-12 col-md-auto">
+                <button type="button" class="btn btn-primary" onclick="javascript:downloadAll()">Download</button>
+            </div>
+
+            <div class="col-xs-12 col-md-auto">
                 <button type="button" class="btn lang-btn">Français</button>
             </div>
         </div>
@@ -40,6 +46,16 @@ permalink: /tools/npc-generator.html
             'max-characteristic-points' : 15,
             'skill-points' : 3000
         };
+
+        function downloadAll() {
+            html2canvas(document.querySelector('.npc-cards')).then(canvas => {
+                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+                var a = document.createElement('a');
+                a.href = image;
+                a.download = 'npc-cards.png';
+                a.click();
+            });
+        }
 
         function download(uid) {
             var build = $('#npc-'+uid+' .build').text().replace(' ', '');
