@@ -91,6 +91,7 @@
          * We apply the template's settings if present.
          */
         if(settings["template"]) {
+            settings["build"] = settings["template"];
             settings["template"] = RDDJS.templates[settings["template"]];
             var template_settings = settings["template"]["settings"];
 
@@ -127,6 +128,46 @@
     }
 
     /*
+     *
+     */
+    RDDJS.prototype.caculateResolutions = function(character) {
+        var resolutions = {};
+
+        $.each(['draconic', 'melee', 'mt'], function(index, value) {
+            var characteristic;
+            var skills = RDDJS.skills[value][1];
+            
+            if(value == 'draconic') {
+                characteristic = 'dream'
+            }
+            else if(value == 'mt') {
+                characteristic = 'missile'
+            }
+            else {
+                characteristic = value;
+            }
+
+            characteristic = character["characteristics"][characteristic];
+
+            $.each(skills, function(index, skill) {
+                var competency = character['skills'][skill];
+
+                if(competency) {
+                    var odds = RDDJS.calculator.calculateResolution(
+                        characteristic,
+                        skill,
+                        competency
+                        );
+
+                    $.extend(resolutions, odds);
+                }
+            });
+        });
+
+        return resolutions;
+    }
+
+    /*
      * Generate a new character
      */
     RDDJS.prototype.generateCharacter = function() {
@@ -145,6 +186,8 @@
         character["archetype"] = RDDJS.generator.archetype.generate(settings);
 
         character["remaining-points"] = RDDJS.generator.skills.getRemainingPoints() || 0;
+        character["build"] = this.settings["build"] || '';
+        character["resolutions"] = this.caculateResolutions(character);
         
         return character;
     }

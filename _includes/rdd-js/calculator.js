@@ -141,8 +141,21 @@
             return cost_table[level][indexes[difficulty]];
         },
 
-        resolution: function(characteristic, skill) {
-            console.log(RDDJS.skills);
+        calculateResolution: function(characteristic, skill, competency) {
+            var sign = (competency <= 0) ? '-' : '+';
+            var resolution = {}
+            resolution[skill] = characteristic;
+
+            var multiplier = 1;
+
+            for(i = -7; i <= competency; i++) {
+                multiplier += 0.5;
+                resolution[skill] = characteristic * multiplier;
+            }
+            
+            resolution[skill] = resolution[skill]+'% ('+sign+competency+')';
+
+            return resolution;
         }
     }
 

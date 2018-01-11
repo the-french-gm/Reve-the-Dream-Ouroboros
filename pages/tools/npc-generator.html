@@ -15,13 +15,13 @@ permalink: /tools/npc-generator.html
             </div>
 
             <div class="col-xs-12 col-md-4">
-                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
+                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCards();">Generate!</button>
 
                 <button type="button" class="btn lang-btn">Français</button>
             </div>
         </div>
 
-        <div class="row bg-secondary">
+        <div class="row row-eq-height bg-light npc-cards">
 
         </div>
     </div>
@@ -32,13 +32,54 @@ permalink: /tools/npc-generator.html
     <script src="{{ '/assets/js/chance.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
     <script>
+        var default_settings = {
+            'characteristic-points' : 160,
+            'max-characteristic-points' : 15,
+            'skill-points' : 3000
+        };
+
+        function generateCard(character) {
+            var div = $('.npc-cards');
+            
+            var html = '';
+            html += '<div class="npc-card col-md-auto">'
+            html += '<table>'
+            html += '<tr><td class="build" COLSPAN=3>'+character['build']+'</td></tr>'
+            html += '<tr><td>Height</td><td>:</td><td class="value">'+character['characteristics']['height']+'</td></tr>'
+            html += '<tr><td>Dream</td><td>:</td><td class="value">'+character['characteristics']['dream']+'</td></tr>'
+            html += '<tr><td>Melee</td><td>:</td><td class="value">'+character['characteristics']['melee']+'</td></tr>'
+            html += '<tr><td>Missile</td><td>:</td><td class="value">'+character['characteristics']['missile']+'</td></tr>'
+            html += '<tr><td>Throw</td><td>:</td><td class="value">'+character['characteristics']['throw']+'</td></tr>'
+
+            $.each(character["resolutions"], function(key, value) {
+                html += '<tr><td>'+key+'</td><td>:</td><td class="value">'+value+'</td></tr>'
+            });
+
+            html += '</table>'
+            html += '</div>'
+
+            div.append(html);
+        }
+
+        function generateCards() {
+            $('.npc-cards').empty();
+
+            $.each(RDDJS.templates, function(key, value) {
+                var settings = default_settings;
+                var rddjs = new RDDJS();
+
+                settings['template'] = key;
+                rddjs.setSettings(settings);
+                character = rddjs.generateCharacter();
+                generateCard(character);
+            });
+        }
+        
         /*
          *
          */
         $(document).ready( function( $ ) {
-            var rddjs = new RDDJS();
-            character = rddjs.generateCharacter();
-            console.log(character);
+            generateCards();
         });
 
     </script>
