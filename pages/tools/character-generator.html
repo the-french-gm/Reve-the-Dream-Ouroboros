@@ -469,7 +469,7 @@ permalink: /tools/character-generator.html
                     var settings = getSettings();
                     
                     $.i18n()
-                    .load({{ "'/assets/js/rdd-js/lang/'+settings['language']+'-'+settings['genre']+'.json'" | prepend: site.baseurl }}, 
+                    .load('{{ site.baseurl }}/assets/js/rdd-js/lang/'+settings['language']+'-'+settings['genre']+'.json', 
                         settings['language']+'-'+settings['genre']).done(function() {
                         $.i18n().locale = settings['language']+'-'+settings['genre'];
                         $('body').i18n();
