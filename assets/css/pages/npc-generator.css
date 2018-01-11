@@ -4,7 +4,6 @@ h1 {
 
 .top-menu button {
     margin-top: 2px;
-    margin-left: 10px;
 }
 
 .value {
@@ -31,4 +30,14 @@ h1 {
     border: 1px solid black;
     padding-bottom: 5px;
     padding-top: 5px;
+}
+
+.setting-characteristic-points {
+    margin-top: 2px;
+    width: 70px;
+}
+
+.setting-skills-points {
+    width: 80px;
+    margin-top: 2px;
 }

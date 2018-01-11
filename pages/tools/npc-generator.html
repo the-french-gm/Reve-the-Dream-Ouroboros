@@ -11,8 +11,16 @@ permalink: /tools/npc-generator.html
 <body>
     <div class="container-fluid">
         <div class="row bg-dark top-menu fixed-top">
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-6">
                 <h1 class="text-white">Rêve: the Dream Ouroboros - NPC Generator</h1>
+            </div>
+
+            <div class="col-xs-12 col-md-auto">
+                <input type="text" class="form-control setting-characteristic-points" value="160" />
+            </div>
+
+            <div class="col-xs-12 col-md-auto">
+                <input type="text" class="form-control setting-skills-points" value="3000" />
             </div>
 
             <div class="col-xs-12 col-md-auto">
@@ -101,6 +109,7 @@ permalink: /tools/npc-generator.html
 
             $.each(RDDJS.templates, function(key, value) {
                 var settings = default_settings;
+                settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
                 var rddjs = new RDDJS();
 
                 settings['template'] = key;

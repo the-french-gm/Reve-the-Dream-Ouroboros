@@ -50,6 +50,7 @@
     RDDJS.templates = {};
 
     {% include rdd-js/templates/classes/assassin.js %}
+    {% include rdd-js/templates/classes/barbarian.js %}
     {% include rdd-js/templates/classes/healer.js %}
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/sailor.js %}
