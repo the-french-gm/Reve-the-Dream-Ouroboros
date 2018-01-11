@@ -81,6 +81,7 @@ permalink: /tools/npc-generator.html
             html += '<tr><td>Melee</td><td>:</td><td class="value">'+character['characteristics']['melee']+'</td></tr>'
             html += '<tr><td>Missile</td><td>:</td><td class="value">'+character['characteristics']['missile']+'</td></tr>'
             html += '<tr><td>Throw</td><td>:</td><td class="value">'+character['characteristics']['throw']+'</td></tr>'
+            html += '<tr><td>DM</td><td>:</td><td class="value">'+character['characteristics']['damage-modifier']+'</td></tr>'
 
             $.each(character["resolutions"], function(key, value) {
                 key = key.replace('-', ' ')
