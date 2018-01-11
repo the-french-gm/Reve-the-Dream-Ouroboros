@@ -1,0 +1,52 @@
+.header {
+    border-bottom: 3px solid black;
+}
+
+.pictures-slider {
+    height: 300px;
+    width: 100%;
+}
+
+.header-title {
+    display: inline-block;
+    margin: 30px auto;
+    overflow: hidden;
+    position: absolute;
+    z-index: 9;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.content {
+    padding-top: 30px;
+}
+
+h2 {
+    margin-top: 10px;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+li:before {
+    content: "\e9a2";
+    font-family: RPGAwesome;
+    display: inline-block;
+    margin-left: -2.3em;
+    width: 2em;
+}
+
+li {
+    margin-top: 20px;
+}
+
+.nitouche {
+    margin-top: 25px;
+}

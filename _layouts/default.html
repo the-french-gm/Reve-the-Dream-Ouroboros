@@ -1,1 +1,28 @@
-{{ content }}
+<html>
+    <head>
+        <title>{{ page.title }}</title>
+
+        <meta name="og:type" content="website" />
+        <meta property="og:title" content="{{ page.title }}" />
+        <meta name="description" content="{{ page.description }}" />
+        <meta property="og:description" content="{{ page.description }}" />
+
+        <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
+        <link rel="stylesheet" href="{{ '/assets/css/plugins/slippry.css' | prepend: site.baseurl }}">
+        <link rel="stylesheet" href="{{ '/assets/css/rpg-awesome.min.css' | prepend: site.baseurl }}">
+        <link rel="stylesheet" href="{{ page.path | replace: '.html', '.css' | prepend: '/assets/css/' | prepend: site.baseurl }}">
+    </head>
+
+    <body>
+
+        {{ content }}
+
+        <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/js/plugins/slippry.js' | prepend: site.baseurl }}"></script>
+
+        <!-- Custom page js -->
+        <script src="{{ page.path | replace: '.html', '.js' | prepend: '/assets/js/' | prepend: site.baseurl }}"></script>
+    </body>
+
+</html>
