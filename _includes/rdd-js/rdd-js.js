@@ -144,7 +144,7 @@
         character["spells"] = RDDJS.generator.skills.generateSpells(settings);
         character["archetype"] = RDDJS.generator.archetype.generate(settings);
 
-        character["remaining-points"] = RDDJS.generator.skills.getRemainingPoints();
+        character["remaining-points"] = RDDJS.generator.skills.getRemainingPoints() || 0;
         
         return character;
     }
