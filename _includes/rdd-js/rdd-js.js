@@ -140,10 +140,12 @@
         RDDJS.generator.skills.distributeSkillPoints(settings);
         character["skill-points"] = RDDJS.generator.skills.skill_points;
         character["spell-points"] = RDDJS.generator.skills.spell_points;
-        character["skills"] = RDDJS.generator.skills.generateSkills(settings);
+        character["skills"] = RDDJS.generator.skills.generateSkills(settings);      
         character["spells"] = RDDJS.generator.skills.generateSpells(settings);
         character["archetype"] = RDDJS.generator.archetype.generate(settings);
 
+        character["remaining-points"] = RDDJS.generator.skills.getRemainingPoints();
+        
         return character;
     }
 

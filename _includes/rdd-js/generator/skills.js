@@ -6,12 +6,17 @@
     
     skills.skill_points;
     skills.spell_points;
-    skills.character_skills;
+    skills.character_skills = 0;
+    skills.remaining_points;
 
     /*
      *
      */
     skills.prototype = {
+        getRemainingPoints: function() {
+            return this.remaining_points;
+        },
+
         /*
          *
          */
@@ -109,6 +114,8 @@
                 }
             }
 
+            this.remaining_points += this.spell_points;
+            
             return acquired_spells;
         },
                 
@@ -266,8 +273,7 @@
             * of a random skill.
             */
             if(points != 0) {
-                var index = RDDJS.utils.getRandomInt(0, skills.length-1);
-                var skill = skills[index];
+                this.remaining_points = points;
             }
 
             return acquired_skills;

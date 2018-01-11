@@ -12,7 +12,6 @@ RDDJS.templates["white-mage"] = {
     "primary-skills" : [
         "alchemy",
         "astrology",
-        "botany",
         "legends",
         "writing",
         "oneiros",

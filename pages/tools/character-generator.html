@@ -251,6 +251,18 @@ permalink: /tools/character-generator.html
                             <td class="characteristic">CT</td>
                             <td class="value" id="constitution-threshold"></td>
                         </tr>
+                        <tr>
+                            <td class="characteristic">Skill Points</td>
+                            <td class="value" id="skill-points"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic">Spell Points</td>
+                            <td class="value" id="spell-points"></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic">Remaining Points</td>
+                            <td class="value" id="remaining-points"></td>
+                        </tr>
                     </table>
                 </div>
                 <div class="col-xs-12 col-md-4">
@@ -389,7 +401,6 @@ permalink: /tools/character-generator.html
 
                 if(settings['build'] != 'none') {
                     settings['template'] = settings['build'];
-                    console.log(settings['template'])
                 }
 
                 return settings;
@@ -430,7 +441,7 @@ permalink: /tools/character-generator.html
                     $("#"+key).text(value);
                 });
 
-                $.each(['age', 'birth-hour', 'gender', 'handedness', 'name', 'high-dreamer'],
+                $.each(['age', 'birth-hour', 'gender', 'handedness', 'name', 'high-dreamer', 'spell-points', 'skill-points', 'remaining-points'],
                     function(index, value) {
                         $("#"+value).text(character[value]);
                     });
