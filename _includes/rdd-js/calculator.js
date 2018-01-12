@@ -153,7 +153,7 @@
                 resolution[skill] = characteristic * multiplier;
             }
             
-            resolution[skill] = resolution[skill]+'% ('+sign+competency+')';
+            resolution[skill] = Math.round(resolution[skill]).toString()+'% ('+sign+competency+')';
 
             return resolution;
         }

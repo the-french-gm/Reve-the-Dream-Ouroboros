@@ -10,17 +10,9 @@ permalink: /tools/npc-generator.html
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row bg-dark top-menu fixed-top">
-            <div class="col-xs-12 col-md-6">
+        <div class="row bg-dark top-menu">
+            <div class="col-xs-12 col-md-7">
                 <h1 class="text-white">Rêve: the Dream Ouroboros - NPC Generator</h1>
-            </div>
-
-            <div class="col-xs-12 col-md-auto">
-                <input type="text" class="form-control setting-characteristic-points" value="160" />
-            </div>
-
-            <div class="col-xs-12 col-md-auto">
-                <input type="text" class="form-control setting-skills-points" value="3000" />
             </div>
 
             <div class="col-xs-12 col-md-auto">
@@ -36,8 +28,29 @@ permalink: /tools/npc-generator.html
             </div>
         </div>
 
-        <div class="row row-eq-height bg-light npc-cards">
+        <div class="row bg-secondary generator-settings">
+            <div class="col-xs-12 col-md-4">
+                <label>Characteristic Points:</label>
+                <input type="text" class="form-control setting-characteristic-points" value="160" />
+            </div>
 
+            <div class="col-xs-12 col-md-4">
+                <label>Skill Points:</label>
+                <input type="text" class="form-control setting-skill-points" value="3000" />
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <label>Genre:</label>
+                <select class="custom-select setting-genre">
+                    <option value="fantasy">Fantasy</option>
+                    <option value="contemporary">Contemporary</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row row-eq-height bg-light npc-cards">
         </div>
     </div>
 
@@ -108,11 +121,13 @@ permalink: /tools/npc-generator.html
             var uid = 0;
 
             $.each(RDDJS.templates, function(key, value) {
-                var settings = default_settings;
+                var settings = Object.assign({}, default_settings);
                 settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
+                console.log(settings);
                 var rddjs = new RDDJS();
 
                 settings['template'] = key;
+
                 rddjs.setSettings(settings);
                 character = rddjs.generateCharacter();
                 generateCard(character, uid);
