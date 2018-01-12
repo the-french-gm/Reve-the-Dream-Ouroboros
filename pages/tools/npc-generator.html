@@ -62,12 +62,18 @@ permalink: /tools/npc-generator.html
     <script src="{{ '/assets/js/chance.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
     <script>
+        /*
+         *
+         */
         var default_settings = {
             'characteristic-points' : 160,
             'max-characteristic-points' : 15,
             'skill-points' : 3000
         };
 
+        /*
+         *
+         */
         function downloadAll() {
             html2canvas(document.querySelector('.npc-cards')).then(canvas => {
                 var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
@@ -78,6 +84,9 @@ permalink: /tools/npc-generator.html
             });
         }
 
+        /*
+         *
+         */
         function download(uid) {
             var build = $('#npc-'+uid+' .build').text().replace(' ', '');
             
@@ -90,13 +99,21 @@ permalink: /tools/npc-generator.html
             });
         }
 
+        /*
+         *
+         */
         function generateCard(character, uid) {
             var div = $('.npc-cards');
-            
+            var build = character['build'].replace(' ', '');
+
             var html = '';
             html += '<div class="npc-card col-md-auto" id="npc-'+uid+'">'
             html += '<table>'
-            html += '<tr><td class="build" COLSPAN=3>'+character['build']+' <a><i class="ra ra-sword" onclick="javascript:download('+uid+')"></i></a></td></tr>'
+            html += '<tr><td class="build" COLSPAN=3>'
+            html += build
+            html += ' <a><i class="ra ra-sword" onclick="javascript:download('+uid+')"></i>'
+            html += ' <i class="ra ra-double-team" onclick="javascript:generateBuild(\''+build+'\')"></i>'
+            html += '</a></td></tr>'
             html += '<tr><td>Height</td><td>:</td><td class="value">'+character['characteristics']['height']+'</td></tr>'
             html += '<tr><td>Life</td><td>:</td><td class="value">'+character['characteristics']['life']+'</td></tr>'
             html += '<tr><td>Dream</td><td>:</td><td class="value">'+character['characteristics']['dream']+'</td></tr>'
@@ -116,15 +133,50 @@ permalink: /tools/npc-generator.html
             div.append(html);
         }
 
+        /*
+         *
+         */
+        function generateBuild(build) {
+            $('.npc-cards').empty();
+            var uid = 0;
+
+            for(i = 0; i < 10; i++) {
+                settings = getSettings();
+                var rddjs = new RDDJS();
+
+                settings['template'] = build;
+
+                rddjs.setSettings(settings);
+                character = rddjs.generateCharacter();
+                generateCard(character, uid);
+                
+                uid++;
+                if(uid == 10) {
+                    return;
+                }
+            }
+        }
+
+        /*
+         *
+         */
+        function getSettings() {
+            var settings = Object.assign({}, default_settings);
+            settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
+            settings["skill-points"] = parseInt($('.setting-skill-points').val()) || 0;
+
+            return settings;
+        }
+
+        /*
+         *
+         */
         function generateCards() {
             $('.npc-cards').empty();
             var uid = 0;
 
             $.each(RDDJS.templates, function(key, value) {
-                var settings = Object.assign({}, default_settings);
-                settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
-                settings["skill-points"] = parseInt($('.setting-skill-points').val()) || 0;
-                
+                settings = getSettings();
                 var rddjs = new RDDJS();
 
                 settings['template'] = key;
