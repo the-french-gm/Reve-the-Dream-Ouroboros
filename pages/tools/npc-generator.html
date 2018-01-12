@@ -123,7 +123,8 @@ permalink: /tools/npc-generator.html
             $.each(RDDJS.templates, function(key, value) {
                 var settings = Object.assign({}, default_settings);
                 settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
-                console.log(settings);
+                settings["skill-points"] = parseInt($('.setting-skill-points').val()) || 0;
+                
                 var rddjs = new RDDJS();
 
                 settings['template'] = key;
