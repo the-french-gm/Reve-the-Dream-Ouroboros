@@ -49,6 +49,7 @@
      */
     RDDJS.templates = {};
 
+    {% include rdd-js/templates/classes/archer.js %}
     {% include rdd-js/templates/classes/assassin.js %}
     {% include rdd-js/templates/classes/barbarian.js %}
     {% include rdd-js/templates/classes/healer.js %}
@@ -59,6 +60,7 @@
     {% include rdd-js/templates/classes/street-artist.js %}
     {% include rdd-js/templates/classes/thanatos-mage.js %}
     {% include rdd-js/templates/classes/traveler.js %}
+    {% include rdd-js/templates/classes/villager.js %}
     {% include rdd-js/templates/classes/warrior.js %}
     {% include rdd-js/templates/classes/white-mage.js %}
     
