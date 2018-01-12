@@ -140,7 +140,7 @@ permalink: /tools/npc-generator.html
             $('.npc-cards').empty();
             var uid = 0;
 
-            for(i = 0; i < 10; i++) {
+            while(uid < 10) {
                 settings = getSettings();
                 var rddjs = new RDDJS();
 
@@ -151,9 +151,6 @@ permalink: /tools/npc-generator.html
                 generateCard(character, uid);
                 
                 uid++;
-                if(uid == 10) {
-                    return;
-                }
             }
         }
 
