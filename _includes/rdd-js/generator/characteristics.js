@@ -14,7 +14,7 @@
             var total_points = parseInt(settings['characteristic-points']);
             var max_points = parseInt(settings['max-characteristic-points']);
             var min_points = 6;
-
+            
             if(max_points < min_points) {
                 max_points = min_points;
             }
@@ -36,6 +36,8 @@
                 'luck' : min_points,
                 'beauty' : 10
             }
+
+            var chars = Object.keys(characteristics);
             
             /*
              * We remove all the points already added in the default template.
@@ -60,13 +62,20 @@
              */
             if(settings['template']) {
                 $.each(settings['template']['characteristics'], function(index, characteristic) {
-                    
+                    var value;
+
                     // dream points have already been applied for high dreamers
                     if(settings['high-dreamer'] && characteristic == "dream") {
                         return;
                     }
 
-                    var value = RDDJS.utils.getRandomInt(Math.floor(max_points / 1.5), max_points);
+                    if(settings[characteristic]) {
+                        value = settings[characteristic];
+                        chars = RDDJS.utils.removeItemFromArray(chars, settings[characteristic]);
+                    }
+                    else {
+                        value = RDDJS.utils.getRandomInt(Math.floor(max_points / 1.5), max_points);
+                    }
                     
                     // we do not decrement the number of total points if beauty is below 10
                     // beauty cannot be above 16
@@ -102,8 +111,6 @@
             /*
              * We randomly add any remaining points to the primary characteristics
              */
-            var chars = Object.keys(characteristics);
-            
             while((total_points != 0)) {
                 key = chars[RDDJS.utils.getRandomInt(0, chars.length - 1)];
                 current_value = characteristics[key];
@@ -127,11 +134,18 @@
                     }
                 }
 
-                // size cannot be more than 15
+                // size cannot be more than 15 or max-size
                 var max_size;
-                if((key == "size") && current_value == 15) {
-                    chars = RDDJS.utils.removeItemFromArray(chars, "size");
-                    continue;
+                if(key == "size") {
+                    if(current_value == 15 && !settings['max-size']) {
+                        chars = RDDJS.utils.removeItemFromArray(chars, "size");
+                        continue;
+                    }
+                    
+                    if(current_value == parseInt(settings['max-size'])) {
+                        chars = RDDJS.utils.removeItemFromArray(chars, "size");
+                        continue;
+                    }
                 }
 
                 if(current_value == max_points) {
@@ -183,8 +197,7 @@
             characteristics['damage-modifier'] = dm;
             
             // Calculate height
-            var size_for_height = (characteristics['size'] > 15) ? 15 : characteristics['size'];
-            characteristics['height'] = RDDJS.calculator.getHeight(size_for_height);
+            characteristics['height'] = RDDJS.calculator.getHeight(characteristics['size']);
             
             characteristics['sustenance'] = RDDJS.calculator.getSustenance(characteristics['size']);
             characteristics['constitution-threshold'] = RDDJS.calculator.getConstitutionThreshold(characteristics['constitution']);

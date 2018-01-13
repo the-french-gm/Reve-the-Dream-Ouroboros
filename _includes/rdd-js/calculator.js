@@ -34,7 +34,7 @@
          * Calculate the height of the character.
          */
         getHeight: function(size) {
-            height = [
+            var height = [
                 "1.52m / 4'11\"",
                 "1.57m / 5'1\"",
                 "1.62m / 5'3\"",
@@ -47,7 +47,14 @@
                 "1.97m / 6'5\""
             ]
 
-            return height[size-6];
+            if(size <= 15) {
+                return height[size-6];
+            }
+            else {
+                var s = 1.97 + (0.05 * (size-15));
+                s = s+"m"
+                return s;
+            }
         },
 
         /*

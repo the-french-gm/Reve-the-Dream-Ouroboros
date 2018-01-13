@@ -53,6 +53,7 @@
     {% include rdd-js/templates/classes/assassin.js %}
     {% include rdd-js/templates/classes/barbarian.js %}
     {% include rdd-js/templates/classes/cyan.js %}
+    {% include rdd-js/templates/classes/droll.js %}
     {% include rdd-js/templates/classes/healer.js %}
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/sailor.js %}
@@ -184,7 +185,7 @@
         character["skills"] = {};
         character["spells"] = {};
         character["characteristics"] = RDDJS.generator.characteristics.generate(settings);
-        
+
         RDDJS.generator.skills.distributeSkillPoints(settings);
         character["skill-points"] = RDDJS.generator.skills.skill_points;
         character["spell-points"] = RDDJS.generator.skills.spell_points;
