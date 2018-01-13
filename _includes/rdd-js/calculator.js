@@ -34,27 +34,11 @@
          * Calculate the height of the character.
          */
         getHeight: function(size) {
-            var height = [
-                "1.52m / 4'11\"",
-                "1.57m / 5'1\"",
-                "1.62m / 5'3\"",
-                "1.67m / 5'5\"",
-                "1.72m / 5'7\"",
-                "1.77m / 5'9\"",
-                "1.82m / 5'11\"",
-                "1.87m / 6'1\"",
-                "1.92m / 6'3\"",
-                "1.97m / 6'5\""
-            ]
-
-            if(size <= 15) {
-                return height[size-6];
-            }
-            else {
-                var s = 1.97 + (0.05 * (size-15));
-                s = s+"m"
-                return s;
-            }
+            var height = 1.52 + (0.05 * (size-6));
+            height += (Math.random() * 0.04);
+            height = height.toFixed(2);
+            height = height+"m"
+            return height;
         },
 
         /*
