@@ -31,7 +31,7 @@ RDDJS.templates["white-mage"] = {
         "leatherwork",
         "metalwork",
         "juggling",
-        "jewelrysmith",
+        "jewelrysmithing",
         "2-handed-sword",
         "2-handed-mace",
         "2-handed-axe",

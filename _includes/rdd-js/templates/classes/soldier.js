@@ -32,7 +32,7 @@ RDDJS.templates["soldier"] = {
         "astrology",
         "alchemy",
         "music",
-        "Jewelrysmith",
+        "jewelrysmithing",
         "dance",
         "singing",
         "seduction",

@@ -32,7 +32,7 @@ RDDJS.templates["barbarian"] = {
         "astrology",
         "alchemy",
         "music",
-        "Jewelrysmith",
+        "jewelrysmithing",
         "dance",
         "singing",
         "seduction",

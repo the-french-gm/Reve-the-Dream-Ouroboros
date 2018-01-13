@@ -1,3 +1,7 @@
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 (function() {
     /*
      * We add a unique() function to Array
@@ -54,6 +58,7 @@
     {% include rdd-js/templates/classes/barbarian.js %}
     {% include rdd-js/templates/classes/cyan.js %}
     {% include rdd-js/templates/classes/droll.js %}
+    {% include rdd-js/templates/classes/faun.js %}
     {% include rdd-js/templates/classes/healer.js %}
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/sailor.js %}

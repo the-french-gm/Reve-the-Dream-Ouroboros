@@ -28,7 +28,7 @@ RDDJS.templates["warrior"] = {
         "astrology",
         "alchemy",
         "music",
-        "Jewelrysmith",
+        "jewelrysmithing",
         "dance",
         "singing",
         "seduction",

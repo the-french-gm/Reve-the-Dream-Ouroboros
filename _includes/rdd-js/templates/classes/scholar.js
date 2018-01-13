@@ -24,7 +24,7 @@ RDDJS.templates["scholar"] = {
         "leatherwork",
         "metalwork",
         "juggling",
-        "jewelrysmith",
+        "jewelrysmithing",
         "acting",
         "gaming",
         "2-handed-sword",

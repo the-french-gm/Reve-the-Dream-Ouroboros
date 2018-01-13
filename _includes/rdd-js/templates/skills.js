@@ -20,7 +20,7 @@ RDDJS.skills = {
        [
           'acrobatics',
           'gaming',
-          'jewelrysmith',
+          'jewelrysmithing',
           'juggling',
           'leatherwork',
           'locksmithing',
