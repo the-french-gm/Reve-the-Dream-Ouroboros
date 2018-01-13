@@ -28,6 +28,8 @@
             if(dm <= 15) {
                 return '+2'
             }
+
+            return '+'+(2 + Math.floor((dm-15)/2));
         },
 
         /*
