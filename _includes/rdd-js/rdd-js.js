@@ -52,6 +52,7 @@
     {% include rdd-js/templates/classes/archer.js %}
     {% include rdd-js/templates/classes/assassin.js %}
     {% include rdd-js/templates/classes/barbarian.js %}
+    {% include rdd-js/templates/classes/cyan.js %}
     {% include rdd-js/templates/classes/healer.js %}
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/sailor.js %}
@@ -68,7 +69,7 @@
      * Location Templates
      */
     RDDJS.locations = {};
-
+    
     {% include rdd-js/templates/locations/artic.js %}
     {% include rdd-js/templates/locations/city.js %}
     {% include rdd-js/templates/locations/desert.js %}
@@ -124,7 +125,9 @@
     
                 settings["template"]["primary-skills"] = settings["template"]["primary-skills"].concat( location["primary-skills"]).unique();
                 
-                settings["template"]["secondary-skills"] = settings["template"]["secondary-skills"].concat(location["secondary-skills"]);
+                if(settings["template"]["secondary-skills"]) {
+                    settings["template"]["secondary-skills"] = settings["template"]["secondary-skills"].concat(location["secondary-skills"]);
+                }
             }
         }
 

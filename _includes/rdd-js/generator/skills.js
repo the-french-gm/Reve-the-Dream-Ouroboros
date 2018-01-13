@@ -149,9 +149,13 @@
              * We assign the points are per the template
              */
             if(settings['template']) {
+
                 // We shuffle the arrays to add more randomness
                 settings['template']['primary-skills'] = RDDJS.utils.shuffleArray(settings['template']['primary-skills']);
-                settings['template']['secondary-skills'] = RDDJS.utils.shuffleArray(settings['template']['secondary-skills']);
+                
+                if(settings['template']['secondary-skills']) {
+                    settings['template']['secondary-skills'] = RDDJS.utils.shuffleArray(settings['template']['secondary-skills']);
+                }
                 
                 /*
                  * Primary and secondary skills assignment.

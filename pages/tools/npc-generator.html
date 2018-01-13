@@ -165,7 +165,8 @@ permalink: /tools/npc-generator.html
             var settings = Object.assign({}, default_settings);
             settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
             settings["skill-points"] = parseInt($('.setting-skill-points').val()) || 0;
-
+            settings["high-dreamer"] = (Math.random() <= 0.25) ? true : false;
+            
             return settings;
         }
 
