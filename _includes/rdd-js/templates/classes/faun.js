@@ -4,7 +4,11 @@ RDDJS.templates["faun"] = {
         "max-characteristic-points" : 17,
         "max-size" : 19,
         "size" : getRandomInt(17, 19),
-        "dream" : 0
+        "dream" : 0,
+        "lance" : +5,
+        "dodging" : +5,
+        "vigilance" : +5,
+        "forest-survival" : +5
     },
 
     "characteristics" : [

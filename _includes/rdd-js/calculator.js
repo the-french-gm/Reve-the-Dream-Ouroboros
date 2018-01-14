@@ -128,10 +128,24 @@
                 '0' : [115, 100, 80, 60],
                 '1' : [135, 120, 100, 80],
                 '2' : [155, 140, 120, 100],
-                '3' : [175, 160, 140, 120]
+                '3' : [175, 160, 140, 120],
+                '4' : [195, 180, 160, 140],
+                '5' : [225, 210, 190, 170],
+                '6' : [255, 240, 230, 200],
+                '7' : [295, 280, 270, 240],
+                '8' : [335, 320, 310, 280],
+                '9' : [395, 380, 370, 340],
+                '10': [455, 440, 330, 400]
             }
 
-            return cost_table[level][indexes[difficulty]];
+            if(level <= 10) {
+                return cost_table[level][indexes[difficulty]];
+            }
+            else {
+                var cost = cost_table[10][indexes[difficulty]]
+                cost += ((level-10)*100)
+                return cost;
+            }
         },
 
         calculateResolution: function(characteristic, skill, competency) {

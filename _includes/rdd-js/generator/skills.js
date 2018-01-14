@@ -174,9 +174,21 @@
                         }
         
                         var difficulty = skill[1];
-                        
+                        var cost;
+
+                        if(settings[skill[0]]) {
+                            level = settings[skill[0]];
+                            cost = RDDJS.calculator.calculateBaseCost(difficulty, level);
+                            
+                            if((points-cost) > 0) {
+                                points -= cost;
+                                acquired_skills[skill[0]] = level;
+                                return;
+                            }
+                        }
+
                         for(level = 3; level > -1; level--) {
-                            var cost = RDDJS.calculator.calculateBaseCost(difficulty, level);
+                            cost = RDDJS.calculator.calculateBaseCost(difficulty, level);
                             
                             if((points-cost) > 0) {
                                 points -= cost;
