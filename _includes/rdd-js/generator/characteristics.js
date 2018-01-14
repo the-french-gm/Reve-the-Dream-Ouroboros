@@ -20,7 +20,7 @@
             }
         
             var characteristics = {
-                'size' : min_points,
+                'size' : settings['size'] || min_points,
                 'appearance' : min_points,
                 'constitution' : min_points,
                 'strength' : min_points,

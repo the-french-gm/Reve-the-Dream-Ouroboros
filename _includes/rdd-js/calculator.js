@@ -36,7 +36,14 @@
          * Calculate the height of the character.
          */
         getHeight: function(size) {
-            var height = 1.52 + (0.05 * (size-6));
+            var height;
+            
+            if(size < 6) {
+                height = size * 0.25;
+            } else {
+                height = 1.52 + (0.05 * (size-6));
+            }
+            
             height += (Math.random() * 0.04);
             height = height.toFixed(2);
             height = height+"m"
