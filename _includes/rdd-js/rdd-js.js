@@ -59,6 +59,8 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/classes/cyan.js %}
     {% include rdd-js/templates/classes/droll.js %}
     {% include rdd-js/templates/classes/faun.js %}
+    {% include rdd-js/templates/classes/feracat.js %}
+    {% include rdd-js/templates/classes/giant.js %}
     {% include rdd-js/templates/classes/healer.js %}
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/sailor.js %}
