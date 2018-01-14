@@ -56,10 +56,10 @@ li {
     text-align: center;
 }
 
-.humanoids {
-    height: 200px;
+.resources {
+    padding-bottom: 20px;
 }
 
-.resources-header {
-    padding-top: 25px;
+.humanoids {
+    height: 200px;
 }
