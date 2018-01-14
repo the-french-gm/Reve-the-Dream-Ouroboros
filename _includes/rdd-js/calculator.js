@@ -41,7 +41,7 @@
             if(size < 6) {
                 height = size * 0.25;
             } else {
-                height = 1.52 + (0.05 * (size-6));
+                height = 1.48 + (0.05 * (size-6));
             }
             
             height += (Math.random() * 0.04);
