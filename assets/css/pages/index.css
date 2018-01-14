@@ -55,3 +55,11 @@ li {
     margin-top: 25px;
     text-align: center;
 }
+
+.humanoids {
+    height: 200px;
+}
+
+.resources-header {
+    padding-top: 25px;
+}
