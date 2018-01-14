@@ -66,6 +66,7 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/classes/hounder.js %}
     {% include rdd-js/templates/classes/mercenary.js %}
     {% include rdd-js/templates/classes/mockturtle.js %}
+    {% include rdd-js/templates/classes/ogre.js %}
     {% include rdd-js/templates/classes/sailor.js %}
     {% include rdd-js/templates/classes/scholar.js %}
     {% include rdd-js/templates/classes/soldier.js %}
