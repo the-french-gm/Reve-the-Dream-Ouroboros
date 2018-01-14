@@ -25,7 +25,7 @@ RDDJS.templates["faun"] = {
         "forest-survival"
     ],
 
-    "excluded" : [
+    "exclude" : [
         "oneiros",
         "thanatos",
         "hypnos",

@@ -26,7 +26,7 @@ RDDJS.templates["droll"] = {
         "underground"
     ],
 
-    "excluded" : [
+    "exclude" : [
         "bow",
         "crossbow",
         "knife",
