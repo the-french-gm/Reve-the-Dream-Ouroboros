@@ -85,7 +85,8 @@ RDDJS.skills = {
           '2-handed-mace',
           'shield',
           '1-handed-sword',
-          '2-handed-sword'
+          '2-handed-sword',
+          'flail'
        ]
     ],
     "mt":[

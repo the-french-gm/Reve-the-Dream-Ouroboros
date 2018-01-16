@@ -68,10 +68,14 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/classes/mockturtle.js %}
     {% include rdd-js/templates/classes/ogre.js %}
     {% include rdd-js/templates/classes/proudarm.js %}
+    {% include rdd-js/templates/classes/repvile.js %}
     {% include rdd-js/templates/classes/sailor.js %}
+    {% include rdd-js/templates/classes/saurian.js %}
     {% include rdd-js/templates/classes/scholar.js %}
+    {% include rdd-js/templates/classes/snork.js %}
     {% include rdd-js/templates/classes/soldier.js %}
     {% include rdd-js/templates/classes/street-artist.js %}
+    {% include rdd-js/templates/classes/sylvan.js %}
     {% include rdd-js/templates/classes/thanatos-mage.js %}
     {% include rdd-js/templates/classes/traveler.js %}
     {% include rdd-js/templates/classes/villager.js %}
