@@ -72,7 +72,8 @@ permalink: /tools/npc-generator.html
         var default_settings = {
             'characteristic-points' : 160,
             'max-characteristic-points' : 15,
-            'skill-points' : 3000
+            'skill-points' : 3000,
+            'max-skill' : +3
         };
 
         /*
@@ -120,6 +121,7 @@ permalink: /tools/npc-generator.html
             html += '</a></td></tr>'
             html += '<tr><td>Height</td><td>:</td><td class="value">'+character['characteristics']['height']+'</td></tr>'
             html += '<tr><td>Life</td><td>:</td><td class="value">'+character['characteristics']['life']+'</td></tr>'
+            html += '<tr><td>Encurance</td><td>:</td><td class="value">'+character['characteristics']['endurance']+'</td></tr>'
             html += '<tr><td>Dream</td><td>:</td><td class="value">'+character['characteristics']['dream']+'</td></tr>'
             html += '<tr><td>Melee</td><td>:</td><td class="value">'+character['characteristics']['melee']+'</td></tr>'
             html += '<tr><td>Missile</td><td>:</td><td class="value">'+character['characteristics']['missile']+'</td></tr>'
@@ -127,6 +129,11 @@ permalink: /tools/npc-generator.html
             html += '<tr><td>DM</td><td>:</td><td class="value">'+character['characteristics']['damage-modifier']+'</td></tr>'
 
             $.each(character["resolutions"], function(key, value) {
+                // We don't bother displaying skills that are -X
+                if(value.indexOf('--') != -1) {
+                    return;
+                }
+
                 key = key.replace('-', ' ')
                 html += '<tr><td class="text-capitalize">'+key+'</td><td>:</td><td class="value">'+value+'</td></tr>'
             });

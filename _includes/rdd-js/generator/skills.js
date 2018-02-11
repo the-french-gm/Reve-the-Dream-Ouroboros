@@ -143,13 +143,14 @@
          */
         assignSkillPointsAndXP: function assignSkillPointsAndXP(settings, points, skills, is_dreamer) {
             var acquired_skills = {};
+            var max_skill = parseInt(settings['max-skill']);
             var draconics = ['thanatos', 'oneiros', 'hypnos', 'narcos'];
-        
+            
             /*
              * We assign the points are per the template
              */
             if(settings['template']) {
-
+                
                 // We shuffle the arrays to add more randomness
                 settings['template']['primary-skills'] = RDDJS.utils.shuffleArray(settings['template']['primary-skills']);
                 
@@ -183,23 +184,25 @@
                             if((points-cost) > 0) {
                                 points -= cost;
                                 acquired_skills[skill[0]] = level;
+                                skills = RDDJS.utils.removeItemFromArray(skills, skill);
                                 return;
                             }
                         }
 
-                        for(level = 3; level > -1; level--) {
+                        for(level = max_skill; level > -1; level--) {
                             cost = RDDJS.calculator.calculateBaseCost(difficulty, level);
                             
                             if((points-cost) > 0) {
                                 points -= cost;
                                 acquired_skills[skill[0]] = level;
+                                skills = RDDJS.utils.removeItemFromArray(skills, skill);
                                 break;
                             }
                         }
                     });
                 });
             }
-
+            
             /*
              * If the character is a dreamer, she must at least have one
              * draconic way.
@@ -207,19 +210,21 @@
             if(is_dreamer) {
                 var index = RDDJS.utils.getRandomInt(0, draconics.length-1);
                 var draconic_way = draconics[index];
-                var cost = RDDJS.calculator.calculateBaseCost(-11, 3);
+                var cost = RDDJS.calculator.calculateBaseCost(-11, max_skill);
 
                 if((!acquired_skills[draconic_way]) && ((points-cost) > 0)) {
                     acquired_skills[draconic_way] = 3;
                 }
             }
-
+            
             /*
              * We assign all remaining points randomly.
              */
-            while((points / 10) >= 1) {
+            while(((points / 10) >= 1) && (skills.length > 0)) {
                 var index = RDDJS.utils.getRandomInt(0, skills.length-1);
                 var skill = skills[index];
+                skills = RDDJS.utils.removeItemFromArray(skills, skill);
+                
                 var difficulty = skill[1];
 
                 /*
@@ -239,15 +244,20 @@
                 /*
                 * Random skill generation
                 */
-                var index = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3]
+                var index = []
+                
+                for(i = -10; i < (max_skill+1); i++) {
+                    index.push(i);
+                }
+
                 if(is_dreamer && draconics.includes(skill[0])) {
-                    var level = RDDJS.utils.getRandomInt(12, 13);
+                    var level = RDDJS.utils.getRandomInt(index.length-2, index.length);
                 }
                 else if(!is_dreamer && draconics.includes(skill[0])) {
                     continue;
                 }
                 else {
-                    var level = RDDJS.utils.getRandomInt(6, 13);
+                    var level = RDDJS.utils.getRandomInt(6, index.length);
                 }
 
                 level = index[level];
@@ -260,27 +270,24 @@
                     continue;
                 }
 
-                if(((difficulty == -11) || (difficulty == -8)) && (level != 3)) {
+                if(((difficulty == -11) || (difficulty == -8)) && (level >= 2)) {
                     continue;
                 }
 
                 /*
                 * We calculate the cost of acquiring the skill
                 */
-                var i = 0;
+                var i;
                 var cost;
 
-                while(cost = RDDJS.calculator.calculateBaseCost(difficulty, (level-i))) {
-                    if((points-cost) < 0) {
-                        i++;
-                    } else {
+                for(i = level; i >= -10; i--) {
+                    cost = RDDJS.calculator.calculateBaseCost(difficulty, i);
+                    
+                    if((points-cost) > 0) {
+                        points -= cost;
+                        acquired_skills[skill[0]] = level;
                         break;
                     }
-                }
-
-                if(cost) {
-                    points -= cost;
-                    acquired_skills[skill[0]] = level;
                 }
             }
 
@@ -291,12 +298,13 @@
             if(points != 0) {
                 this.remaining_points = points;
             }
-
+            
             return acquired_skills;
         },
 
         /*
-         *
+         * Splits the skill points between skills to be acquired, and spells
+         * to be acquired.
          */
         distributeSkillPoints: function(settings) {
             this.skill_points = settings['skill-points'];

@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /tools/character-generator.html
+title: Rêve the Dream Ouroboros - Character Generator
 ---
 
 <html>
@@ -52,7 +53,7 @@ permalink: /tools/character-generator.html
                                 <label class="small max align-middle">Max.</label>
                             </div>
                             <div class="col col-xs-12 col-md-4">
-                                <input type="text" class="form-control setting-max-skill-points" value="+3" />
+                                <input type="text" class="form-control setting-max-skill" value="+3" />
                             </div>
                         </div>
                     </div>
@@ -61,6 +62,7 @@ permalink: /tools/character-generator.html
                         <label>Build:</label>
                         <select class="custom-select setting-build">
                             <option value="none">None</option>
+                            <option value="archer">Archer</option>
                             <option value="traveler">Traveler</option>
                             <option value="white-mage">White Mage</option>
                             <option value="thanatos-mage">Thanatos Mage</option>
@@ -389,6 +391,7 @@ permalink: /tools/character-generator.html
                 settings['characteristic-points'] = $('.setting-characteristic-points').val();
                 settings['max-characteristic-points'] = $('.setting-max-characteristic-points').val();
                 settings['skill-points'] = $('.setting-skill-points').val();
+                settings['max-skill'] = $('.setting-max-skill').val();
                 settings['build'] = $('.setting-build option:selected').val().toLowerCase();
                 settings['location'] = $('.setting-location option:selected').val().toLowerCase();
                 settings['high-dreamer'] = $('.setting-high-dreamer option:selected').val();

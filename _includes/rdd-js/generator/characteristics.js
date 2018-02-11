@@ -11,14 +11,15 @@
          *
          */
         generate: function(settings) {
+
             var total_points = parseInt(settings['characteristic-points']);
             var max_points = parseInt(settings['max-characteristic-points']);
-            var min_points = 6;
-            
+            var min_points = Math.floor(total_points / 14);
+
             if(max_points < min_points) {
                 max_points = min_points;
             }
-        
+
             var characteristics = {
                 'size' : settings['size'] || min_points,
                 'appearance' : min_points,
@@ -43,11 +44,12 @@
              * We remove all the points already added in the default template.
              */
             total_points -= (min_points * 14);
-
+            
             /*
              * High dreamers are maxed out on Dream.
              */
             if(settings['high-dreamer']) {
+                total_points += characteristics['dream'];
                 characteristics['dream'] = max_points;
                 total_points -= max_points;
             }
@@ -98,6 +100,8 @@
                     if((characteristic == "strength") && value >= (characteristics['size'] + 4)) {
                         value = (characteristics['size'] + 4);
                     }
+
+                    total_points += characteristics[characteristic]
 
                     while((total_points-value) <= 0) {
                         value--;

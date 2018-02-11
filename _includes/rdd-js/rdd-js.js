@@ -21,7 +21,7 @@ function getRandomInt(min, max) {
             "characteristic-points" : 160,
             "skill-points" : 3000,
             "max-characteristic-points" : 15,
-            "max-skill" : 3
+            "max-skill" : +3
         }
     }
 
@@ -201,11 +201,10 @@ function getRandomInt(min, max) {
         character["skills"] = {};
         character["spells"] = {};
         character["characteristics"] = RDDJS.generator.characteristics.generate(settings);
-
         RDDJS.generator.skills.distributeSkillPoints(settings);
         character["skill-points"] = RDDJS.generator.skills.skill_points;
         character["spell-points"] = RDDJS.generator.skills.spell_points;
-        character["skills"] = RDDJS.generator.skills.generateSkills(settings);      
+        character["skills"] = RDDJS.generator.skills.generateSkills(settings);
         character["spells"] = RDDJS.generator.skills.generateSpells(settings);
         character["archetype"] = RDDJS.generator.archetype.generate(settings);
 

@@ -10,7 +10,7 @@ RDDJS.templates["mockturtle"] = {
 
     "characteristics" : [
     ],
-
+    
     "primary-skills" : [
         "1-handed-sword",
         "shield",

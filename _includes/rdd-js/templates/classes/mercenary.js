@@ -1,4 +1,8 @@
 RDDJS.templates["mercenary"] = {
+    "settings" : {
+        "high-dreamer" : false
+    },
+
     "characteristics" : [
         "size",
         "strength",
@@ -32,6 +36,10 @@ RDDJS.templates["mercenary"] = {
         "dance",
         "singing",
         "seduction",
-        "drawing"
+        "drawing",
+        "oneiros",
+        "thanatos",
+        "hypnos",
+        "narcos"
     ]
 }

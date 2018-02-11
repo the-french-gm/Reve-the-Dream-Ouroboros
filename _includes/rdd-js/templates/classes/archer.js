@@ -12,7 +12,8 @@ RDDJS.templates["archer"] = {
         "bow",
         "crossbow",
         "vigilance",
-        "dagger"
+        "dagger",
+        "discretion"
     ],
 
     "secondary-skills" : [
