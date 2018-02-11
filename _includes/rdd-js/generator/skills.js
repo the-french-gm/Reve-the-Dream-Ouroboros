@@ -220,10 +220,11 @@
             /*
              * We assign all remaining points randomly.
              */
-            while(((points / 10) >= 1) && (skills.length > 0)) {
+            var xx = 0;
+            while(((points / 10) >= 1) && (skills.length > 0) && (xx < 300)) {
+                xx++; // there's a infinite loop condition here that I haven't found any other way to get rid of.
                 var index = RDDJS.utils.getRandomInt(0, skills.length-1);
                 var skill = skills[index];
-                skills = RDDJS.utils.removeItemFromArray(skills, skill);
                 
                 var difficulty = skill[1];
 
@@ -266,11 +267,15 @@
                 * We skip acquiring purchasing advanced skills if the
                 * proposed level is too low.
                 */
-                if((difficulty == -6) && (level < 1)) {
+                if((difficulty == -4) && (level < -1)) {
+                    continue;
+                }
+                
+                if((difficulty == -6) && (level < 0)) {
                     continue;
                 }
 
-                if(((difficulty == -11) || (difficulty == -8)) && (level >= 2)) {
+                if(((difficulty == -11) || (difficulty == -8)) && (level < 2)) {
                     continue;
                 }
 
