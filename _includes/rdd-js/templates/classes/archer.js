@@ -1,11 +1,8 @@
 RDDJS.templates["archer"] = {
-    "settings" : {
-        "high-dreamer" : false
-    },
-    
     "characteristics" : [
         "sight",
-        "dexterity"
+        "dexterity",
+        "agility"
     ],
 
     "primary-skills" : [
@@ -27,27 +24,9 @@ RDDJS.templates["archer"] = {
     ],
 
     "exclude" : [
-        "acting",
-        "writing",
-        "legends",
-        "astrology",
-        "alchemy",
-        "music",
-        "jewelrysmithing",
-        "dance",
-        "singing",
-        "seduction",
-        "drawing",
         "2-handed-sword",
         "2-handed-axe",
         "2-handed-mace",
-        "shield",
-        "lance",
-        "javelin",
-        "whip",
-        "lasso",
-        "knife",
-        "1-handed-mace",
-        "1-handed-mace"
+        "2-handed-mace"
     ]
 }

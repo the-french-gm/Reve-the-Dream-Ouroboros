@@ -28,8 +28,6 @@ RDDJS.templates["barbarian"] = {
     "exclude" : [
         "acting",
         "writing",
-        "legends",
-        "astrology",
         "alchemy",
         "music",
         "jewelrysmithing",

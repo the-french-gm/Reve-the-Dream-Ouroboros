@@ -35,6 +35,7 @@ function getRandomInt(min, max) {
     RDDJS.generator.characteristics = {};
     RDDJS.generator.skills = {};
     RDDJS.generator.archetype = {};
+    RDDJS.generator.plot = {};
 
     /*
      * Reve de Dragon's Skills
@@ -216,6 +217,17 @@ function getRandomInt(min, max) {
     }
 
     /*
+     * Generate a new character
+     */
+    RDDJS.prototype.generateScenario = function() {
+        var scenario = {};
+        
+        scenario['plot'] = RDDJS.generator.plot.generate();
+
+        return scenario;
+    }
+
+    /*
      * Load a new template
      */
     RDDJS.prototype.loadTemplate = function(name, configuration) {
@@ -237,3 +249,5 @@ function getRandomInt(min, max) {
 {% include rdd-js/generator/characteristics.js %}
 {% include rdd-js/generator/skills.js %}
 {% include rdd-js/generator/archetype.js %}
+{% include rdd-js/generator/plot.js %}
+{% include rdd-js/generator/twists.js %}

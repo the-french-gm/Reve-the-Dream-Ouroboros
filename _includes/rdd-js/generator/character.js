@@ -182,6 +182,10 @@
          * genre of selected.
          */
         generateName: function(settings, gender) {
+            if(!settings && !gender) {
+                return this.generateFantasyName();
+            }
+
             if(!settings['genre']) {
                 settings['genre'] = 'fantasy';
             }

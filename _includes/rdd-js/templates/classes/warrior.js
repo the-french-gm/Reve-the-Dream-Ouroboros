@@ -2,7 +2,9 @@ RDDJS.templates["warrior"] = {
     "characteristics" : [
         "size",
         "strength",
-        "constitution"
+        "constitution",
+        "agility",
+        "will"
     ],
 
     "primary-skills" : [
@@ -19,19 +21,5 @@ RDDJS.templates["warrior"] = {
         "2-handed-sword",
         "hand-to-hand",
         "running"
-    ],
-
-    "exclude" : [
-        "acting",
-        "writing",
-        "legends",
-        "astrology",
-        "alchemy",
-        "music",
-        "jewelrysmithing",
-        "dance",
-        "singing",
-        "seduction",
-        "drawing"
     ]
 }

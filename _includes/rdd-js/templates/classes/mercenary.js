@@ -23,23 +23,5 @@ RDDJS.templates["mercenary"] = {
         "dagger",
         "1-handed-sword",
         "hand-to-hand"
-    ],
-
-    "exclude" : [
-        "acting",
-        "writing",
-        "legends",
-        "astrology",
-        "alchemy",
-        "music",
-        "jewelrysmithing",
-        "dance",
-        "singing",
-        "seduction",
-        "drawing",
-        "oneiros",
-        "thanatos",
-        "hypnos",
-        "narcos"
     ]
 }

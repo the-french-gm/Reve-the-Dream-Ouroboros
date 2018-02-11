@@ -1,0 +1,60 @@
+---
+layout: default
+permalink: /tools/scenario-generator.html
+title: Rêve the Dream Ouroboros - Scenario Generator
+---
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
+        <link rel="stylesheet" href="{{ '/assets/css/pages/chargen.css' | prepend: site.baseurl }}">
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div>
+                <div class="row bg-dark row-eq-height top-menu">
+                    <div class="col-xs-12 col-md-8">
+                        <h1 class="text-white">Rêve: the Dream Ouroboros - Scenario Generator</h1>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4">
+                        <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
+
+                        <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6" id="main-plot"></div>
+
+                    <div class="col-xs-12 col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
+    
+    <script>
+        /*
+         *
+         */
+        function generateScenario() {
+            var rddjs = new RDDJS();
+            var scenario = rddjs.generateScenario();
+            console.log(scenario);
+        }
+
+        /*
+         *
+         */
+         $(document).ready( function( $ ) {
+            generateScenario();
+        });
+    </script>
+</html>
