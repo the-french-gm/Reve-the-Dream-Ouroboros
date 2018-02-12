@@ -4,27 +4,36 @@
     };
 
     plot.prototype = {
+
+        /*
+        */
+        randomlySelectCreature: function() {
+            var creatures = Object.keys(RDDJS.templates);
+            var index = RDDJS.utils.getRandomInt(0, creatures.length-1);
+            var creature = creatures[index].charAt(0).toUpperCase() + creatures[index].slice(1);
+
+            return creature;
+        },
+
         /*
          * Generate a simple plot for a Reve de Dragon's game.
          */
         generate: function() {
-            var plot = '';
+            var plot = {
+                'story' : '',
+                'protagonist-name' : '',
+                'protagonist-type' : ''
+            };
 
             /*
              * Randomly generate a protagonist
              */
-            var creatures = Object.keys(RDDJS.templates);
-            var index = RDDJS.utils.getRandomInt(0, creatures.length-1);
-            var creature = creatures[index].charAt(0).toUpperCase() + creatures[index].slice(1);
+            plot['protagonist-type'] = this.randomlySelectCreature();
+            plot['protagonist-name'] = RDDJS.generator.character.generateName();
+
+            plot['story'] += 'A <b>'+plot['protagonist-type']+'</b> called <b>'+plot['protagonist-name']+'</b> '
+            plot['story'] += this.generateMotivation();
             
-            /*
-             * Randomly generate the protagonist's name
-             */
-            var name = RDDJS.generator.character.generateName();
-
-            plot += 'A <b>'+creature+'</b> called <b>'+name+'</b> '
-            plot += this.generateMotivation();
-
             return plot;
         },
 
