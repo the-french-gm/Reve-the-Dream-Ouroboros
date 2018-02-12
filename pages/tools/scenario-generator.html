@@ -26,7 +26,24 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12 col-md-6" id="main-plot"></div>
+                    <div class="col-xs-12 col-md-6">
+                        <table>
+                            <tr>
+                                <td>Adventure:</td>
+                                <td id="adventure-type"></td>
+                            </tr>
+                            <tr>
+                                <td>Storyline:</td>
+                                <td id="story"></td>
+                            </tr>
+                            <tr>
+                                <td>Twists:</td>
+                                <td>
+                                    <ul id="twists"></ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
                     <div class="col-xs-12 col-md-6">
 
@@ -47,7 +64,14 @@ title: Rêve the Dream Ouroboros - Scenario Generator
         function generateScenario() {
             var rddjs = new RDDJS();
             var scenario = rddjs.generateScenario();
-            console.log(scenario);
+            
+            $('#adventure-type').append(scenario['adventure-type']);
+            
+            $('#story').append(scenario['story']);
+
+            $.each(scenario['twists'], function(index, value) {
+                $('#twists').append('<li>'+value+'</li>');
+                });
         }
 
         /*

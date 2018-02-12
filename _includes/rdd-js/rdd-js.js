@@ -220,22 +220,7 @@ function getRandomInt(min, max) {
      * Generate a new character
      */
     RDDJS.prototype.generateScenario = function() {
-        var scenario = RDDJS.generator.plot.generate();
-        
-        /*
-         * We generate a full build for the protagonist / villain
-         */
-        var settings = {};
-        settings['template'] = scenario['protagonist-type'];
-        settings['characteristic-points'] = RDDJS.utils.getRandomInt(160, 190);
-        settings['skill-points'] = RDDJS.utils.getRandomInt(3000, 4000);
-        settings['max-characteristic-points'] = 15;
-        settings['max-skill'] = RDDJS.utils.getRandomInt(3, 5);
-        
-        scenario['protagonist-build'] = this.generateCharacter();
-        scenario['protagonist-build']['name'] = scenario['protagonist-name']
-        
-        return scenario;
+        return RDDJS.generator.plot.generate();
     }
 
     /*
