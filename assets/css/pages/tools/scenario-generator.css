@@ -12,8 +12,14 @@
     padding: 5px !important;
 }
 
+.main-characters h2 {
+    margin-top: 15px;
+}
+
 .npc-card {
     width: auto;
+    border: 1px dotted gray;
+    margin: 10px;
 }
 
 #twists {
