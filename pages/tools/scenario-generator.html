@@ -46,7 +46,16 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                     </div>
 
                     <div class="col-xs-12 col-md-6">
-
+                        <table>
+                            <tr>
+                                <td>Landscapes:</td>
+                                <td id="landscapes"></td>
+                            </tr>
+                            <tr>
+                                <td>Supporting Characters:</td>
+                                <td id="supporting-characters"></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -71,6 +80,15 @@ title: Rêve the Dream Ouroboros - Scenario Generator
 
             $.each(scenario['twists'], function(index, value) {
                 $('#twists').append('<li>'+value+'</li>');
+                });
+
+            $.each(scenario['landscapes'], function(index, value){
+                $('#landscapes').append('<li>'+value+'</li>');
+                });
+
+            $.each(scenario['supporting-characters'], function(index, value){
+                var character = value;
+                $('#supporting-characters').append('<li><b>'+character['alignment']+': </b><u>'+character['name']+'</u> the '+character['build']+'</li>');
                 });
         }
 
