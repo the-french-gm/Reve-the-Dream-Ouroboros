@@ -8,56 +8,86 @@ title: Rêve the Dream Ouroboros - Scenario Generator
     <head>
         <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ '/assets/css/pages/chargen.css' | prepend: site.baseurl }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
     </head>
 
     <body>
         <div class="container-fluid">
-            <div>
-                <div class="row bg-dark row-eq-height top-menu">
-                    <div class="col-xs-12 col-md-8">
-                        <h1 class="text-white">Rêve: the Dream Ouroboros - Scenario Generator</h1>
-                    </div>
+            <div class="row bg-dark row-eq-height top-menu">
+                <div class="col-xs-12 col-md-8">
+                    <h1 class="text-white">Rêve: the Dream Ouroboros - Scenario Generator</h1>
+                </div>
 
-                    <div class="col-xs-12 col-md-4">
-                        <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCharacter();">Generate!</button>
+                <div class="col-xs-12 col-md-4">
+                    <button type="button" class="btn btn-success align-middle" onclick="javascript:location.reload();">Generate!</button>
 
-                        <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
+                    <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
+                </div>
+            </div>
+            
+            <div class="row bg-light adventure-overview">
+                <div class="col-xs-12 col-md-6">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">
+                            Story Overview
+                        </div>
+                        <div class="card-body">
+                            <table>
+                                <tr>
+                                    <td>Adventure</td>
+                                    <td>:</td>
+                                    <td id="adventure-type"></td>
+                                </tr>
+                                <tr>
+                                    <td>Storyline</td>
+                                    <td>:</td>
+                                    <td id="story"></td>
+                                </tr>
+                                <tr>
+                                    <td>Twists</td>
+                                    <td>:</td>
+                                    <td>
+                                        <ul id="twists"></ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <table>
-                            <tr>
-                                <td>Adventure:</td>
-                                <td id="adventure-type"></td>
-                            </tr>
-                            <tr>
-                                <td>Storyline:</td>
-                                <td id="story"></td>
-                            </tr>
-                            <tr>
-                                <td>Twists:</td>
-                                <td>
-                                    <ul id="twists"></ul>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6">
-                        <table>
-                            <tr>
-                                <td>Landscapes:</td>
-                                <td id="landscapes"></td>
-                            </tr>
-                            <tr>
-                                <td>Supporting Characters:</td>
-                                <td id="supporting-characters"></td>
-                            </tr>
-                        </table>
+                <div class="col-xs-12 col-md-6">
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header">
+                            Adventure Components
+                        </div>
+                        <div class="card-body">
+                            <table class="text-white" style="width:100%;">
+                                <tr>
+                                    <td>Landscapes</td>
+                                    <td>:</td>
+                                    <td id="landscapes"></td>
+                                </tr>
+                                <tr>
+                                    <td>Supporting<br/>Characters</td>
+                                    <td>:</td>
+                                    <td id="supporting-characters"></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-dark gallery-container">
+            <div class="tz-gallery">
+                <div class="row" id="thumbnails"></div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row main-characters">
             </div>
         </div>
     </body>
@@ -65,37 +95,227 @@ title: Rêve the Dream Ouroboros - Scenario Generator
     <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
     
     <script>
         /*
          *
          */
-        function generateScenario() {
-            var rddjs = new RDDJS();
-            var scenario = rddjs.generateScenario();
+        var easy_settings = {
+            'characteristic-points' : 110,
+            'skill-points' : 2000,
+            'max-characteristic-points' : 12,
+            'max-skill' : 2
+        };
+        
+        /*
+         *
+         */
+        var medium_settings = {
+            'characteristic-points' : 160,
+            'skill-points' : 3000,
+            'max-characteristic-points' : 15,
+            'max-skill' : 4
+        }
+        
+        /*
+         *
+         */
+        var difficult_settings = {
+            'characteristic-points' : 180,
+            'skill-points' : 4000,
+            'max-characteristic-points' : 18,
+            'max-skill' : 6
+        }
+
+        /*
+         *
+         */
+        function buildLargeNPCCard(character) {
+            var html = ''
+            html += '<div class="row npc-card">'
+            html += '   <div class="col-xs-12 col-md-auto">'
+            html += '       <table>'
+            html += '           <tr>'
+            html += '               <td>Name</td><td>:</td>'
+            html += '               <td>'+character['name']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Class</td><td>:</td>'
+            html += '               <td>'+RDDJS.utils.jsUcfirst(character['build'])+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>High Dreamer</td><td>:</td>'
+            html += '               <td>'+RDDJS.utils.jsUcfirst(((character['high-dreamer']) ? true : false).toString()) +'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Height</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['height']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Life</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['life']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Endurance</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['endurance']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Dream</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['dream']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Melee</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['melee']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Missile</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['missile']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>Throw</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['throw']+'</td>'
+            html += '           </tr>'
+            html += '           <tr>'
+            html += '               <td>DM</td><td>:</td>'
+            html += '               <td>'+character['characteristics']['damage-modifier']+'</td>'
+            html += '           </tr>'
+            html += '       </table>'
+            html += '   </div>'
             
+            var i = 1;
+            var max = Object.keys(character["skills"]).length;
+            
+            $.each(character["skills"], function(key, value) {
+                max--;
+
+                if(i == 1) {
+                    html += '   <div class="col-xs-12 col-md-auto">'
+                    html += '       <table>'
+                }
+                // We don't bother displaying skills that are -X
+                if(value.toString().indexOf('--') != -1) {
+                    return;
+                }
+
+                key = key.replace('-', ' ')
+                html += '       <tr>'
+                html += '           <td class="text-capitalize">'+key+'</td><td>:</td>'
+                html += '           <td class="value">'+value+'</td>'
+                html += '       </tr>'
+
+                if(i == 11 || max == 0) {
+                    i = 1;
+                    html += '       </table>'
+                    html += '   </div>'
+                }
+                else {
+                    i++;
+                }
+            });
+
+            html += '   <div class="col-xs-12 col-md-auto">'
+            html += '       <table>'
+            
+            $.each(character["resolutions"], function(key, value) {
+                // We don't bother displaying skills that are -X
+                if(value.indexOf('--') != -1) {
+                    return;
+                }
+
+                key = key.replace('-', ' ')
+                html += '       <tr>'
+                html += '           <td class="text-capitalize">'+key+'</td>'
+                html += '           <td class="value">'+value+'</td>'
+                html += '       </tr>'
+            });
+            
+            html += '       </table>'
+            html += '   </div>'
+
+            html += '</div>'
+
+            return html;
+        }
+
+        /*
+         *
+         */
+        function populateAdventureOverview(scenario) {
             $('#adventure-type').append(scenario['adventure-type']);
             
             $('#story').append(scenario['story']);
 
             $.each(scenario['twists'], function(index, value) {
                 $('#twists').append('<li>'+value+'</li>');
-                });
+            });
 
             $.each(scenario['landscapes'], function(index, value){
                 $('#landscapes').append('<li>'+value+'</li>');
-                });
+            });
 
             $.each(scenario['supporting-characters'], function(index, value){
                 var character = value;
-                $('#supporting-characters').append('<li><b>'+character['alignment']+': </b><u>'+character['name']+'</u> the '+character['build']+'</li>');
-                });
+                $('#supporting-characters').append('<li><u>'+character['name']+'</u> the '+character['build']+' ('+character['alignment']+')</li>');
+            });
         }
 
         /*
          *
          */
-         $(document).ready( function( $ ) {
+        function populateMainCharacters(scenario) {
+            var div_characters = $('.main-characters');
+
+            $.each(scenario['main-protagonists'], function(index, character) {
+                var html = buildLargeNPCCard(character);
+                div_characters.append(html);
+            });
+        }
+
+        /*
+         *
+         */
+        function populateRandomImages() {
+            var images = [
+                {% for file in site.static_files %}
+                    {% if file.path contains "story-generator" %}
+                        "{{ site.baseurl }}{{ file.path }}",
+                    {% endif %}
+                {% endfor %}
+            ];
+
+            images = RDDJS.utils.shuffleArray(images);
+
+            for(var i = 0; i < 10; i++) {
+                var html = '';
+                html += '<div class="col-sm-12 col-md-auto">'
+                html += '   <a class="lightbox" href="'+images[i]+'">'
+                html += '       <img src="'+images[i]+'" style="height:200px;width:auto;">'
+                html += '   </a>'
+                html += '</div>'
+
+                $('#thumbnails').append(html);
+            }
+
+            baguetteBox.run('.tz-gallery');
+        }
+
+        /*
+         *
+         */
+        function generateScenario() {
+            var rddjs = new RDDJS();
+            var scenario = rddjs.generateScenario(easy_settings);
+
+            populateAdventureOverview(scenario);
+            populateRandomImages();
+            populateMainCharacters(scenario);
+        }
+        
+        /*
+         *
+         */
+        $(document).ready( function( $ ) {
             generateScenario();
         });
     </script>

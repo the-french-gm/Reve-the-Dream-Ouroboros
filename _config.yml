@@ -14,3 +14,7 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+
+collections:
+  images:
+    output: true

@@ -32,8 +32,11 @@
         /*
          *
          */
-        generateRandomCharacter: function() {
-            var settings = this.generateRandomSettings();
+        generateRandomCharacter: function(settings = null) {
+            if(!settings) {
+                var settings = this.generateRandomSettings();
+            }
+
             settings['template'] = this.selectRandomTemplate();
             RDDJS.prototype.setSettings(settings);
 
@@ -43,7 +46,7 @@
         /*
          * Generate a simple plot for a Reve de Dragon's game.
          */
-        generate: function() {
+        generate: function(settings = null) {
             /*
              * The template for the plot
              */
@@ -62,7 +65,7 @@
             var max = RDDJS.utils.getRandomInt(1, 3);
 
             for(var i = 1; i <= max; i++) {
-                plot['main-protagonists'].push(this.generateRandomCharacter());
+                plot['main-protagonists'].push(this.generateRandomCharacter(settings));
             }
             
             /*
@@ -344,7 +347,8 @@
                 'Ocean',
                 'Crystal Cave',
                 'Island',
-                'Volcano'
+                'Volcano',
+                'Castle'
             ];
 
             var index = RDDJS.utils.getRandomInt(0, landscapes.length-1);

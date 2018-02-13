@@ -219,8 +219,8 @@ function getRandomInt(min, max) {
     /*
      * Generate a new character
      */
-    RDDJS.prototype.generateScenario = function() {
-        return RDDJS.generator.plot.generate();
+    RDDJS.prototype.generateScenario = function(settings = null) {
+        return RDDJS.generator.plot.generate(settings);
     }
 
     /*
