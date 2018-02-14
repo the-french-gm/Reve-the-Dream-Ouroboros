@@ -32,6 +32,7 @@
     min-height: 100vh;
     padding: 5px;
     border-bottom: 1px solid black;
+    min-height: auto !important;
 }
 
 .gallery-container h1 {
