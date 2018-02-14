@@ -54,35 +54,69 @@ function getRandomInt(min, max) {
      */
     RDDJS.templates = {};
 
-    {% include rdd-js/templates/classes/archer.js %}
-    {% include rdd-js/templates/classes/assassin.js %}
-    {% include rdd-js/templates/classes/barbarian.js %}
-    {% include rdd-js/templates/classes/cyan.js %}
-    {% include rdd-js/templates/classes/droll.js %}
-    {% include rdd-js/templates/classes/faun.js %}
-    {% include rdd-js/templates/classes/feracat.js %}
-    {% include rdd-js/templates/classes/giant.js %}
-    {% include rdd-js/templates/classes/gnome.js %}
-    {% include rdd-js/templates/classes/healer.js %}
-    {% include rdd-js/templates/classes/hounder.js %}
-    {% include rdd-js/templates/classes/mercenary.js %}
-    {% include rdd-js/templates/classes/mockturtle.js %}
-    {% include rdd-js/templates/classes/ogre.js %}
-    {% include rdd-js/templates/classes/proudarm.js %}
-    {% include rdd-js/templates/classes/repvile.js %}
-    {% include rdd-js/templates/classes/sailor.js %}
-    {% include rdd-js/templates/classes/saurian.js %}
-    {% include rdd-js/templates/classes/scholar.js %}
-    {% include rdd-js/templates/classes/snork.js %}
-    {% include rdd-js/templates/classes/soldier.js %}
-    {% include rdd-js/templates/classes/street-artist.js %}
-    {% include rdd-js/templates/classes/sylvan.js %}
-    {% include rdd-js/templates/classes/thanatos-mage.js %}
-    {% include rdd-js/templates/classes/traveler.js %}
-    {% include rdd-js/templates/classes/villager.js %}
-    {% include rdd-js/templates/classes/warrior.js %}
-    {% include rdd-js/templates/classes/white-mage.js %}
+    {% include rdd-js/templates/humanoids/archer.js %}
+    {% include rdd-js/templates/humanoids/assassin.js %}
+    {% include rdd-js/templates/humanoids/barbarian.js %}
+    {% include rdd-js/templates/humanoids/cyan.js %}
+    {% include rdd-js/templates/humanoids/droll.js %}
+    {% include rdd-js/templates/humanoids/faun.js %}
+    {% include rdd-js/templates/humanoids/feracat.js %}
+    {% include rdd-js/templates/humanoids/giant.js %}
+    {% include rdd-js/templates/humanoids/gnome.js %}
+    {% include rdd-js/templates/humanoids/healer.js %}
+    {% include rdd-js/templates/humanoids/hounder.js %}
+    {% include rdd-js/templates/humanoids/mercenary.js %}
+    {% include rdd-js/templates/humanoids/mockturtle.js %}
+    {% include rdd-js/templates/humanoids/ogre.js %}
+    {% include rdd-js/templates/humanoids/proudarm.js %}
+    {% include rdd-js/templates/humanoids/repvile.js %}
+    {% include rdd-js/templates/humanoids/sailor.js %}
+    {% include rdd-js/templates/humanoids/saurian.js %}
+    {% include rdd-js/templates/humanoids/scholar.js %}
+    {% include rdd-js/templates/humanoids/snork.js %}
+    {% include rdd-js/templates/humanoids/soldier.js %}
+    {% include rdd-js/templates/humanoids/street-artist.js %}
+    {% include rdd-js/templates/humanoids/sylvan.js %}
+    {% include rdd-js/templates/humanoids/thanatos-mage.js %}
+    {% include rdd-js/templates/humanoids/traveler.js %}
+    {% include rdd-js/templates/humanoids/villager.js %}
+    {% include rdd-js/templates/humanoids/warrior.js %}
+    {% include rdd-js/templates/humanoids/white-mage.js %}
     
+    /*
+     * Creature Templates
+     */
+    RDDJS.animals = {};
+
+    {% include rdd-js/templates/animals/alligate.js %}
+    {% include rdd-js/templates/animals/bane.js %}
+    {% include rdd-js/templates/animals/bellow.js %}
+    {% include rdd-js/templates/animals/boarn.js %}
+    {% include rdd-js/templates/animals/cackler.js %}
+    {% include rdd-js/templates/animals/camule.js %}
+    {% include rdd-js/templates/animals/centibeast.js %}
+    {% include rdd-js/templates/animals/chrasm.js %}
+    {% include rdd-js/templates/animals/drakkule.js %}
+    {% include rdd-js/templates/animals/felorn.js %}
+    {% include rdd-js/templates/animals/flider.js %}
+    {% include rdd-js/templates/animals/furlong.js %}
+    {% include rdd-js/templates/animals/ghul.js %}
+    {% include rdd-js/templates/animals/gleepzook.js %}
+    {% include rdd-js/templates/animals/gong.js %}
+    {% include rdd-js/templates/animals/grindling.js %}
+    {% include rdd-js/templates/animals/grizzle.js %}
+    {% include rdd-js/templates/animals/harpy.js %}
+    {% include rdd-js/templates/animals/jabberwock.js %}
+    {% include rdd-js/templates/animals/jackalid.js %}
+    {% include rdd-js/templates/animals/killerbeast.js %}
+    {% include rdd-js/templates/animals/laughing-reaver.js %}
+    {% include rdd-js/templates/animals/lycan.js %}
+    {% include rdd-js/templates/animals/necrat.js %}
+    {% include rdd-js/templates/animals/necromorph.js %}
+    {% include rdd-js/templates/animals/oracle-bird.js %}
+    {% include rdd-js/templates/animals/panthler.js %}
+    {% include rdd-js/templates/animals/razorfly.js %}
+
     /*
      * Location Templates
      */

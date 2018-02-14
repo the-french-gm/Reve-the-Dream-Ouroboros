@@ -66,12 +66,19 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                                 <tr>
                                     <td>Landscapes</td>
                                     <td>:</td>
-                                    <td id="landscapes"></td>
+                                    <td id="landscapes-1"></td>
+                                    <td id="landscapes-2"></td>
                                 </tr>
                                 <tr>
                                     <td>Supporting<br/>Characters</td>
                                     <td>:</td>
                                     <td id="supporting-characters"></td>
+                                </tr>
+                                <tr>
+                                    <td>Creatures</td>
+                                    <td>:</td>
+                                    <td id="creatures-1"></td>
+                                    <td id="creatures-2"></td>
                                 </tr>
                             </table>
                         </div>
@@ -87,8 +94,8 @@ title: Rêve the Dream Ouroboros - Scenario Generator
         </div>
 
         <div class="container">
-            <h2>Main Character - NPC Cards</h2>
-            <div class="row main-characters">
+            <h2 class="mt-15">Main Character - NPC Cards</h2>
+            <div class="row main-characters mx-auto">
             </div>
         </div>
     </body>
@@ -250,14 +257,40 @@ title: Rêve the Dream Ouroboros - Scenario Generator
             $.each(scenario['twists'], function(index, value) {
                 $('#twists').append('<li>'+value+'</li>');
             });
+            
+            var i = 1;
 
             $.each(scenario['landscapes'], function(index, value){
-                $('#landscapes').append('<li>'+value+'</li>');
+                $('#landscapes-'+i.toString()).append('<li>'+value+'</li>');
+                
+                if(i == 2) {
+                    i = 1;
+                    return;
+                }
+
+                i++;
             });
 
             $.each(scenario['supporting-characters'], function(index, value){
                 var character = value;
                 $('#supporting-characters').append('<li><u>'+character['name']+'</u> the '+character['build']+' ('+character['alignment']+')</li>');
+            });
+
+            var i = 1;
+
+            $.each(scenario['creatures'], function(index, value){
+                if(!value) {return}
+                
+                value = RDDJS.utils.jsUcfirst(value);
+                
+                $('#creatures-'+i.toString()).append('<li>'+value+'</li>');
+                
+                if(i == 2) {
+                    i = 1;
+                    return;
+                }
+
+                i++;
             });
         }
 

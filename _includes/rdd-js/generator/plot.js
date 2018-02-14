@@ -56,7 +56,8 @@
                 'main-protagonists' : [],
                 'supporting-characters' : [],
                 'twists' : [],
-                'landscapes' : []
+                'landscapes' : [],
+                'creatures' : []
             };
 
             /*
@@ -72,9 +73,9 @@
              * Randomly generate characters and creatures that the PC will
              * meet.
              */
-            var max = RDDJS.utils.getRandomInt(2, 5);
+            var max = RDDJS.utils.getRandomInt(1, 3);
 
-            for(var i = 0; i <= max; i++) {
+            for(var i = 1; i <= max; i++) {
                 var character = this.generateRandomCharacter();
                 character['alignment'] = (Math.random() <= 0.5) ? 'Ennemy' : 'Ally';
                 character['build'] = RDDJS.utils.jsUcfirst(character['build']);
@@ -118,7 +119,7 @@
             /*
              * Generate twists
              */
-            var max = RDDJS.utils.getRandomInt(2, 6);
+            var max = RDDJS.utils.getRandomInt(2, 4);
 
             for(var i = 0; i <= max; i++) {
                 var twist = this.selectRandomTwist();
@@ -138,6 +139,22 @@
 
                 if(!plot['landscapes'].includes(landscape)) {
                     plot['landscapes'].push(landscape);
+                }
+            }
+
+            /*
+             * Generate the create that the PCs will confront
+             */
+            var creatures = Object.keys(RDDJS.animals);
+
+            var max = RDDJS.utils.getRandomInt(2, 6);
+
+            for(var i = 0; i <= max; i++) {
+                var j = RDDJS.utils.getRandomInt(0, creatures.length);
+                var creature = creatures[j];
+                
+                if(!plot['creatures'].includes(creature)) {
+                    plot['creatures'].push(creature);
                 }
             }
 
