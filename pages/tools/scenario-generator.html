@@ -353,12 +353,18 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                 {% endfor %}
             ];
 
+            var used_keywords = [];
+
             images = RDDJS.utils.shuffleArray(images);
 
             for(var i = 0; i < 15; i++) {
                 var image = null;
 
                 $.each(scenario['keywords'], function(index, keyword) {
+                    /* We skip keywords we have already used */
+                    if(used_keywords.includes(keyword)) {
+                        return;
+                    }
 
                     /* Search for images when we have a single keyword */
                     if(!Array.isArray(keyword) && keyword) {
@@ -368,7 +374,7 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                             if(record.includes(keyword)) {
                                 image = record;
                                 images = RDDJS.utils.removeItemFromArray(images, image);
-                                scenario['keywords'] = RDDJS.utils.removeItemFromArray(scenario['keywords'], keyword);
+                                used_keywords.push(keyword);
                                 return false;
                             }
                         }
@@ -390,7 +396,7 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                                     $.each(tagged_images, function(index, value) {
                                         if(value[0] == record) {
                                             already_seen = true;
-                                            value[1]++;
+                                            tagged_images[index][1]++;
 
                                             return false;
                                         }
@@ -408,6 +414,7 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                         });
 
                         if(tagged_images.length > 0) {
+                            console.log(tagged_images);
                             var highest_ranked_images = [];
 
                             $.each(tagged_images, function(index, value) {
@@ -418,10 +425,10 @@ title: Rêve the Dream Ouroboros - Scenario Generator
 
                             var k = RDDJS.utils.getRandomInt(0, highest_ranked_images.length-1);
                             image = highest_ranked_images[k];
-                            console.log(image);
+                            //console.log(image);
 
                             images = RDDJS.utils.removeItemFromArray(images, image);
-                            scenario['keywords'] = RDDJS.utils.removeItemFromArray(scenario['keywords'], keyword);
+                            used_keywords.push(keyword);
 
                             return false;
                         }

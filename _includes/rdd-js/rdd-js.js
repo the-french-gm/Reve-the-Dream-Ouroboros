@@ -103,6 +103,7 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/animals/ghul.js %}
     {% include rdd-js/templates/animals/gleepzook.js %}
     {% include rdd-js/templates/animals/gong.js %}
+    {% include rdd-js/templates/animals/green-tiger.js %}
     {% include rdd-js/templates/animals/grindling.js %}
     {% include rdd-js/templates/animals/grizzle.js %}
     {% include rdd-js/templates/animals/harpy.js %}
@@ -116,6 +117,14 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/animals/oracle-bird.js %}
     {% include rdd-js/templates/animals/panthler.js %}
     {% include rdd-js/templates/animals/razorfly.js %}
+    {% include rdd-js/templates/animals/sanguinox.js %}
+    {% include rdd-js/templates/animals/siren.js %}
+    {% include rdd-js/templates/animals/stonebones.js %}
+    {% include rdd-js/templates/animals/turntooth.js %}
+    {% include rdd-js/templates/animals/yellow-viper.js %}
+    {% include rdd-js/templates/animals/zemu.js %}
+    {% include rdd-js/templates/animals/zider.js %}
+    {% include rdd-js/templates/animals/zobster.js %}
 
     /*
      * Location Templates
