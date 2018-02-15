@@ -197,10 +197,10 @@ function getRandomInt(min, max) {
             var skills = RDDJS.skills[value][1];
             
             if(value == 'draconic') {
-                characteristic = 'dream'
+                characteristic = 'dream';
             }
             else if(value == 'mt') {
-                characteristic = 'missile'
+                characteristic = 'missile';
             }
             else {
                 characteristic = value;
@@ -280,4 +280,3 @@ function getRandomInt(min, max) {
 {% include rdd-js/generator/skills.js %}
 {% include rdd-js/generator/archetype.js %}
 {% include rdd-js/generator/plot.js %}
-{% include rdd-js/generator/twists.js %}

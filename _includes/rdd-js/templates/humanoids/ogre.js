@@ -1,4 +1,4 @@
-RDDJS.templates["orgre"] = {
+RDDJS.templates["ogre"] = {
     "settings" : {
         "high-dreamer" : false,
         "max-size" : 23,

@@ -70,9 +70,15 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                                     <td id="landscapes-2"></td>
                                 </tr>
                                 <tr>
-                                    <td>Supporting<br/>Characters</td>
+                                    <td>Weathers</td>
                                     <td>:</td>
-                                    <td id="supporting-characters"></td>
+                                    <td id="weathers-1"></td>
+                                    <td id="weathers-2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Humanoids</td>
+                                    <td>:</td>
+                                    <td id="humanoids"></td>
                                 </tr>
                                 <tr>
                                     <td>Creatures</td>
@@ -250,16 +256,20 @@ title: Rêve the Dream Ouroboros - Scenario Generator
          *
          */
         function populateAdventureOverview(scenario) {
+
+            /* Populate the type of adventure this scenario is */
             $('#adventure-type').append(scenario['adventure-type']);
             
+            /* Populate the story's overview / idea */
             $('#story').append(scenario['story']);
 
+            /* Populate all the twists that the story could have */
             $.each(scenario['twists'], function(index, value) {
                 $('#twists').append('<li>'+value+'</li>');
             });
             
+            /* Populate the landscape that our jouerneyers will travel through */
             var i = 1;
-
             $.each(scenario['landscapes'], function(index, value){
                 $('#landscapes-'+i.toString()).append('<li>'+value+'</li>');
                 
@@ -271,13 +281,27 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                 i++;
             });
 
-            $.each(scenario['supporting-characters'], function(index, value){
-                var character = value;
-                $('#supporting-characters').append('<li><u>'+character['name']+'</u> the '+character['build']+' ('+character['alignment']+')</li>');
+            /* Populate the weather that the travallers may face */
+            var i = 1;
+            $.each(scenario['weathers'], function(index, value){
+                $('#weathers-'+i.toString()).append('<li>'+value+'</li>');
+                
+                if(i == 2) {
+                    i = 1;
+                    return;
+                }
+
+                i++;
             });
 
-            var i = 1;
+            /* Populate some key humanoids that the travellers may meet */
+            $.each(scenario['humanoids'], function(index, value){
+                var character = value;
+                $('#humanoids').append('<li><u>'+character['name']+'</u> the '+character['build']+' ('+character['alignment']+')</li>');
+            });
 
+            /* Populate some key creatures that the travellers may come across */
+            var i = 1;
             $.each(scenario['creatures'], function(index, value){
                 if(!value) {return}
                 

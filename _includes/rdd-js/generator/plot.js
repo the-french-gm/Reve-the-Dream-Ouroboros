@@ -54,9 +54,10 @@
                 'adventure-type' : '<b>'+this.selectRandomAdventureType()+'</b>',
                 'story' : '',
                 'main-protagonists' : [],
-                'supporting-characters' : [],
+                'humanoids' : [],
                 'twists' : [],
                 'landscapes' : [],
+                'weathers' : [],
                 'creatures' : []
             };
 
@@ -79,7 +80,7 @@
                 var character = this.generateRandomCharacter();
                 character['alignment'] = (Math.random() <= 0.5) ? 'Ennemy' : 'Ally';
                 character['build'] = RDDJS.utils.jsUcfirst(character['build']);
-                plot['supporting-characters'].push(character);
+                plot['humanoids'].push(character);
             }
             
             /*
@@ -134,13 +135,25 @@
              */
             var max = RDDJS.utils.getRandomInt(1, 4);
 
-            for(var i = 0; i <= max; i++) {
-                var landscape = this.selectRandomLandscape();
+            for(var i = 1; i <= max; i++) {
+                var landscape = this.selectRandomLandscape() + ' in ' + this.selectRandomSeason();
 
                 if(!plot['landscapes'].includes(landscape)) {
                     plot['landscapes'].push(landscape);
                 }
             }
+
+            /*
+             * Generate the Weather / Environmental Challenges
+             */
+            for(var i = 1; i <= plot['landscapes'].length; i++) {
+                var weather = this.selectRandomWeather();
+
+                if(!plot['weathers'].includes(weather)) {
+                    plot['weathers'].push(weather);
+                }
+            }
+
 
             /*
              * Generate the create that the PCs will confront
@@ -246,13 +259,6 @@
             var index = RDDJS.utils.getRandomInt(0, adventures.length-1);
 
             return adventures[index];
-        },
-
-        /*
-         *
-         */
-        selectRandomTheme: function() {
-
         },
 
         /*
@@ -371,6 +377,59 @@
             var index = RDDJS.utils.getRandomInt(0, landscapes.length-1);
 
             return landscapes[index];
+        },
+
+        /*
+         *
+         */
+        selectRandomSeason: function() {
+            var seasons = [
+                'Winter',
+                'Summer',
+                'Spring',
+                'Autumn'
+            ];
+
+            var index = RDDJS.utils.getRandomInt(0, seasons.length-1);
+
+            return seasons[index];
+        },
+
+        /*
+         *
+         */
+        selectRandomWeather: function() {
+            var weathers = [
+                'Rainy',
+                'Stormy',
+                'Sunny',
+                'Cloudy',
+                'Hot',
+                'Cold',
+                'Dry',
+                'Wet',
+                'Windy',
+                'Hurricanes',
+                'Typhoons',
+                'Sand-storms',
+                'Snow-storms',
+                'Tornados',
+                'Humid',
+                'Foggy',
+                'Snow',
+                'Thundersnow',
+                'Hail',
+                'Sleet',
+                'Drought',
+                'Wildfire',
+                'Blizzard',
+                'Avalanche',
+                'Mist'
+            ];
+
+            var index = RDDJS.utils.getRandomInt(0, weathers.length-1);
+
+            return weathers[index];
         }
     }
 
