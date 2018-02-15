@@ -49,6 +49,10 @@
     color: #999;
 }
 
+.gallery-container a {
+    color: #fff;
+}
+
 .tz-gallery {
     padding: 5px;
 }

@@ -58,7 +58,8 @@
                 'twists' : [],
                 'landscapes' : [],
                 'weathers' : [],
-                'creatures' : []
+                'creatures' : [],
+                'keywords' : []
             };
 
             /*
@@ -67,7 +68,9 @@
             var max = RDDJS.utils.getRandomInt(1, 3);
 
             for(var i = 1; i <= max; i++) {
-                plot['main-protagonists'].push(this.generateRandomCharacter(settings));
+                var protagonist = this.generateRandomCharacter(settings);
+                plot['main-protagonists'].push(protagonist);
+                plot['keywords'].push(protagonist['build']);
             }
             
             /*
@@ -81,6 +84,7 @@
                 character['alignment'] = (Math.random() <= 0.5) ? 'Ennemy' : 'Ally';
                 character['build'] = RDDJS.utils.jsUcfirst(character['build']);
                 plot['humanoids'].push(character);
+                plot['keywords'].push(character['build']);
             }
             
             /*
@@ -140,6 +144,7 @@
 
                 if(!plot['landscapes'].includes(landscape)) {
                     plot['landscapes'].push(landscape);
+                    plot['keywords'].push(landscape.split(' in '));
                 }
             }
 
@@ -151,12 +156,13 @@
 
                 if(!plot['weathers'].includes(weather)) {
                     plot['weathers'].push(weather);
+                    plot['keywords'].push(weather);
                 }
             }
 
 
             /*
-             * Generate the create that the PCs will confront
+             * Generate the creature that the PCs will confront
              */
             var creatures = Object.keys(RDDJS.animals);
 
@@ -168,8 +174,28 @@
                 
                 if(!plot['creatures'].includes(creature)) {
                     plot['creatures'].push(creature);
+                    plot['keywords'].push(creature);
                 }
             }
+
+            /*
+             * Filters the keywords
+             */
+            plot['keywords'] = RDDJS.utils.shuffleArray(plot['keywords'].unique());
+
+            $.each(plot['keywords'], function(index, value) {
+                if(!value) {
+                    plot['keywords'][index] = '';
+                }
+                else if(Array.isArray(value)) {
+                    $.each(value, function(index2, keyword) {
+                        plot['keywords'][index][index2] = keyword.toLowerCase().replace(' ', '-');
+                    });
+                }
+                else {
+                    plot['keywords'][index] = value.toLowerCase().replace(' ', '-');
+                }
+            });
 
             return plot;
         },
@@ -411,8 +437,8 @@
                 'Windy',
                 'Hurricanes',
                 'Typhoons',
-                'Sand-storms',
-                'Snow-storms',
+                'Sandstorms',
+                'Snowstorms',
                 'Tornados',
                 'Humid',
                 'Foggy',

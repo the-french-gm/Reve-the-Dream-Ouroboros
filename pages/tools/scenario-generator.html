@@ -94,8 +94,15 @@ title: Rêve the Dream Ouroboros - Scenario Generator
         </div>
 
         <div class="container-fluid bg-dark gallery-container">
-            <div class="tz-gallery">
-                <div class="row" id="thumbnails"></div>
+            <div class="row">
+                <div class="col col-xs-12 col-md-11">
+                    <div class="tz-gallery">
+                        <div class="row" id="thumbnails"></div>
+                    </div>
+                </div>
+                <div class="col col-xs-12 col-md-1 text-white">
+                    <a href="javascript:populateRandomImages(scenario);">Refresh</a>
+                </div>
             </div>
         </div>
 
@@ -112,6 +119,8 @@ title: Rêve the Dream Ouroboros - Scenario Generator
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
     
     <script>
+        var scenario;
+
         /*
          *
          */
@@ -333,7 +342,9 @@ title: Rêve the Dream Ouroboros - Scenario Generator
         /*
          *
          */
-        function populateRandomImages() {
+        function populateRandomImages(scenario) {
+            $('#thumbnails').empty();
+
             var images = [
                 {% for file in site.static_files %}
                     {% if file.path contains "story-generator" %}
@@ -344,15 +355,94 @@ title: Rêve the Dream Ouroboros - Scenario Generator
 
             images = RDDJS.utils.shuffleArray(images);
 
-            for(var i = 0; i < 10; i++) {
-                var html = '';
-                html += '<div class="col-sm-12 col-md-auto">'
-                html += '   <a class="lightbox" href="'+images[i]+'">'
-                html += '       <img src="'+images[i]+'" style="height:200px;width:auto;">'
-                html += '   </a>'
-                html += '</div>'
+            for(var i = 0; i < 15; i++) {
+                var image = null;
 
-                $('#thumbnails').append(html);
+                $.each(scenario['keywords'], function(index, keyword) {
+
+                    /* Search for images when we have a single keyword */
+                    if(!Array.isArray(keyword) && keyword) {
+                        for(var j = 0; j < images.length; j++) {
+                            var record = images[j];
+
+                            if(record.includes(keyword)) {
+                                image = record;
+                                images = RDDJS.utils.removeItemFromArray(images, image);
+                                scenario['keywords'] = RDDJS.utils.removeItemFromArray(scenario['keywords'], keyword);
+                                return false;
+                            }
+                        }
+                    }
+
+                    if(Array.isArray(keyword) && keyword) {
+                        var tagged_images = [];
+                        var max = 0;
+
+                        $.each(keyword, function(index, word) {
+                            keyword[index] = word;
+
+                            for(var j = 0; j < images.length; j++) {
+                                var record = images[j];
+
+                                if(record.includes(word)) {
+                                    var already_seen = false;
+                                    
+                                    $.each(tagged_images, function(index, value) {
+                                        if(value[0] == record) {
+                                            already_seen = true;
+                                            value[1]++;
+
+                                            return false;
+                                        }
+                                    });
+
+                                    if(!already_seen) {
+                                        tagged_images.push([record, 1]);
+
+                                        if(max == 0) {
+                                            max = 1;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        if(tagged_images.length > 0) {
+                            var highest_ranked_images = [];
+
+                            $.each(tagged_images, function(index, value) {
+                                if(value[1] == max) {
+                                    highest_ranked_images.push(value[0]);
+                                }
+                            });
+
+                            var k = RDDJS.utils.getRandomInt(0, highest_ranked_images.length-1);
+                            image = highest_ranked_images[k];
+                            console.log(image);
+
+                            images = RDDJS.utils.removeItemFromArray(images, image);
+                            scenario['keywords'] = RDDJS.utils.removeItemFromArray(scenario['keywords'], keyword);
+
+                            return false;
+                        }
+                    }
+                });
+
+                if(!image) {
+                    var j = RDDJS.utils.getRandomInt(0, images.length-1);
+                    image = images[j];
+                }
+
+                if(image) {
+                    var html = '';
+                    html += '<div class="col-sm-12 col-md-auto">'
+                    html += '   <a class="lightbox" href="'+image+'">'
+                    html += '       <img src="'+image+'" style="height:200px;width:auto;">'
+                    html += '   </a>'
+                    html += '</div>'
+
+                    $('#thumbnails').append(html);
+                }
             }
 
             baguetteBox.run('.tz-gallery');
@@ -363,10 +453,10 @@ title: Rêve the Dream Ouroboros - Scenario Generator
          */
         function generateScenario() {
             var rddjs = new RDDJS();
-            var scenario = rddjs.generateScenario(easy_settings);
+            scenario = rddjs.generateScenario(easy_settings);
 
             populateAdventureOverview(scenario);
-            populateRandomImages();
+            populateRandomImages(scenario);
             populateMainCharacters(scenario);
         }
         
