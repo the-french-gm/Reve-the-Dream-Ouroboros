@@ -1,322 +1,346 @@
 ---
 layout: default
 permalink: /tools/scenario-generator.html
-title: Rêve the Dream Ouroboros - Scenario Generator
+title: Rêve the Dream Ouroboros - Scenario Ideas Generator
 ---
+<link rel="stylesheet" href="{{ '/assets/css/generator.css' | prepend: site.baseurl }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+<link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
 
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ '/assets/css/pages/chargen.css' | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
-    </head>
-
-    <body>
-        <div class="container-fluid">
-            <div class="row bg-dark row-eq-height top-menu">
-                <div class="col-xs-12 col-md-8">
-                    <h1 class="text-white">Rêve: the Dream Ouroboros - Scenario Generator</h1>
-                </div>
-
-                <div class="col-xs-12 col-md-4">
-                    <button type="button" class="btn btn-success align-middle" onclick="javascript:location.reload();">Generate!</button>
-
-                    <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
-                </div>
-            </div>
-            
-            <div class="row bg-light adventure-overview">
-                <div class="col-xs-12 col-md-6">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header">
-                            Story Overview
-                        </div>
-                        <div class="card-body">
-                            <table>
-                                <tr>
-                                    <td>Adventure</td>
-                                    <td>:</td>
-                                    <td id="adventure-type"></td>
-                                </tr>
-                                <tr>
-                                    <td>Storyline</td>
-                                    <td>:</td>
-                                    <td id="story"></td>
-                                </tr>
-                                <tr>
-                                    <td>Twists</td>
-                                    <td>:</td>
-                                    <td>
-                                        <ul id="twists"></ul>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-md-6">
-                    <div class="card text-white bg-secondary mb-3">
-                        <div class="card-header">
-                            Adventure Components
-                        </div>
-                        <div class="card-body">
-                            <table class="text-white" style="width:100%;">
-                                <tr>
-                                    <td>Landscapes</td>
-                                    <td>:</td>
-                                    <td id="landscapes-1"></td>
-                                    <td id="landscapes-2"></td>
-                                </tr>
-                                <tr>
-                                    <td>Weathers</td>
-                                    <td>:</td>
-                                    <td id="weathers-1"></td>
-                                    <td id="weathers-2"></td>
-                                </tr>
-                                <tr>
-                                    <td>Humanoids</td>
-                                    <td>:</td>
-                                    <td id="humanoids"></td>
-                                </tr>
-                                <tr>
-                                    <td>Creatures</td>
-                                    <td>:</td>
-                                    <td id="creatures-1"></td>
-                                    <td id="creatures-2"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid">
+    <div class="row bg-dark row-eq-height top-menu">
+        <div class="col-xs-12 col-md-8">
+            <h1 class="text-white">{{ page.title }}</h1>
         </div>
 
-        <div class="container-fluid bg-dark gallery-container">
-            <div class="row">
-                <div class="col col-xs-12 col-md-11">
-                    <div class="tz-gallery">
-                        <div class="row" id="thumbnails"></div>
-                    </div>
-                </div>
-                <div class="col col-xs-12 col-md-1 text-white">
-                    <a href="javascript:populateRandomImages(scenario);">Refresh</a>
-                </div>
-            </div>
-        </div>
+        <div class="col-xs-12 col-md-4">
+            <button type="button" class="btn btn-success align-middle" onclick="javascript:location.reload();">Generate!</button>
 
-        <div class="container">
-            <h2 class="mt-15">Main Character - NPC Cards</h2>
-            <div class="row main-characters mx-auto">
-            </div>
+            <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
         </div>
-    </body>
-
-    <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    </div>
     
-    <script>
-        var scenario;
+    <div class="row bg-light adventure-overview">
+        <div class="col-xs-12 col-md-6">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Story</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Goal</td>
+                        <td id="adventure-type"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Storyline</td>
+                        <td id="story"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Twists</td>
+                        <td>
+                            <ul id="twists"></ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        /*
-         *
-         */
-        var easy_settings = {
-            'characteristic-points' : 110,
-            'skill-points' : 2000,
-            'max-characteristic-points' : 12,
-            'max-skill' : 2
-        };
+        <div class="col-xs-12 col-md-6">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Component</th>
+                        <th colspan="2">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Landscapes</td>
+                        <td id="landscapes-1"></td>
+                        <td id="landscapes-2"></td>
+                    </tr>
+                    <tr>
+                        <td>Weathers</td>
+                        <td id="weathers-1"></td>
+                        <td id="weathers-2"></td>
+                    </tr>
+                    <tr>
+                        <td>Humanoids</td>
+                        <td id="humanoids" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td>Creatures</td>
+                        <td id="creatures-1"></td>
+                        <td id="creatures-2"></td>
+                    </tr>
+                    <tr id="additional-components" style="display:none;">
+                        <td>Other</td>
+                        <td id="additional-components-1"></td>
+                        <td id="additional-components-2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark gallery-container">
+    <div class="row">
+        <div class="col col-xs-12 col-md-11">
+            <div class="tz-gallery">
+                <div class="row" id="thumbnails"></div>
+            </div>
+        </div>
+        <div class="col col-xs-12 col-md-1 text-white">
+            <a href="javascript:populateRandomImages(scenario);">Refresh</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="mt-15 mb-15">Main Character - NPC Cards</h2>
+    <div class="row main-characters mx-auto">
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="mt-15 mb-15">Humanoids - NPC Cards</h2>
+    <div class="row humanoids-cards mx-auto">
+    </div>
+</div>
+
+<script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/pages/tools/npc-generator.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+<script>
+    /*
+        * The global variable that holds the scenario JSON
+        * ideas.
+        */
+    var scenario;
+    
+    /*
+        *
+        */
+    var easy_settings = {
+        'characteristic-points' : 110,
+        'skill-points' : 2000,
+        'max-characteristic-points' : 12,
+        'max-skill' : 2
+    };
+    
+    /*
+        *
+        */
+    var medium_settings = {
+        'characteristic-points' : 160,
+        'skill-points' : 3000,
+        'max-characteristic-points' : 15,
+        'max-skill' : 4
+    }
+    
+    /*
+        *
+        */
+    var difficult_settings = {
+        'characteristic-points' : 180,
+        'skill-points' : 4000,
+        'max-characteristic-points' : 18,
+        'max-skill' : 6
+    }
+
+    /*
+        *
+        */
+    function buildLargeNPCCard(character) {
+        var html = ''
+        html += '<div class="row npc-card">'
+        html += '   <div class="col-xs-12 col-md-auto">'
+        html += '       <table>'
+        html += '           <tr>'
+        html += '               <td>Name</td><td>:</td>'
+        html += '               <td>'+character['name']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Class</td><td>:</td>'
+        html += '               <td>'+RDDJS.utils.jsUcfirst(character['build'])+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>High Dreamer</td><td>:</td>'
+        html += '               <td>'+RDDJS.utils.jsUcfirst(((character['high-dreamer']) ? true : false).toString()) +'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Height</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['height']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Life</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['life']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Endurance</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['endurance']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Dream</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['dream']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Melee</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['melee']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Missile</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['missile']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>Throw</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['throw']+'</td>'
+        html += '           </tr>'
+        html += '           <tr>'
+        html += '               <td>DM</td><td>:</td>'
+        html += '               <td>'+character['characteristics']['damage-modifier']+'</td>'
+        html += '           </tr>'
+        html += '       </table>'
+        html += '   </div>'
         
-        /*
-         *
-         */
-        var medium_settings = {
-            'characteristic-points' : 160,
-            'skill-points' : 3000,
-            'max-characteristic-points' : 15,
-            'max-skill' : 4
-        }
+        var i = 1;
+        var max = Object.keys(character["skills"]).length;
         
-        /*
-         *
-         */
-        var difficult_settings = {
-            'characteristic-points' : 180,
-            'skill-points' : 4000,
-            'max-characteristic-points' : 18,
-            'max-skill' : 6
-        }
+        $.each(character["skills"], function(key, value) {
+            max--;
 
-        /*
-         *
-         */
-        function buildLargeNPCCard(character) {
-            var html = ''
-            html += '<div class="row npc-card">'
-            html += '   <div class="col-xs-12 col-md-auto">'
-            html += '       <table>'
-            html += '           <tr>'
-            html += '               <td>Name</td><td>:</td>'
-            html += '               <td>'+character['name']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Class</td><td>:</td>'
-            html += '               <td>'+RDDJS.utils.jsUcfirst(character['build'])+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>High Dreamer</td><td>:</td>'
-            html += '               <td>'+RDDJS.utils.jsUcfirst(((character['high-dreamer']) ? true : false).toString()) +'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Height</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['height']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Life</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['life']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Endurance</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['endurance']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Dream</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['dream']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Melee</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['melee']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Missile</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['missile']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>Throw</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['throw']+'</td>'
-            html += '           </tr>'
-            html += '           <tr>'
-            html += '               <td>DM</td><td>:</td>'
-            html += '               <td>'+character['characteristics']['damage-modifier']+'</td>'
-            html += '           </tr>'
-            html += '       </table>'
-            html += '   </div>'
-            
-            var i = 1;
-            var max = Object.keys(character["skills"]).length;
-            
-            $.each(character["skills"], function(key, value) {
-                max--;
+            if(i == 1) {
+                html += '   <div class="col-xs-12 col-md-auto">'
+                html += '       <table>'
+            }
+            // We don't bother displaying skills that are -X
+            if(value.toString().indexOf('--') != -1) {
+                return;
+            }
 
-                if(i == 1) {
-                    html += '   <div class="col-xs-12 col-md-auto">'
-                    html += '       <table>'
-                }
-                // We don't bother displaying skills that are -X
-                if(value.toString().indexOf('--') != -1) {
-                    return;
-                }
+            key = key.replace('-', ' ')
+            html += '       <tr>'
+            html += '           <td class="text-capitalize">'+key+'</td><td>:</td>'
+            html += '           <td class="value">'+value+'</td>'
+            html += '       </tr>'
 
-                key = key.replace('-', ' ')
-                html += '       <tr>'
-                html += '           <td class="text-capitalize">'+key+'</td><td>:</td>'
-                html += '           <td class="value">'+value+'</td>'
-                html += '       </tr>'
-
-                if(i == 11 || max == 0) {
-                    i = 1;
-                    html += '       </table>'
-                    html += '   </div>'
-                }
-                else {
-                    i++;
-                }
-            });
-
-            html += '   <div class="col-xs-12 col-md-auto">'
-            html += '       <table>'
-            
-            $.each(character["resolutions"], function(key, value) {
-                // We don't bother displaying skills that are -X
-                if(value.indexOf('--') != -1) {
-                    return;
-                }
-
-                key = key.replace('-', ' ')
-                html += '       <tr>'
-                html += '           <td class="text-capitalize">'+key+'</td>'
-                html += '           <td class="value">'+value+'</td>'
-                html += '       </tr>'
-            });
-            
-            html += '       </table>'
-            html += '   </div>'
-
-            html += '</div>'
-
-            return html;
-        }
-
-        /*
-         *
-         */
-        function populateAdventureOverview(scenario) {
-
-            /* Populate the type of adventure this scenario is */
-            $('#adventure-type').append(scenario['adventure-type']);
-            
-            /* Populate the story's overview / idea */
-            $('#story').append(scenario['story']);
-
-            /* Populate all the twists that the story could have */
-            $.each(scenario['twists'], function(index, value) {
-                $('#twists').append('<li>'+value+'</li>');
-            });
-            
-            /* Populate the landscape that our jouerneyers will travel through */
-            var i = 1;
-            $.each(scenario['landscapes'], function(index, value){
-                $('#landscapes-'+i.toString()).append('<li>'+value+'</li>');
-                
-                if(i == 2) {
-                    i = 1;
-                    return;
-                }
-
+            if(i == 11 || max == 0) {
+                i = 1;
+                html += '       </table>'
+                html += '   </div>'
+            }
+            else {
                 i++;
-            });
+            }
+        });
 
-            /* Populate the weather that the travallers may face */
+        html += '   <div class="col-xs-12 col-md-auto">'
+        html += '       <table>'
+        
+        $.each(character["resolutions"], function(key, value) {
+            // We don't bother displaying skills that are -X
+            if(value.indexOf('--') != -1) {
+                return;
+            }
+
+            key = key.replace('-', ' ')
+            html += '       <tr>'
+            html += '           <td class="text-capitalize">'+key+'</td>'
+            html += '           <td class="value">'+value+'</td>'
+            html += '       </tr>'
+        });
+        
+        html += '       </table>'
+        html += '   </div>'
+
+        html += '</div>'
+
+        return html;
+    }
+
+    /*
+        *
+        */
+    function populateAdventureOverview(scenario) {
+        /* Populate the type of adventure this scenario is */
+        $('#adventure-type').append(scenario['adventure-type']);
+        
+        /* Populate the story's overview / idea */
+        $('#story').append(scenario['story']);
+
+        /* Populate all the twists that the story could have */
+        $.each(scenario['twists'], function(index, value) {
+            $('#twists').append('<li>'+value+'</li>');
+        });
+        
+        /* Populate the landscape that our jouerneyers will travel through */
+        var i = 1;
+        $.each(scenario['landscapes'], function(index, value){
+            $('#landscapes-'+i.toString()).append('<li>'+value+'</li>');
+            
+            if(i == 2) {
+                i = 1;
+                return;
+            }
+
+            i++;
+        });
+
+        /* Populate the weather that the travallers may face */
+        var i = 1;
+        $.each(scenario['weathers'], function(index, value){
+            $('#weathers-'+i.toString()).append('<li>'+value+'</li>');
+            
+            if(i == 2) {
+                i = 1;
+                return;
+            }
+
+            i++;
+        });
+
+        /* Populate some key humanoids that the travellers may meet */
+        $.each(scenario['humanoids'], function(index, value){
+            var character = value;
+            $('#humanoids').append('<li><u>'+character['name']+'</u> the '+character['build']+' ('+character['alignment']+')</li>');
+        });
+
+        /* Populate some key creatures that the travellers may come across */
+        var i = 1;
+        $.each(scenario['creatures'], function(index, value){
+            if(!value) {return}
+            
+            value = RDDJS.utils.jsUcfirst(value);
+            
+            $('#creatures-'+i.toString()).append('<li>'+value+'</li>');
+            
+            if(i == 2) {
+                i = 1;
+                return;
+            }
+
+            i++;
+        });
+
+        /* Populate the other components of the adventure */
+        if(scenario['additional-components'].length > 0) {
+            $('#additional-components').css({'display':''});
             var i = 1;
-            $.each(scenario['weathers'], function(index, value){
-                $('#weathers-'+i.toString()).append('<li>'+value+'</li>');
+            
+            $.each(scenario['additional-components'], function(index, value){
+                if(!value || !value[0] || !value[1]) {return}
                 
-                if(i == 2) {
-                    i = 1;
-                    return;
-                }
-
-                i++;
-            });
-
-            /* Populate some key humanoids that the travellers may meet */
-            $.each(scenario['humanoids'], function(index, value){
-                var character = value;
-                $('#humanoids').append('<li><u>'+character['name']+'</u> the '+character['build']+' ('+character['alignment']+')</li>');
-            });
-
-            /* Populate some key creatures that the travellers may come across */
-            var i = 1;
-            $.each(scenario['creatures'], function(index, value){
-                if(!value) {return}
+                type = RDDJS.utils.jsUcfirst(value[0]);
+                text = RDDJS.utils.jsUcfirst(value[1]);
                 
-                value = RDDJS.utils.jsUcfirst(value);
-                
-                $('#creatures-'+i.toString()).append('<li>'+value+'</li>');
+                $('#additional-components-'+i.toString()).append('<li>'+type+': '+text+'</li>');
                 
                 if(i == 2) {
                     i = 1;
@@ -326,152 +350,157 @@ title: Rêve the Dream Ouroboros - Scenario Generator
                 i++;
             });
         }
+    }
 
-        /*
-         *
-         */
-        function populateMainCharacters(scenario) {
-            var div_characters = $('.main-characters');
+    /*
+        *
+        */
+    function populateMainCharacters(scenario) {
+        var div_characters = $('.main-characters');
 
-            $.each(scenario['main-protagonists'], function(index, character) {
-                var html = buildLargeNPCCard(character);
-                div_characters.append(html);
-            });
-        }
+        $.each(scenario['main-protagonists'], function(index, character) {
+            var html = buildLargeNPCCard(character);
+            div_characters.append(html);
+        });
+    }
 
-        /*
-         *
-         */
-        function populateRandomImages(scenario) {
-            $('#thumbnails').empty();
+    function populateHumanoidNPCCards(scenario) {
+        $.each(scenario['humanoids'], function(index, value) {
+            generateHumanoidNPCCard(value, index, true);
+        });
+    }
 
-            var images = [
-                {% for file in site.static_files %}
-                    {% if file.path contains "story-generator" %}
-                        "{{ site.baseurl }}{{ file.path }}",
-                    {% endif %}
-                {% endfor %}
-            ];
+    /*
+        *
+        */
+    function populateRandomImages(scenario) {
+        $('#thumbnails').empty();
 
-            var used_keywords = [];
+        var images = [
+            {% for file in site.static_files %}
+                {% if file.path contains "story-generator" %}
+                    "{{ site.baseurl }}{{ file.path }}",
+                {% endif %}
+            {% endfor %}
+        ];
 
-            images = RDDJS.utils.shuffleArray(images);
+        var used_keywords = [];
 
-            for(var i = 0; i < 15; i++) {
-                var image = null;
+        images = RDDJS.utils.shuffleArray(images);
 
-                $.each(scenario['keywords'], function(index, keyword) {
-                    /* We skip keywords we have already used */
-                    if(used_keywords.includes(keyword)) {
-                        return;
-                    }
+        for(var i = 0; i < 15; i++) {
+            var image = null;
 
-                    /* Search for images when we have a single keyword */
-                    if(!Array.isArray(keyword) && keyword) {
-                        for(var j = 0; j < images.length; j++) {
-                            var record = images[j];
+            $.each(scenario['keywords'], function(index, keyword) {
+                /* We skip keywords we have already used */
+                if(used_keywords.includes(keyword)) {
+                    return;
+                }
 
-                            if(record.includes(keyword)) {
-                                image = record;
-                                images = RDDJS.utils.removeItemFromArray(images, image);
-                                used_keywords.push(keyword);
-                                return false;
-                            }
-                        }
-                    }
+                /* Search for images when we have a single keyword */
+                if(!Array.isArray(keyword) && keyword) {
+                    for(var j = 0; j < images.length; j++) {
+                        var record = images[j];
 
-                    if(Array.isArray(keyword) && keyword) {
-                        var tagged_images = [];
-                        var max = 0;
-
-                        $.each(keyword, function(index, word) {
-                            keyword[index] = word;
-
-                            for(var j = 0; j < images.length; j++) {
-                                var record = images[j];
-
-                                if(record.includes(word)) {
-                                    var already_seen = false;
-                                    
-                                    $.each(tagged_images, function(index, value) {
-                                        if(value[0] == record) {
-                                            already_seen = true;
-                                            tagged_images[index][1]++;
-
-                                            return false;
-                                        }
-                                    });
-
-                                    if(!already_seen) {
-                                        tagged_images.push([record, 1]);
-
-                                        if(max == 0) {
-                                            max = 1;
-                                        }
-                                    }
-                                }
-                            }
-                        });
-
-                        if(tagged_images.length > 0) {
-                            console.log(tagged_images);
-                            var highest_ranked_images = [];
-
-                            $.each(tagged_images, function(index, value) {
-                                if(value[1] == max) {
-                                    highest_ranked_images.push(value[0]);
-                                }
-                            });
-
-                            var k = RDDJS.utils.getRandomInt(0, highest_ranked_images.length-1);
-                            image = highest_ranked_images[k];
-                            //console.log(image);
-
+                        if(record.includes(keyword)) {
+                            image = record;
                             images = RDDJS.utils.removeItemFromArray(images, image);
                             used_keywords.push(keyword);
-
                             return false;
                         }
                     }
-                });
-
-                if(!image) {
-                    var j = RDDJS.utils.getRandomInt(0, images.length-1);
-                    image = images[j];
                 }
 
-                if(image) {
-                    var html = '';
-                    html += '<div class="col-sm-12 col-md-auto">'
-                    html += '   <a class="lightbox" href="'+image+'">'
-                    html += '       <img src="'+image+'" style="height:200px;width:auto;">'
-                    html += '   </a>'
-                    html += '</div>'
+                if(Array.isArray(keyword) && keyword) {
+                    var tagged_images = [];
+                    var max = 0;
 
-                    $('#thumbnails').append(html);
+                    $.each(keyword, function(index, word) {
+                        keyword[index] = word;
+
+                        for(var j = 0; j < images.length; j++) {
+                            var record = images[j];
+
+                            if(record.includes(word)) {
+                                var already_seen = false;
+                                
+                                $.each(tagged_images, function(index, value) {
+                                    if(value[0] == record) {
+                                        already_seen = true;
+                                        tagged_images[index][1]++;
+
+                                        return false;
+                                    }
+                                });
+
+                                if(!already_seen) {
+                                    tagged_images.push([record, 1]);
+
+                                    if(max == 0) {
+                                        max = 1;
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    if(tagged_images.length > 0) {
+                        var highest_ranked_images = [];
+
+                        $.each(tagged_images, function(index, value) {
+                            if(value[1] == max) {
+                                highest_ranked_images.push(value[0]);
+                            }
+                        });
+
+                        var k = RDDJS.utils.getRandomInt(0, highest_ranked_images.length-1);
+                        image = highest_ranked_images[k];
+
+                        images = RDDJS.utils.removeItemFromArray(images, image);
+                        used_keywords.push(keyword);
+
+                        return false;
+                    }
                 }
+            });
+
+            if(!image) {
+                var j = RDDJS.utils.getRandomInt(0, images.length-1);
+                image = images[j];
             }
 
-            baguetteBox.run('.tz-gallery');
+            if(image) {
+                var html = '';
+                html += '<div class="col-sm-12 col-md-auto">'
+                html += '   <a class="lightbox" href="'+image+'">'
+                html += '       <img src="'+image+'" style="height:200px;width:auto;">'
+                html += '   </a>'
+                html += '</div>'
+
+                $('#thumbnails').append(html);
+            }
         }
 
-        /*
-         *
-         */
-        function generateScenario() {
-            var rddjs = new RDDJS();
-            scenario = rddjs.generateScenario(easy_settings);
+        baguetteBox.run('.tz-gallery');
+    }
 
-            populateAdventureOverview(scenario);
-            populateRandomImages(scenario);
-            populateMainCharacters(scenario);
-        }
-        
-        /*
-         *
-         */
-        $(document).ready( function( $ ) {
-            generateScenario();
-        });
-    </script>
-</html>
+    /*
+        *
+        */
+    function generateScenario() {
+        var rddjs = new RDDJS();
+        scenario = rddjs.generateScenario(easy_settings);
+
+        populateAdventureOverview(scenario);
+        populateRandomImages(scenario);
+        populateMainCharacters(scenario);
+        populateHumanoidNPCCards(scenario);
+    }
+    
+    /*
+        *
+        */
+    $(document).ready( function( $ ) {
+        generateScenario();
+    });
+</script>

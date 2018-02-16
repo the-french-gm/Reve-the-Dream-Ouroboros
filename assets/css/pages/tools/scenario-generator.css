@@ -9,21 +9,49 @@
 }
 
 .card-body {
-    padding: 5px !important;
+    padding: 0px !important;
 }
 
 .main-characters h2 {
     margin-top: 15px;
 }
 
+.main-characters > .npc-card {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 .npc-card {
     width: 100%;
-    border: 1px dotted gray;
+    border: 1px solid black;
     margin: 10px;
+}
+
+.humanoids-cards > .npc-card {
+    margin-top: 15px;
+    margin-right: 10px;
+    margin-left: 0px;
+    border: 1px solid black;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: auto;
+}
+
+.build {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.humanoids-cards > .npc-card table {
+    font-size: 13px;
 }
 
 #twists {
     margin-bottom: 0px;
+    margin-left: 0;
+    padding-left: 15px;
 }
 
 .gallery-container {
@@ -102,4 +130,13 @@
 
 .baguetteBox-button {
     background-color: transparent !important;
+}
+
+.adventure-overview .table-bordered {
+    border: none;
+}
+
+.adventure-overview .table {
+    margin-bottom: 0px;
+    border-spacing: 0px;
 }

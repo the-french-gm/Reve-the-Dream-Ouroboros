@@ -3,7 +3,8 @@ h1 {
 }
 
 .top-menu button {
-    margin-top: 2px;
+    margin-top: 2px !important;
+    margin-left: 0 !important;
 }
 
 .value {

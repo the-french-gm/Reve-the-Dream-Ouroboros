@@ -51,7 +51,7 @@
              * The template for the plot
              */
             var plot = {
-                'adventure-type' : '<b>'+this.selectRandomAdventureType()+'</b>',
+                'adventure-type' : this.selectRandomAdventureType(),
                 'story' : '',
                 'main-protagonists' : [],
                 'humanoids' : [],
@@ -59,6 +59,7 @@
                 'landscapes' : [],
                 'weathers' : [],
                 'creatures' : [],
+                'additional-components' : [],
                 'keywords' : []
             };
 
@@ -80,7 +81,7 @@
             var max = RDDJS.utils.getRandomInt(1, 3);
 
             for(var i = 1; i <= max; i++) {
-                var character = this.generateRandomCharacter();
+                var character = this.generateRandomCharacter(settings);
                 character['alignment'] = (Math.random() <= 0.5) ? 'Ennemy' : 'Ally';
                 character['build'] = RDDJS.utils.jsUcfirst(character['build']);
                 plot['humanoids'].push(character);
@@ -196,6 +197,26 @@
                     plot['keywords'][index] = value.toLowerCase().replace(' ', '-');
                 }
             });
+
+            /*
+             * There's a 10% chance that the scenario contains
+             * an entity
+             */
+            if((Math.random() <= 0.1)) {
+                var entities = Object.keys(RDDJS.entities);
+                var index = RDDJS.utils.getRandomInt(0, entities.length-1);
+                
+                plot['additional-components'].push(['entity', entities[index]]);
+            }
+
+            /*
+             * There's a 10% chance that the PCs could catch a disease
+             */
+            if((Math.random() <= 0.1)) {
+                var index = RDDJS.utils.getRandomInt(0, RDDJS.diseases.length-1);
+                
+                plot['additional-components'].push(['disease', RDDJS.diseases[index]]);
+            }
 
             return plot;
         },

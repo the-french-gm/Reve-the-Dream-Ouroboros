@@ -1,168 +1,166 @@
 ---
+layout: default
 permalink: /tools/map-generator.html
+title: Rêve the Dream Ouroboros - Map Generator
 ---
 
-<html>
-<head>
-    <title>Rêve: the Dream Ouroboros - Map Generator</title>
-    <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
-    <link rel="stylesheet" href="{{ '/assets/css/pages/npc-generator.css' | prepend: site.baseurl }}">
-    <link rel="stylesheet" href="{{ '/assets/css/rpg-awesome.min.css' | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ '/assets/css/generator.css' | prepend: site.baseurl }}">
 
-    <style>
-        h1 {
-            font-size: 30px;
-        }
+<style>
+    h1 {
+        font-size: 30px;
+    }
 
-        .top-menu button {
-            margin-top: 2px;
-        }
+    .top-menu button {
+        margin-top: 2px;
+    }
 
-        path, line {
-            fill: none;
-            stroke: black;
-            stroke-linecap: round;
-        }
+    path, line {
+        fill: none;
+        stroke: black;
+        stroke-linecap: round;
+    }
 
-        .field {
-            stroke: none;
-            fill-opacity: 1.0;
-        }
+    .field {
+        stroke: none;
+        fill-opacity: 1.0;
+    }
 
-        .slope {
-            stroke-width: 1;
-        }
+    .slope {
+        stroke-width: 1;
+    }
 
-        .river {
-            stroke-width: 2;
-        }
+    .river {
+        stroke-width: 2;
+    }
 
-        .coast {
-            stroke-width: 4;
-        }
+    .coast {
+        stroke-width: 4;
+    }
 
-        .border {
-            stroke-width: 5;
-            stroke-dasharray: 4,4;
-            stroke-linecap: butt;
-        }
+    .border {
+        stroke-width: 5;
+        stroke-dasharray: 4,4;
+        stroke-linecap: butt;
+    }
 
-        text {
-            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-            color: black;
-            stroke: white;
-            stroke-width: 5;
-            stroke-linejoin: round;
-            paint-order: stroke;
-        }
+    text {
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        color: black;
+        stroke: white;
+        stroke-width: 5;
+        stroke-linejoin: round;
+        paint-order: stroke;
+    }
 
-        text.region {
-            stroke-width:10;
-            font-variant: small-caps;
-        }
+    text.region {
+        stroke-width:10;
+        font-variant: small-caps;
+    }
 
-        svg {
-            float: right;
-            background-color: white;
-        }
-    </style>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row bg-dark top-menu">
-            <div class="col-xs-12 col-md-9">
-                <h1 class="text-white">Rêve: the Dream Ouroboros - Map Generator</h1>
-            </div>
+    svg {
+        float: right;
+        background-color: white;
+    }
+</style>
 
-            <div class="col-xs-12 col-md-auto">
-                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateMap();">Generate</button>
-            </div>
-            <div class="col-xs-12 col-md-auto">
-                <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
-            </div>
+<div class="container-fluid">
+    <div class="row bg-dark top-menu">
+        <div class="col-xs-12 col-md-9">
+            <h1 class="text-white">
+                <a href="{{ '/index.html' | prepend: site.baseurl }}">
+                    {{ page.title }}
+                </a>
+            </h1>
         </div>
-        <div class="row" id="map-here">
 
+        <div class="col-xs-12 col-md-auto">
+            <button type="button" class="btn btn-success align-middle" onclick="javascript:generateMap();">Generate</button>
+        </div>
+        <div class="col-xs-12 col-md-auto">
+            <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
         </div>
     </div>
+    <div class="row" id="map-here">
 
-    <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/map-js/d3.v4.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/map-js/priority-queue.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/map-js/language.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/map-js/terrain.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/map-js/saveSvgAsPng.js' | prepend: site.baseurl }}"></script>
+    </div>
+</div>
 
-    <script>
-        var svg = d3.select("#map-here")
-            .append("svg")
-            .attr("width", "100%")
-            .attr("height", "100%")
-            .attr("id", "map");
+<script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/map-js/d3.v4.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/map-js/priority-queue.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/map-js/language.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/map-js/terrain.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/map-js/saveSvgAsPng.js' | prepend: site.baseurl }}"></script>
 
-        /*
-         *
-         */
-        function generateLand(params) {
-            var mesh = generateGoodMesh(params.npts, params.extent);
-            var h = add(
-                    slope(mesh, randomVector(4)),
-                    cone(mesh, runif(-1, -1)),
-                    mountains(mesh, 50)
-                    );
-            for (var i = 0; i < 10; i++) {
-                h = relax(h);
-            }
-            h = peaky(h);
-            h = doErosion(h, runif(0, 0.1), 5);
+<script>
+    var svg = d3.select("#map-here")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("id", "map");
 
-            if(Math.random() <= 0.50) {
-                h = setSeaLevel(h, runif(0.2, 0.3));
-            }
+    /*
+        *
+        */
+    function generateLand(params) {
+        var mesh = generateGoodMesh(params.npts, params.extent);
+        var h = add(
+                slope(mesh, randomVector(4)),
+                cone(mesh, runif(-1, -1)),
+                mountains(mesh, 50)
+                );
+        for (var i = 0; i < 10; i++) {
+            h = relax(h);
+        }
+        h = peaky(h);
+        h = doErosion(h, runif(0, 0.1), 5);
 
-            h = fillSinks(h);
-            h = cleanCoast(h, 3);
-            return h;
+        if(Math.random() <= 0.50) {
+            h = setSeaLevel(h, runif(0.2, 0.3));
         }
 
-        var defaultExtent = {
-            width: 1,
-            height: 1
-        };
+        h = fillSinks(h);
+        h = cleanCoast(h, 3);
+        return h;
+    }
 
-        var defaultParams = {
-            extent: defaultExtent,
-            generator: generateLand,
-            npts: 16384,
-            ncities: 15,
-            nterrs: 5,
-            fontsizes: {
-                region: 40,
-                city: 25,
-                town: 20
-            }
+    var defaultExtent = {
+        width: 1,
+        height: 1
+    };
+
+    var defaultParams = {
+        extent: defaultExtent,
+        generator: generateLand,
+        npts: 16384,
+        ncities: 15,
+        nterrs: 5,
+        fontsizes: {
+            region: 40,
+            city: 25,
+            town: 20
         }
+    }
+    
+    /*
+        *
+        */
+    function generateMap() {
+        $('#map').empty();
 
-        /*
-         *
-         */
-        function generateMap() {
-            $('#map').empty();
+        doMap(svg, defaultParams);
+    }
 
-            doMap(svg, defaultParams);
-        }
+    /*
+        *
+        */
+    function download() {
+        
+    }
 
-        /*
-         *
-         */
-        function download() {
-            
-        }
-
-        $(document).ready( function( $ ) {
-            generateMap();
-        });
-    </script>
-</body>
-</html>
+    $(document).ready( function( $ ) {
+        generateMap();
+    });
+</script>

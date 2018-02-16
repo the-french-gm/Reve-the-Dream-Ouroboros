@@ -55,6 +55,8 @@ label.max {
     margin-right: 10px;
 }
 
-.mt-15 {
-    margin-top: 15px;
+h1 > a,
+h1 > a:hover {
+    text-decoration: none;
+    color: #fff;
 }

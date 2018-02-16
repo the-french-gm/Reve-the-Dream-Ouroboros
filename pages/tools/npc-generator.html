@@ -1,209 +1,167 @@
 ---
-permalink: /tools/npc-generator.html
+layout: default
+permalink: /tools/npc-generator.
+title: Rêve the Dream Ouroboros - NPC Generator
 ---
+<link rel="stylesheet" href="{{ '/assets/css/generator.css' | prepend: site.baseurl }}">
 
-<html>
-<head>
-    <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | prepend: site.baseurl }}">
-    <link rel="stylesheet" href="{{ '/assets/css/pages/npc-generator.css' | prepend: site.baseurl }}">
-    <link rel="stylesheet" href="{{ '/assets/css/rpg-awesome.min.css' | prepend: site.baseurl }}">
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row bg-dark top-menu">
-            <div class="col-xs-12 col-md-7">
-                <h1 class="text-white">Rêve: the Dream Ouroboros - NPC Generator</h1>
-            </div>
-
-            <div class="col-xs-12 col-md-auto">
-                <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCards();">Generate</button>
-            </div>
-
-            <div class="col-xs-12 col-md-auto">
-                <button type="button" class="btn btn-primary" onclick="javascript:downloadAll()">Download</button>
-            </div>
-
-            <div class="col-xs-12 col-md-auto">
-                <button type="button" class="btn lang-btn">Français</button>
-            </div>
-
-            <div class="col-xs-12 col-md-auto">
-                <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
-            </div>
+<div class="container-fluid">
+    <div class="row bg-dark top-menu">
+        <div class="col-xs-12 col-md-7">
+            <h1 class="text-white">
+                <a href="{{ '/index.html' | prepend: site.baseurl }}">
+                    {{ page.title }}
+                </a>
+            </h1>
         </div>
 
-        <div class="row bg-secondary generator-settings">
-            <div class="col-xs-12 col-md-4">
-                <label>Characteristic Points:</label>
-                <input type="text" class="form-control setting-characteristic-points" value="160" />
-            </div>
+        <div class="col-xs-12 col-md-auto">
+            <button type="button" class="btn btn-success align-middle" onclick="javascript:generateCards();">Generate</button>
+        </div>
 
-            <div class="col-xs-12 col-md-4">
-                <label>Skill Points:</label>
-                <input type="text" class="form-control setting-skill-points" value="3000" />
-            </div>
+        <div class="col-xs-12 col-md-auto">
+            <button type="button" class="btn btn-primary" onclick="javascript:downloadAll()">Download</button>
+        </div>
 
-            <div class="col-xs-12 col-md-4">
-                <label>Genre:</label>
-                <select class="custom-select setting-genre">
-                    <option value="fantasy">Fantasy</option>
-                    <option value="contemporary">Contemporary</option>
-                </select>
-            </div>
+        <div class="col-xs-12 col-md-auto">
+            <button type="button" class="btn lang-btn">Français</button>
+        </div>
+
+        <div class="col-xs-12 col-md-auto">
+            <a href="{{ '/index.html' | prepend: site.baseurl }}"><button type="button" class="btn btn-seconday align-middle">Home Page</button></a>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row row-eq-height bg-light npc-cards">
+    <div class="row bg-secondary generator-settings">
+        <div class="col-xs-12 col-md-4">
+            <label>Characteristic Points:</label>
+            <input type="text" class="form-control setting-characteristic-points" value="160" />
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <label>Skill Points:</label>
+            <input type="text" class="form-control setting-skill-points" value="3000" />
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <label>Genre:</label>
+            <select class="custom-select setting-genre">
+                <option value="fantasy">Fantasy</option>
+                <option value="contemporary">Contemporary</option>
+            </select>
         </div>
     </div>
+</div>
 
-    
-    <script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/html2canvas.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/canvas2image.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/js/chance.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
-    <script>
-        /*
-         *
-         */
-        var default_settings = {
-            'characteristic-points' : 160,
-            'max-characteristic-points' : 15,
-            'skill-points' : 3000,
-            'max-skill' : +3
-        };
+<div class="container-fluid">
+    <div class="row row-eq-height bg-light humanoids-cards">
+    </div>
+</div>
 
-        /*
-         *
-         */
-        function downloadAll() {
-            html2canvas(document.querySelector('.npc-cards')).then(canvas => {
-                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
-                var a = document.createElement('a');
-                a.href = image;
-                a.download = 'npc-cards.png';
-                a.click();
-            });
-        }
+<script src="{{ '/assets/js/jquery-3.2.1.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/bootstrap.bundle.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/html2canvas.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/canvas2image.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/chance.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/rdd-js/rdd-js.js' | prepend: site.baseurl }}"></script>
 
-        /*
-         *
-         */
-        function download(uid) {
-            var build = $('#npc-'+uid+' .build').text().replace(' ', '');
-            
-            html2canvas(document.querySelector('#npc-'+uid)).then(canvas => {
-                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
-                var a = document.createElement('a');
-                a.href = image;
-                a.download = build+'-'+uid+'.png';
-                a.click();
-            });
-        }
+<script>
+    /*
+     *
+     */
+    var default_settings = {
+        'characteristic-points' : 160,
+        'max-characteristic-points' : 15,
+        'skill-points' : 3000,
+        'max-skill' : +3
+    };
 
-        /*
-         *
-         */
-        function generateCard(character, uid) {
-            var div = $('.npc-cards');
-            var build = character['build'].replace(' ', '');
-
-            var html = '';
-            html += '<div class="npc-card col-md-auto" id="npc-'+uid+'">'
-            html += '<table>'
-            html += '<tr><td class="build" COLSPAN=3>'
-            html += build
-            html += ' <a><i class="ra ra-sword" onclick="javascript:download('+uid+')"></i>'
-            html += ' <i class="ra ra-double-team" onclick="javascript:generateBuild(\''+build+'\')"></i>'
-            html += '</a></td></tr>'
-            html += '<tr><td>Height</td><td>:</td><td class="value">'+character['characteristics']['height']+'</td></tr>'
-            html += '<tr><td>Life</td><td>:</td><td class="value">'+character['characteristics']['life']+'</td></tr>'
-            html += '<tr><td>Encurance</td><td>:</td><td class="value">'+character['characteristics']['endurance']+'</td></tr>'
-            html += '<tr><td>Dream</td><td>:</td><td class="value">'+character['characteristics']['dream']+'</td></tr>'
-            html += '<tr><td>Melee</td><td>:</td><td class="value">'+character['characteristics']['melee']+'</td></tr>'
-            html += '<tr><td>Missile</td><td>:</td><td class="value">'+character['characteristics']['missile']+'</td></tr>'
-            html += '<tr><td>Throw</td><td>:</td><td class="value">'+character['characteristics']['throw']+'</td></tr>'
-            html += '<tr><td>DM</td><td>:</td><td class="value">'+character['characteristics']['damage-modifier']+'</td></tr>'
-
-            $.each(character["resolutions"], function(key, value) {
-                // We don't bother displaying skills that are -X
-                if(value.indexOf('--') != -1) {
-                    return;
-                }
-
-                key = key.replace('-', ' ')
-                html += '<tr><td class="text-capitalize">'+key+'</td><td>:</td><td class="value">'+value+'</td></tr>'
-            });
-            
-            html += '</table>'
-            html += '</div>'
-
-            div.append(html);
-        }
-
-        /*
-         *
-         */
-        function generateBuild(build) {
-            $('.npc-cards').empty();
-            var uid = 0;
-
-            while(uid < 10) {
-                settings = getSettings();
-                var rddjs = new RDDJS();
-
-                settings['template'] = build;
-
-                rddjs.setSettings(settings);
-                character = rddjs.generateCharacter();
-                generateCard(character, uid);
-                
-                uid++;
-            }
-        }
-
-        /*
-         *
-         */
-        function getSettings() {
-            var settings = Object.assign({}, default_settings);
-            settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
-            settings["skill-points"] = parseInt($('.setting-skill-points').val()) || 0;
-            settings["high-dreamer"] = (Math.random() <= 0.25) ? true : false;
-            
-            return settings;
-        }
-
-        /*
-         *
-         */
-        function generateCards() {
-            $('.npc-cards').empty();
-            var uid = 0;
-
-            $.each(RDDJS.templates, function(key, value) {
-                settings = getSettings();
-                var rddjs = new RDDJS();
-
-                settings['template'] = key;
-
-                rddjs.setSettings(settings);
-                character = rddjs.generateCharacter();
-                generateCard(character, uid);
-                uid++;
-            });
-        }
-        
-        /*
-         *
-         */
-        $(document).ready( function( $ ) {
-            generateCards();
+    /*
+     *
+     */
+    function downloadAll() {
+        html2canvas(document.querySelector('.npc-cards')).then(canvas => {
+            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+            var a = document.createElement('a');
+            a.href = image;
+            a.download = 'npc-cards.png';
+            a.click();
         });
+    }
 
-    </script>
-</body>
-</html>
+    /*
+     *
+     */
+    function download(uid) {
+        var build = $('#npc-'+uid+' .build').text().replace(' ', '');
+        
+        html2canvas(document.querySelector('#npc-'+uid)).then(canvas => {
+            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+            var a = document.createElement('a');
+            a.href = image;
+            a.download = build+'-'+uid+'.png';
+            a.click();
+        });
+    }
+    
+    /*
+     *
+     */
+    function generateBuild(build) {
+        $('.npc-cards').empty();
+        var uid = 0;
+
+        while(uid < 10) {
+            settings = getSettings();
+            var rddjs = new RDDJS();
+
+            settings['template'] = build;
+
+            rddjs.setSettings(settings);
+            character = rddjs.generateCharacter();
+            generateHumanoidNPCCard(character, uid);
+            
+            uid++;
+        }
+    }
+
+    /*
+     *
+     */
+    function getSettings() {
+        var settings = Object.assign({}, default_settings);
+        settings["characteristic-points"] = parseInt($('.setting-characteristic-points').val()) || 0;
+        settings["skill-points"] = parseInt($('.setting-skill-points').val()) || 0;
+        settings["high-dreamer"] = (Math.random() <= 0.25) ? true : false;
+        
+        return settings;
+    }
+
+    /*
+     *
+     */
+    function generateCards() {
+        $('.npc-cards').empty();
+        var uid = 0;
+
+        $.each(RDDJS.templates, function(key, value) {
+            settings = getSettings();
+            var rddjs = new RDDJS();
+
+            settings['template'] = key;
+
+            rddjs.setSettings(settings);
+            character = rddjs.generateCharacter();
+            generateHumanoidNPCCard(character, uid);
+            uid++;
+        });
+    }
+    
+    /*
+     *
+     */
+    $(document).ready( function( $ ) {
+        generateCards();
+    });
+
+</script>

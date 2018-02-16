@@ -127,6 +127,28 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/animals/zobster.js %}
 
     /*
+     * Entity templates
+     */
+    RDDJS.entities = {};
+
+    {% include rdd-js/templates/entities/chimera.js %}
+    {% include rdd-js/templates/entities/coqmare.js %}
+    {% include rdd-js/templates/entities/death-dog.js %}
+    {% include rdd-js/templates/entities/despair.js %}
+    {% include rdd-js/templates/entities/drowner.js %}
+    {% include rdd-js/templates/entities/fear.js %}
+    {% include rdd-js/templates/entities/hate.js %}
+    {% include rdd-js/templates/entities/kraken.js %}
+    {% include rdd-js/templates/entities/omen-bird.js %}
+    {% include rdd-js/templates/entities/shadow.js %}
+    {% include rdd-js/templates/entities/skeleton.js %}
+    {% include rdd-js/templates/entities/sludgehammer.js %}
+    {% include rdd-js/templates/entities/stalker.js %}
+    {% include rdd-js/templates/entities/twaddle.js %}
+    {% include rdd-js/templates/entities/unicorn.js %}
+    {% include rdd-js/templates/entities/zombie.js %}
+
+    /*
      * Location Templates
      */
     RDDJS.locations = {};
@@ -141,6 +163,17 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/locations/swamp.js %}
     {% include rdd-js/templates/locations/underground.js %}
 
+    /*
+     * Diseases
+     */
+    RDDJS.diseases = [
+        'Brown Feaver',
+        'Acridream',
+        'White Fever',
+        'Green Ague',
+        'Flesh rot'
+    ];
+    
     /*
      *
      */
