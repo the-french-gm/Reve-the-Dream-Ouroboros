@@ -255,7 +255,8 @@
                 'invasion or occupation by foreigners',
                 'they have been falsely accused of a capital crime',
                 'a plague is spreading in the vicinity',
-                'rebels are plotting to overthrow the government'
+                'rebels are plotting to overthrow the government',
+                'it\'s in a boiling lake that melts people'
             ];
 
             var index = RDDJS.utils.getRandomInt(0, problems.length-1);
