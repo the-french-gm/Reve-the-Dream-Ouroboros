@@ -57,6 +57,7 @@
                 'main-protagonists' : [],
                 'humanoids' : [],
                 'twists' : [],
+                'genres' : '',
                 'landscapes' : [],
                 'weathers' : [],
                 'creatures' : [],
@@ -140,6 +141,11 @@
                     plot['twists'].push(twist);
                 }
             }
+
+            /*
+             * Generate genres
+             */
+            plot['genres'] = this.selectRandomGenres();
 
             /*
              * Generate the landscapes
@@ -534,15 +540,30 @@
         /*
          *
          */
-        selectRandomGenre: function() {
-            var genre = 'Fantasy /'
+        selectRandomGenres: function() {
+            var genre = 'Fantasy'
 
             var genres = [
                 'Horror',
-                'Humor',
+                'Comedy',
                 'Science Fiction',
-                ''
+                'Steampunk',
+                'Western',
+                'Contemporary',
+                'Mythology',
+                'Romance',
+                'Historical Fiction'
             ];
+
+            var max = RDDJS.utils.getRandomInt(1, 3);
+
+            for(var i = 2; i <= max; i++) {
+                var index = RDDJS.utils.getRandomInt(0, genres.length-1);
+                genre += ' / ' + genres[index];
+                genres = RDDJS.utils.removeItemFromArray(genres, genres[index]);
+            }
+
+            return genre;
         }
     }
 

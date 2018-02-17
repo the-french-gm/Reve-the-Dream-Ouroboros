@@ -66,6 +66,10 @@ title: Rêve the Dream Ouroboros - Scenario Ideas Generator
                 </thead>
                 <tbody>
                     <tr>
+                        <td>Genre(s)</td>
+                        <td id="genres" colspan="2"></td>
+                    </tr>
+                    <tr>
                         <td>Landscapes</td>
                         <td id="landscapes-1"></td>
                         <td id="landscapes-2"></td>
@@ -290,6 +294,9 @@ title: Rêve the Dream Ouroboros - Scenario Ideas Generator
         $.each(scenario['twists'], function(index, value) {
             $('#twists').append('<li>'+value+'</li>');
         });
+
+        /* Populate genre(s) cell */
+        $('#genres').append(scenario['genres']);
         
         /* Populate the landscape that our jouerneyers will travel through */
         var i = 1;
