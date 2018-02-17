@@ -167,9 +167,9 @@
              */
             var creatures = Object.keys(RDDJS.animals);
 
-            var max = RDDJS.utils.getRandomInt(2, 6);
+            var max = RDDJS.utils.getRandomInt(1, 4);
 
-            for(var i = 0; i <= max; i++) {
+            for(var i = 1; i <= max; i++) {
                 var j = RDDJS.utils.getRandomInt(0, creatures.length);
                 var creature = creatures[j];
                 
