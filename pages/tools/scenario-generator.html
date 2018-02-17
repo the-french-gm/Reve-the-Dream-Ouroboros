@@ -39,7 +39,11 @@ title: Rêve the Dream Ouroboros - Scenario Ideas Generator
                         <td id="adventure-type"></td>
                     </tr>
                     <tr>
-                        <th scope="row">Storyline</td>
+                        <th scope="row">Start</td>
+                        <td id="start"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Story</td>
                         <td id="story"></td>
                     </tr>
                     <tr>
@@ -276,7 +280,10 @@ title: Rêve the Dream Ouroboros - Scenario Ideas Generator
         /* Populate the type of adventure this scenario is */
         $('#adventure-type').append(scenario['adventure-type']);
         
-        /* Populate the story's overview / idea */
+        /* Populate the story's start */
+        $('#start').append(scenario['start']);
+
+        /* Populate the story's overview and idea */
         $('#story').append(scenario['story']);
 
         /* Populate all the twists that the story could have */

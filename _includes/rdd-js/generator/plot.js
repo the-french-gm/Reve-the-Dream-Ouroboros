@@ -53,6 +53,7 @@
             var plot = {
                 'adventure-type' : this.selectRandomAdventureType(),
                 'story' : '',
+                'start' : '',
                 'main-protagonists' : [],
                 'humanoids' : [],
                 'twists' : [],
@@ -121,6 +122,11 @@
             plot['story'] += '<b>'+this.selectRandomMotivation()+'</b>';
             plot['story'] += ', but he/she/they is/are having a hard time getting/doing it because '
             plot['story'] += '<b>'+this.selectRandomProblem()+'</b>';
+
+            /*
+             * Generate how the scenario starts
+             */
+            plot['start'] = this.selectRandomStart();
 
             /*
              * Generate twists
@@ -277,7 +283,12 @@
                 'they have been falsely accused of a capital crime',
                 'a plague is spreading in the vicinity',
                 'rebels are plotting to overthrow the government',
-                'it\'s in a boiling lake that melts people'
+                'it\'s in a boiling lake that melts people',
+                'a gang/terrorist organization wages war against a local city',
+                'undead threaten cities across the nation',
+                'mysteriously, the entire city has lost its inhabitants overnight',
+                'anybody not born into a religion gets killed',
+                'the object they need has gone missing'
             ];
 
             var index = RDDJS.utils.getRandomInt(0, problems.length-1);
@@ -301,7 +312,12 @@
                 'Solve a Mystery',
                 'Steal (or Destroy) Something',
                 'Transport Something or Someone',
-                'Discovery'
+                'Discovery',
+                'Blackmail',
+                'Breaking and Entering',
+                'Manhunt',
+                'Pandora\'s Box',
+                'Exploration'
             ];
 
             var index = RDDJS.utils.getRandomInt(0, adventures.length-1);
@@ -379,7 +395,8 @@
                 'A key adventure objective is guarded by an animal or special creature',
                 'A valuable employee/servant leaves for a new employer',
                 'The opposition has taken hostages and they are being held in the encounter area',
-                'A player character\'s identity has been stolen by a member of the opposition'
+                'A player character\'s identity has been stolen by a member of the opposition',
+                'Someone in the party is secretly a half-wolf'
             ];
 
             var index = RDDJS.utils.getRandomInt(0, twists.length-1);
@@ -478,6 +495,54 @@
             var index = RDDJS.utils.getRandomInt(0, weathers.length-1);
 
             return weathers[index];
+        },
+
+        /*
+         *
+         */
+        selectRandomStart: function() {
+            var starts = [
+                'You start off dead. You have been resurrected by a Thanatos mage and now must do his/her bidding',
+                'You start in a prison',
+                'You are the personal guard of an NPC but he/she gets assassinated and you are framed for his/her murderr',
+                'You are escorting a caravan',
+                'You have been kidnapped',
+                'You hear of a prophecy that involves you',
+                'You start in a combat zone',
+                'You start on a ship that is sinking',
+                'You start in a refugee camp',
+                'You start off by being sold as a gladiator',
+                'You face off a natural disaster (e.g. flood, wildfire etc.)',
+                'You start off in a cave. Ennemis enter every second-round to try and kill you',
+                'You start off as ghosts',
+                'You start off cursed',
+                'You start off with a life-threatening disease',
+                'You start off turned into a genie, imprisoned in a lamp and marooned in a remote uninhabited location',
+                'You start off as a spy',
+                'You witness the police killing an innocent person',
+                'You wake up unable to recognise your surroundings or the people you are living with',
+                'You start off disguised as something, and you can\'t remember what you were meant to do',
+                'Many years ago, you were given an object by a family member. You find out that a Villain wants it badly too',
+                'You are attacked by a counter-force from an unexpected source'
+            ];
+
+            var index = RDDJS.utils.getRandomInt(0, starts.length-1);
+
+            return starts[index];
+        },
+
+        /*
+         *
+         */
+        selectRandomGenre: function() {
+            var genre = 'Fantasy /'
+
+            var genres = [
+                'Horror',
+                'Humor',
+                'Science Fiction',
+                ''
+            ];
         }
     }
 
