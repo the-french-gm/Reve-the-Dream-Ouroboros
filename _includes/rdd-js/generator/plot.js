@@ -552,7 +552,13 @@
                 'Contemporary',
                 'Mythology',
                 'Romance',
-                'Historical Fiction'
+                'Historical Fiction',
+                'Supernatural',
+                'Heroic',
+                'Post Apocalyptic',
+                'Dystopian',
+                'Gothic',
+                'Prehistoric'
             ];
 
             var max = RDDJS.utils.getRandomInt(1, 3);
