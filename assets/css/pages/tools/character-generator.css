@@ -1,0 +1,31 @@
+.resolution-table {
+    width: auto;
+    max-height: 320px;
+}
+
+@media print {
+
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+
+    h6,
+    .col,
+    .characteristic,
+    .value,
+    .skill,
+    .arch-skill,
+    .skills td {
+        font-size: 11px !important;
+    }
+
+    .resolution-table {
+        width: auto;
+        max-height: 260px;
+    }
+
+    .skills > .col {
+        padding-top: 10px !important;
+    }
+}

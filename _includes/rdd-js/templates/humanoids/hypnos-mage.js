@@ -1,4 +1,4 @@
-RDDJS.templates["white-mage"] = {
+RDDJS.templates["hypnos-mage"] = {
     "settings" : {
         "high-dreamer" : true
     },
@@ -10,22 +10,24 @@ RDDJS.templates["white-mage"] = {
     ],
 
     "primary-skills" : [
+        "hypnos",
         "alchemy",
         "astrology",
         "legends",
-        "writing",
-        "oneiros",
-        "hypnos",
-        "narcos"
+        "writing"
     ],
 
     "secondary-skills" : [
         "surgery",
         "medicine",
+        "1-handed-sword",
+        "dodging"
     ],
 
     "exclude" : [
         "thanatos",
+        "narcos",
+        "oneiros",
         "masonry",
         "carpentry",
         "leatherwork",

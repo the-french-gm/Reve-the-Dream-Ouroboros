@@ -9,7 +9,7 @@ title: Rêve the Dream Ouroboros - Character Generator
 
 <div class="container-fluid">
     <div>
-        <div class="row bg-dark row-eq-height top-menu">
+        <div class="row bg-dark row-eq-height top-menu d-print-none">
             <div class="col-xs-12 col-md-8">
                 <h1 class="text-white">
                     <a href="{{ '/index.html' | prepend: site.baseurl }}">
@@ -27,7 +27,7 @@ title: Rêve the Dream Ouroboros - Character Generator
             </div>
         </div>
 
-        <div class="row bg-secondary generator-settings">
+        <div class="row bg-secondary generator-settings d-print-none">
             <div class="col-xs-12 col-md-2">
                 <label>Characteristic Points:</label>
                 <div class="form-row">
@@ -64,7 +64,7 @@ title: Rêve the Dream Ouroboros - Character Generator
                     <option value="none">None</option>
                     <option value="archer">Archer</option>
                     <option value="traveler">Traveler</option>
-                    <option value="white-mage">White Mage</option>
+                    <option value="hypnos-mage">Hypnos Mage</option>
                     <option value="thanatos-mage">Thanatos Mage</option>
                     <option value="mercenary">Mercenary</option>
                     <option value="assassin">Assassin</option>
@@ -113,7 +113,7 @@ title: Rêve the Dream Ouroboros - Character Generator
     </div>
 
     <div class="row bg-light characteristics">
-        <div class="col-xs-12 col-md-auto">
+        <div class="col col-xs-12 col-md-auto">
             <table>
                 <tr>
                     <td class="characteristic">Name</td>
@@ -149,7 +149,7 @@ title: Rêve the Dream Ouroboros - Character Generator
                 </tr>
             </table>
         </div>
-        <div class="col-xs-12 col-md-auto">
+        <div class="col col-xs-12 col-md-auto">
             <table>
                 <tr>
                     <td class="characteristic">Size</td>
@@ -189,7 +189,7 @@ title: Rêve the Dream Ouroboros - Character Generator
                 </tr>
             </table>
         </div>
-        <div class="col-xs-12 col-md-auto">
+        <div class="col col-xs-12 col-md-auto">
             <table>
                 <tr>
                     <td class="characteristic">Will</td>
@@ -229,7 +229,7 @@ title: Rêve the Dream Ouroboros - Character Generator
                 </tr>
             </table>
         </div>
-        <div class="col-xs-12 col-md-auto">
+        <div class="col col-xs-12 col-md-auto">
             <table>
                 <tr>
                     <td class="characteristic">Life</td>
@@ -269,8 +269,8 @@ title: Rêve the Dream Ouroboros - Character Generator
                 </tr>
             </table>
         </div>
-        <div class="col-xs-12 col-md-4">
-            <img src="{{ '/assets/images/resolution-table.png' | prepend: site.baseurl }}" style="width:auto;max-height:320px;" />
+        <div class="col col-xs-12 col-md-4">
+            <img src="{{ '/assets/images/resolution-table.png' | prepend: site.baseurl }}" class="resolution-table" />
         </div>
     </div>
     <div class="row bg-light skills">

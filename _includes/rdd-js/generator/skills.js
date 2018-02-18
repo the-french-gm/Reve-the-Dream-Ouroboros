@@ -208,6 +208,16 @@
              * draconic way.
              */
             if(is_dreamer) {
+
+                // We make sure that excluded draconics cannot be added
+                if(settings['template'] && settings['template']['exclude']) {
+                    $.each(settings['template']['exclude'], function(index, value) {
+                        if(draconics.indexOf(value) > -1) {
+                            draconics = RDDJS.utils.removeItemFromArray(draconics, value);
+                        }
+                    });
+                }
+
                 var index = RDDJS.utils.getRandomInt(0, draconics.length-1);
                 var draconic_way = draconics[index];
                 var cost = RDDJS.calculator.calculateBaseCost(-11, max_skill);

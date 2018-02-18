@@ -65,6 +65,7 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/humanoids/gnome.js %}
     {% include rdd-js/templates/humanoids/healer.js %}
     {% include rdd-js/templates/humanoids/hounder.js %}
+    {% include rdd-js/templates/humanoids/hypnos-mage.js %}
     {% include rdd-js/templates/humanoids/mercenary.js %}
     {% include rdd-js/templates/humanoids/mockturtle.js %}
     {% include rdd-js/templates/humanoids/ogre.js %}
@@ -81,7 +82,6 @@ function getRandomInt(min, max) {
     {% include rdd-js/templates/humanoids/traveler.js %}
     {% include rdd-js/templates/humanoids/villager.js %}
     {% include rdd-js/templates/humanoids/warrior.js %}
-    {% include rdd-js/templates/humanoids/white-mage.js %}
     
     /*
      * Creature Templates
